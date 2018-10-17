@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import { theme } from 'theme';
 import ExerciseCreator from 'components/ExerciseCreator';
-import { Scrollbars } from 'react-custom-scrollbars';
+import exampleData from 'exercises/example';
 
 class Index extends React.Component {
     constructor() {
@@ -15,9 +15,7 @@ class Index extends React.Component {
     render () {
         return (
             <MuiThemeProvider theme={theme}>
-                <Scrollbars  style={{ width: '100vw', height: '100vh', background: theme.palette.primary.main }}>
-                    <ExerciseCreator/>
-                </Scrollbars>
+                    <ExerciseCreator data={exampleData}/>
             </MuiThemeProvider>
             );
     }

@@ -1,0 +1,14 @@
+{
+  "skillLevel": "?",
+  "totalLines": 10,
+  "code": {
+    "1": "fruits = ['apple', 'banana', 'cherry']",
+    "2": "for x in fruits:",
+    "3": "print(x)"
+  },
+  "indentation": {
+    "1": "0",
+    "2": "0",
+    "3": "1"
+  }
+}
