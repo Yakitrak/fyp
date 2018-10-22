@@ -1,18 +1,49 @@
 import React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
-import Style from 'components/CodeContainer/style';
+import Style from './style';
 import List from '@material-ui/core/List';
 import CodeBlock from 'components/CodeBlock';
-import { DropTarget, DragDropContext, ConnectDropTarget } from 'react-dnd'
-import HTML5Backend from 'react-dnd-html5-backend'
 
 
 class CodeContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            cards: props.list,
             data: this.props.data,
         };
+    }
+
+    pushCard(card) {
+        this.setState(update(this.state, {
+            cards: {
+                $push: [ card ]
+            }
+        }));
+    }
+
+    removeCard(index) {
+        this.setState(update(this.state, {
+            cards: {
+                $splice: [
+                    [index, 1]
+                ]
+            }
+        }));
+    }
+
+    moveCard(dragIndex, hoverIndex) {
+        const { cards } = this.state;
+        const dragCard = cards[dragIndex];
+
+        this.setState(update(this.state, {
+            cards: {
+                $splice: [
+                    [dragIndex, 1],
+                    [hoverIndex, 0, dragCard]
+                ]
+            }
+        }));
     }
 
     createCode = () => {
@@ -27,11 +58,21 @@ class CodeContainer extends React.Component {
     };
 
     render() {
+        const { cards } = this.state;
+        const { canDrop, isOver, connectDropTarget } = this.props;
+        const isActive = canDrop && isOver;
+        const style = {
+            width: "200px",
+            height: "404px",
+            border: '1px dashed gray'
+        };
+
+        const backgroundColor = isActive ? 'lightgreen' : '#FFF';
         const { classes } = this.props;
         const codeBox = this.createCode();
 
-        return (
-            <div className={classes.root}>
+        return connectDropTarget(
+            <div style={{...style, backgroundColor}}>
                 <List>
                     {codeBox}
                 </List>
@@ -40,4 +81,4 @@ class CodeContainer extends React.Component {
     }
 }
 
-export default withStyles(Style)(CodeContainer);
+export default DragDropContext(HTML5Backend)(withStyles(Style)(CodeContainer));

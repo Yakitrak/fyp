@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import { theme } from 'theme';
-import ExerciseCreator from 'components/CodeContainer';
+import Exercise from 'components/ExerciseScreen';
 import exampleData from 'exercises/example.json';
 
 class Index extends React.Component {
@@ -15,7 +15,7 @@ class Index extends React.Component {
     render () {
         return (
             <MuiThemeProvider theme={theme}>
-                    <ExerciseCreator data={exampleData}/>
+                    <ExerciseScreen data={exampleData}/>
             </MuiThemeProvider>
             );
     }
