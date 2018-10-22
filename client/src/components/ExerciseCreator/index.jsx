@@ -9,27 +9,40 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import InboxIcon from '@material-ui/icons/Inbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
+import { DragSource } from 'react-dnd';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+
 
 class ExerciseCreator extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             data: this.props.data,
         };
     }
 
+    createCode = () => {
+        let code_stuff = [];
+        this.props.data.code.map(line => {
+            code_stuff.push(
+                <ListItem button>
+                    <ListItemText primary={line} />
+                </ListItem>
+            );
+        });
+
+        return code_stuff;
+    };
+
     render() {
         const { classes } = this.props;
-        console.log(this.state.data);
+        const codeBox = this.createCode();
+
         return (
             <div className={classes.root}>
-                <List component="nav">
-                    <ListItem button>
-                        <ListItemText primary="Trash" />
-                    </ListItem>
-                    <ListItem button component="a" href="#simple-list">
-                        <ListItemText primary="Spam" />
-                    </ListItem>
+                <List>
+                    {codeBox}
                 </List>
             </div>
         );
