@@ -2,7 +2,8 @@ import React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Style from './style';
 import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';import CodeContainer from 'components/CodeContainer';
+import HTML5Backend from 'react-dnd-html5-backend';
+import CodeContainer from 'components/CodeContainer';
 
 class Exercise extends React.Component {
     constructor(props) {
@@ -16,7 +17,7 @@ class Exercise extends React.Component {
 
         return (
             <div className={classes.root}>
-                <ExerciseScreen data={this.props.data}/>
+                <CodeContainer data={this.props.data}/>
             </div>
         );
     }

@@ -4,77 +4,8 @@ import Style from './style';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import {
-    DragSource,
-    DropTarget,
-    ConnectDragSource,
-    ConnectDropTarget,
-    DragSourceMonitor,
-    DropTargetMonitor,
-} from 'react-dnd';
-
-
-const Types = {
-    CARD: 'card'
-};
-
-/**
- * Specifies the drag source contract.
- * Only `beginDrag` function is required.
- */
-const cardSource = {
-    canDrag(props) {
-        // You can disallow drag based on props
-        return props.isReady;
-    },
-
-    isDragging(props, monitor) {
-        // If your component gets unmounted while dragged
-        // (like a card in Kanban board dragged between lists)
-        // you can implement something like this to keep its
-        // appearance dragged:
-        return monitor.getItem().id === props.id;
-    },
-
-    beginDrag(props, monitor, component) {
-        // Return the data describing the dragged item
-        const item = { id: props.id };
-        return item;
-    },
-
-    endDrag(props, monitor, component) {
-        if (!monitor.didDrop()) {
-            // You can check whether the drop was successful
-            // or if the drag ended but nobody handled the drop
-            return;
-        }
-
-        // When dropped on a compatible target, do something.
-        // Read the original dragged item from getItem():
-        const item = monitor.getItem();
-
-        // You may also read the drop result from the drop target
-        // that handled the drop, if it returned an object from
-        // its drop() method.
-        const dropResult = monitor.getDropResult();
-
-        // This is a good place to call some Flux action
-        CardActions.moveCardToList(item.id, dropResult.listId);
-    }
-};
-
-/**
- * Specifies which props to inject into your component.
- */
-function collect(connect, monitor) {
-    return {
-        // Call this function inside render()
-        // to let React DnD handle the drag events:
-        connectDragSource: connect.dragSource(),
-        // You can ask the monitor about the current drag state:
-        isDragging: monitor.isDragging()
-    };
-}
+import { DragSource, DropTarget } from 'react-dnd';
+import flow from 'lodash/flow';
 
 class CodeBlock extends React.Component {
     constructor(props) {
@@ -84,17 +15,97 @@ class CodeBlock extends React.Component {
     }
 
     render() {
-        const { isDragging, connectDragSource } = this.props;
+        const { card, isDragging, connectDragSource, connectDropTarget } = this.props;
+        const opacity = isDragging ? 0 : 1;
         const { classes } = this.props;
 
-        return connectDragSource(
+        return connectDragSource(connectDropTarget(
             <div >
                 <ListItem button>
                      <ListItemText primary={this.props.code} />
                 </ListItem>
             </div>
-        );
+        ));
     }
 }
 
-export default DragSource(Types.CARD, cardSource, collect)(withStyles(Style)(CodeBlock));
+const cardSource = {
+
+    beginDrag(props) {
+        return {
+            index: props.index,
+            listId: props.listId,
+            card: props.card
+        };
+    },
+
+    endDrag(props, monitor) {
+        const item = monitor.getItem();
+        const dropResult = monitor.getDropResult();
+
+        if ( dropResult && dropResult.listId !== item.listId ) {
+            props.removeCard(item.index);
+        }
+    }
+};
+
+const cardTarget = {
+
+    hover(props, monitor, component) {
+        const dragIndex = monitor.getItem().index;
+        const hoverIndex = props.index;
+        const sourceListId = monitor.getItem().listId;
+
+        // Don't replace items with themselves
+        if (dragIndex === hoverIndex) {
+            return;
+        }
+
+        // Determine rectangle on screen
+        const hoverBoundingRect = findDOMNode(component).getBoundingClientRect();
+
+        // Get vertical middle
+        const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+
+        // Determine mouse position
+        const clientOffset = monitor.getClientOffset();
+
+        // Get pixels to the top
+        const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+
+        // Only perform the move when the mouse has crossed half of the items height
+        // When dragging downwards, only move when the cursor is below 50%
+        // When dragging upwards, only move when the cursor is above 50%
+
+        // Dragging downwards
+        if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+            return;
+        }
+
+        // Dragging upwards
+        if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+            return;
+        }
+
+        // Time to actually perform the action
+        if (props.listId === sourceListId) {
+            props.moveCard(dragIndex, hoverIndex);
+
+            // Note: we're mutating the monitor item here!
+            // Generally it's better to avoid mutations,
+            // but it's good here for the sake of performance
+            // to avoid expensive index searches.
+            monitor.getItem().index = hoverIndex;
+        }
+    }
+};
+
+export default flow(
+    DropTarget("CARD", cardTarget, connect => ({
+        connectDropTarget: connect.dropTarget()
+    })),
+    DragSource("CARD", cardSource, (connect, monitor) => ({
+        connectDragSource: connect.dragSource(),
+        isDragging: monitor.isDragging()
+    }))
+)(withStyles(Style)(CodeBlock));

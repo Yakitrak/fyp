@@ -3,7 +3,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Style from './style';
 import List from '@material-ui/core/List';
 import CodeBlock from 'components/CodeBlock';
-
+import { DropTarget } from 'react-dnd';
 
 class CodeContainer extends React.Component {
     constructor(props) {
@@ -47,10 +47,28 @@ class CodeContainer extends React.Component {
     }
 
     createCode = () => {
+        const { cards } = this.state;
+        const { canDrop, isOver, connectDropTarget } = this.props;
+        const isActive = canDrop && isOver;
+        const style = {
+            width: "200px",
+            height: "404px",
+            border: '1px dashed gray'
+        };
+        const backgroundColor = isActive ? 'lightgreen' : '#FFF';
+
+
         let code_stuff = [];
-        this.props.data.code.map(line => {
+        this.props.data.code.map((line, index) => {
             code_stuff.push(
-                <CodeBlock code={line} />
+                <CodeBlock code={line}
+                           key={index}
+                           index={index}
+                           listId={this.props.id}
+                           card={line}
+                           removeCard={this.removeCard.bind(this)}
+                           moveCard={this.moveCard.bind(this)}
+                />
             );
         });
 
@@ -81,4 +99,19 @@ class CodeContainer extends React.Component {
     }
 }
 
-export default DragDropContext(HTML5Backend)(withStyles(Style)(CodeContainer));
+const cardTarget = {
+    drop(props, monitor, component ) {
+        const { id } = props;
+        const sourceObj = monitor.getItem();
+        if ( id !== sourceObj.listId ) component.pushCard(sourceObj.card);
+        return {
+            listId: id
+        };
+    }
+}
+
+export default DropTarget("CARD", cardTarget, (connect, monitor) => ({
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver(),
+    canDrop: monitor.canDrop()
+}))((withStyles(Style)(CodeContainer)));
