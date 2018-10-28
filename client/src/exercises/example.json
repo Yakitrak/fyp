@@ -6,11 +6,6 @@
     { "id": 2, "line": "for x in fruits:" },
     { "id": 3, "line": "print(x)" }
   ],
-  "code": [
-    "fruits = ['apple', 'banana', 'cherry']",
-    "for x in fruits:",
-    "print(x)"
-  ],
   "indentation": [
     0,
     0,

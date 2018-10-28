@@ -5,6 +5,8 @@ import Style from './style';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { DragSource, DropTarget } from 'react-dnd';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import DragButton from '@material-ui/icons/DragHandle';
 import flow from 'lodash/flow';
 
 
@@ -16,16 +18,22 @@ class CodeBlock extends React.Component {
     }
 
     render() {
-        const { classes, block, isDragging, connectDragSource, connectDropTarget } = this.props;
+        const { classes, block, isDragging, connectDragSource, connectDropTarget, connectDragPreview } = this.props;
         const opacity = isDragging ? 0 : 1;
 
-        return connectDragSource(connectDropTarget(
+        return (
+            connectDragPreview &&
+            connectDragSource &&
+            connectDragPreview(connectDropTarget(
             <div className={classes.block} style={{ opacity }}>
-                <ListItem >
-                     <ListItemText primary={block.line} />
+                <ListItem>
+                    <ListItemIcon>
+                        {connectDragSource(<div style={{ cursor: 'move' }}> <DragButton/> </div>)}
+                    </ListItemIcon>
+                    <ListItemText primary={block.line} />
                 </ListItem>
             </div>
-        ));
+        )));
     }
 }
 
@@ -85,6 +93,7 @@ export default flow(
     })),
     DragSource("BLOCK", blockSource, (connect, monitor) => ({
         connectDragSource: connect.dragSource(),
+        connectDragPreview: connect.dragPreview(),
         isDragging: monitor.isDragging()
-    }))
+    })),
 )(withStyles(Style)(CodeBlock));
