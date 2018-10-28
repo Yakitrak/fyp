@@ -15,7 +15,7 @@ class Index extends React.Component {
     render () {
         return (
             <MuiThemeProvider theme={theme}>
-                    <ExerciseScreen data={exampleData}/>
+                <ExerciseScreen data={exampleData}/>
             </MuiThemeProvider>
             );
     }

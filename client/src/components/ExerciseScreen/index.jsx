@@ -17,7 +17,7 @@ class Exercise extends React.Component {
 
         return (
             <div className={classes.root}>
-                <CodeContainer id={1} list={this.props.data.startCode} data={this.props.data}/>
+                <CodeContainer list={this.props.data.startCode} data={this.props.data}/>
             </div>
         );
     }

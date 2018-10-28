@@ -2,19 +2,11 @@ import React from 'react';
 import { findDOMNode } from 'react-dom';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Style from './style';
-import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
 
-const style = {
-    border: '1px dashed gray',
-    padding: '0.5rem 1rem',
-    margin: '.5rem',
-    backgroundColor: 'white',
-    cursor: 'move'
-};
 
 class CodeBlock extends React.Component {
     constructor(props) {
@@ -24,13 +16,12 @@ class CodeBlock extends React.Component {
     }
 
     render() {
-        const { block, isDragging, connectDragSource, connectDropTarget } = this.props;
+        const { classes, block, isDragging, connectDragSource, connectDropTarget } = this.props;
         const opacity = isDragging ? 0 : 1;
-        const { classes } = this.props;
 
         return connectDragSource(connectDropTarget(
-            <div style={{ ...style, opacity }}>
-                <ListItem button>
+            <div className={classes.block} style={{ opacity }}>
+                <ListItem >
                      <ListItemText primary={block.line} />
                 </ListItem>
             </div>
@@ -39,31 +30,18 @@ class CodeBlock extends React.Component {
 }
 
 const blockSource = {
-
     beginDrag(props) {
         return {
             index: props.index,
-            listId: props.listId,
-            block: props.block
+            block: props. block
         };
     },
-
-    endDrag(props, monitor) {
-        const item = monitor.getItem();
-        const dropResult = monitor.getDropResult();
-
-        if ( dropResult && dropResult.listId !== item.listId ) {
-            props.removeBlock(item.index);
-        }
-    }
 };
 
 const blockTarget = {
-
     hover(props, monitor, component) {
         const dragIndex = monitor.getItem().index;
         const hoverIndex = props.index;
-        const sourceListId = monitor.getItem().listId;
 
         // Don't replace items with themselves
         if (dragIndex === hoverIndex) {
@@ -96,16 +74,8 @@ const blockTarget = {
             return;
         }
 
-        // Time to actually perform the action
-        if (props.listId === sourceListId) {
-            props.moveBlock(dragIndex, hoverIndex);
-
-            // Note: we're mutating the monitor item here!
-            // Generally it's better to avoid mutations,
-            // but it's good here for the sake of performance
-            // to avoid expensive index searches.
-            monitor.getItem().index = hoverIndex;
-        }
+        props.moveBlock(dragIndex, hoverIndex);
+        monitor.getItem().index = hoverIndex;
     }
 };
 

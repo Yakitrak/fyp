@@ -1,15 +1,11 @@
 const style = theme => ({
-    // root: {
-    //     color: theme.palette.primary.contrastText,
-    //     background: theme.palette.primary.main,
-    //     display: 'flex',
-    //     flexDirection: 'column',
-    //     alignItems: 'center',
-    //     textAlign: 'center',
-    //     justifyContent: 'center',
-    //     height: '95vh',
-    //     padding: '0 10px',
-    // },
+    block: {
+        border: '1px dashed gray',
+        padding: '0.5rem 1rem',
+        margin: '.5rem',
+        backgroundColor: 'white',
+        cursor: 'move'
+    }
 });
 
 export default style;

@@ -1,14 +1,8 @@
 const style = theme => ({
-    root: {
-        color: theme.palette.primary.contrastText,
-        background: theme.palette.primary.main,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        textAlign: 'center',
-        justifyContent: 'center',
-        height: '95vh',
-        padding: '0 10px',
+    container: {
+        width: '60vw',
+        border: '1px dashed gray',
+        borderRadius: 10,
     },
 });
 
