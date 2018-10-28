@@ -1,4 +1,5 @@
 import React from 'react';
+import { findDOMNode } from 'react-dom';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Style from './style';
 import List from '@material-ui/core/List';
@@ -6,6 +7,14 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
+
+const style = {
+    border: '1px dashed gray',
+    padding: '0.5rem 1rem',
+    margin: '.5rem',
+    backgroundColor: 'white',
+    cursor: 'move'
+};
 
 class CodeBlock extends React.Component {
     constructor(props) {
@@ -15,27 +24,27 @@ class CodeBlock extends React.Component {
     }
 
     render() {
-        const { card, isDragging, connectDragSource, connectDropTarget } = this.props;
+        const { block, isDragging, connectDragSource, connectDropTarget } = this.props;
         const opacity = isDragging ? 0 : 1;
         const { classes } = this.props;
 
         return connectDragSource(connectDropTarget(
-            <div >
+            <div style={{ ...style, opacity }}>
                 <ListItem button>
-                     <ListItemText primary={this.props.code} />
+                     <ListItemText primary={block.line} />
                 </ListItem>
             </div>
         ));
     }
 }
 
-const cardSource = {
+const blockSource = {
 
     beginDrag(props) {
         return {
             index: props.index,
             listId: props.listId,
-            card: props.card
+            block: props.block
         };
     },
 
@@ -44,12 +53,12 @@ const cardSource = {
         const dropResult = monitor.getDropResult();
 
         if ( dropResult && dropResult.listId !== item.listId ) {
-            props.removeCard(item.index);
+            props.removeBlock(item.index);
         }
     }
 };
 
-const cardTarget = {
+const blockTarget = {
 
     hover(props, monitor, component) {
         const dragIndex = monitor.getItem().index;
@@ -89,7 +98,7 @@ const cardTarget = {
 
         // Time to actually perform the action
         if (props.listId === sourceListId) {
-            props.moveCard(dragIndex, hoverIndex);
+            props.moveBlock(dragIndex, hoverIndex);
 
             // Note: we're mutating the monitor item here!
             // Generally it's better to avoid mutations,
@@ -101,10 +110,10 @@ const cardTarget = {
 };
 
 export default flow(
-    DropTarget("CARD", cardTarget, connect => ({
+    DropTarget("BLOCK", blockTarget, connect => ({
         connectDropTarget: connect.dropTarget()
     })),
-    DragSource("CARD", cardSource, (connect, monitor) => ({
+    DragSource("BLOCK", blockSource, (connect, monitor) => ({
         connectDragSource: connect.dragSource(),
         isDragging: monitor.isDragging()
     }))

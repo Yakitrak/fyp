@@ -1,6 +1,11 @@
 {
   "skillLevel": "?",
   "totalLines": 10,
+  "startCode": [
+    { "id": 1, "line": "fruits = ['apple', 'banana', 'cherry']" },
+    { "id": 2, "line": "for x in fruits:" },
+    { "id": 3, "line": "print(x)" }
+  ],
   "code": [
     "fruits = ['apple', 'banana', 'cherry']",
     "for x in fruits:",

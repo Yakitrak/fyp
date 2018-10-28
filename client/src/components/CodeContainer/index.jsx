@@ -4,27 +4,28 @@ import Style from './style';
 import List from '@material-ui/core/List';
 import CodeBlock from 'components/CodeBlock';
 import { DropTarget } from 'react-dnd';
+import update from 'react-addons-update';
 
 class CodeContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            cards: props.list,
+            blocks: this.props.list,
             data: this.props.data,
         };
     }
 
-    pushCard(card) {
+    pushBlock(block) {
         this.setState(update(this.state, {
-            cards: {
-                $push: [ card ]
+            blocks: {
+                $push: [ block ]
             }
         }));
     }
 
-    removeCard(index) {
+    removeBlock(index) {
         this.setState(update(this.state, {
-            cards: {
+            blocks: {
                 $splice: [
                     [index, 1]
                 ]
@@ -32,12 +33,12 @@ class CodeContainer extends React.Component {
         }));
     }
 
-    moveCard(dragIndex, hoverIndex) {
-        const { cards } = this.state;
-        const dragCard = cards[dragIndex];
+    moveBlock(dragIndex, hoverIndex) {
+        const { blocks } = this.state;
+        const dragCard = blocks[dragIndex];
 
         this.setState(update(this.state, {
-            cards: {
+            blocks: {
                 $splice: [
                     [dragIndex, 1],
                     [hoverIndex, 0, dragCard]
@@ -46,37 +47,27 @@ class CodeContainer extends React.Component {
         }));
     }
 
-    createCode = () => {
-        const { cards } = this.state;
-        const { canDrop, isOver, connectDropTarget } = this.props;
-        const isActive = canDrop && isOver;
-        const style = {
-            width: "200px",
-            height: "404px",
-            border: '1px dashed gray'
-        };
-        const backgroundColor = isActive ? 'lightgreen' : '#FFF';
-
-
-        let code_stuff = [];
+    createCodeBlocks = () => {
+        let blockList = [];
         this.props.data.code.map((line, index) => {
-            code_stuff.push(
-                <CodeBlock code={line}
-                           key={index}
-                           index={index}
-                           listId={this.props.id}
-                           card={line}
-                           removeCard={this.removeCard.bind(this)}
-                           moveCard={this.moveCard.bind(this)}
+            blockList.push(
+                <CodeBlock
+                    key={index}
+                    index={index}
+                    listId={1}
+                    block={line}
+                    code={line}
+                    removeBlock={this.removeBlock.bind(this)}
+                    moveBlock={this.moveBlock.bind(this)}
                 />
             );
         });
-
-        return code_stuff;
+        return blockList;
     };
 
     render() {
-        const { cards } = this.state;
+        const { blocks } = this.state;
+        const { classes } = this.props;
         const { canDrop, isOver, connectDropTarget } = this.props;
         const isActive = canDrop && isOver;
         const style = {
@@ -84,33 +75,40 @@ class CodeContainer extends React.Component {
             height: "404px",
             border: '1px dashed gray'
         };
-
         const backgroundColor = isActive ? 'lightgreen' : '#FFF';
-        const { classes } = this.props;
-        const codeBox = this.createCode();
+        const codeBox = this.createCodeBlocks();
 
         return connectDropTarget(
             <div style={{...style, backgroundColor}}>
-                <List>
-                    {codeBox}
-                </List>
+                {blocks.map((block, i) => {
+                    return (
+                        <CodeBlock
+                            key={block.id}
+                            index={i}
+                            listId={this.props.id}
+                            block={block}
+                            removeBlock={this.removeBlock.bind(this)}
+                            moveBlock={this.moveBlock.bind(this)}
+                        />
+                    );
+                })}
             </div>
         );
     }
 }
 
-const cardTarget = {
+const blockTarget = {
     drop(props, monitor, component ) {
         const { id } = props;
         const sourceObj = monitor.getItem();
-        if ( id !== sourceObj.listId ) component.pushCard(sourceObj.card);
+        if ( id !== sourceObj.listId ) component.pushBlock(sourceObj.block);
         return {
             listId: id
         };
     }
-}
+};
 
-export default DropTarget("CARD", cardTarget, (connect, monitor) => ({
+export default DropTarget("BLOCK", blockTarget, (connect, monitor) => ({
     connectDropTarget: connect.dropTarget(),
     isOver: monitor.isOver(),
     canDrop: monitor.canDrop()
