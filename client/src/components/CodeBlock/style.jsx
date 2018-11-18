@@ -4,6 +4,7 @@ const style = theme => ({
         padding: '0.5rem 1rem',
         margin: '.5rem',
         backgroundColor: 'white',
+        cursor: 'move',
     }
 });
 

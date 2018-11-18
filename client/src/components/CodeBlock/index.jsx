@@ -24,16 +24,18 @@ class CodeBlock extends React.Component {
         return (
             connectDragPreview &&
             connectDragSource &&
-            connectDragPreview(connectDropTarget(
+            connectDragPreview(connectDropTarget(connectDragSource(
+            //     connectDragPreview(connectDropTarget(
             <div className={classes.block} style={{ opacity }}>
                 <ListItem>
-                    <ListItemIcon>
-                        {connectDragSource(<div style={{ cursor: 'move' }}> <DragButton/> </div>)}
-                    </ListItemIcon>
+                    {/*<ListItemIcon>*/}
+                        {/*<div style={{ cursor: 'move' }}> <DragButton/> </div>*/}
+                        {/*{connectDragSource(<div style={{ cursor: 'move' }}> <DragButton/> </div>)}*/}
+                    {/*</ListItemIcon>*/}
                     <ListItemText primary={block.line} />
                 </ListItem>
             </div>
-        )));
+        ))));
     }
 }
 
