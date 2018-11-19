@@ -9,23 +9,30 @@ class CodeContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            blocks: this.props.list,
-            data: this.props.data,
+            data: this.props.data, // not used yet
+            blocks: this.props.data.startCode,
+            indent: [],
         };
     }
 
-    moveBlock(dragIndex, hoverIndex) {
+    moveBlockVertical(dragVerticalIndex, hoverVerticalIndex, ) {
         const { blocks } = this.state;
-        const dragBlock = blocks[dragIndex];
+        const dragBlock = blocks[dragVerticalIndex];
 
         this.setState(update(this.state, {
             blocks: {
                 $splice: [
-                    [dragIndex, 1],
-                    [hoverIndex, 0, dragBlock]
+                    [dragVerticalIndex, 1],
+                    [hoverVerticalIndex, 0, dragBlock]
                 ]
             }
         }));
+    }
+
+    moveBlockHorizontal(dragHorizontalIndex, hoverHorizontalIndex, ) {
+        const { blocks } = this.state;
+        // console.log('HELP');
+
     }
 
     render() {
@@ -40,10 +47,12 @@ class CodeContainer extends React.Component {
                     return (
                         <CodeBlock
                             key={block.id}
-                            index={i}
+                            verticalIndex={i}
+                            horizontalIndex={0}
                             listId={this.props.id}
                             block={block}
-                            moveBlock={this.moveBlock.bind(this)}
+                            moveBlockVertical={this.moveBlockVertical.bind(this)}
+                            moveBlockHorizontal={this.moveBlockHorizontal.bind(this)}
                         />
                     );
                 })}

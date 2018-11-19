@@ -1,6 +1,6 @@
 {
   "skillLevel": "?",
-  "totalLines": 10,
+  "question": "Arrange the lines of code to print out the following: apple, banana, cherry",
   "startCode": [
     { "id": 1, "line": "fruits = ['apple', 'banana', 'cherry']" },
     { "id": 2, "line": "for x in fruits:" },

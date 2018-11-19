@@ -42,50 +42,76 @@ class CodeBlock extends React.Component {
 const blockSource = {
     beginDrag(props) {
         return {
-            index: props.index,
-            block: props. block
+            verticalIndex: props.verticalIndex,
+            horizontalIndex: props.horizontalIndex,
+            block: props.block
         };
     },
 };
 
 const blockTarget = {
     hover(props, monitor, component) {
-        const dragIndex = monitor.getItem().index;
-        const hoverIndex = props.index;
+        const dragVerticalIndex = monitor.getItem().verticalIndex;
+        const hoverVerticalIndex = props.verticalIndex;
+
+        const dragHorizontalIndex = monitor.getItem().horizontalIndex;
+        const hoverHorizontalIndex = props.horizontalIndex;
 
         // Don't replace items with themselves
-        if (dragIndex === hoverIndex) {
+        if (dragVerticalIndex === hoverVerticalIndex) {
             return;
         }
 
         // Determine rectangle on screen
         const hoverBoundingRect = findDOMNode(component).getBoundingClientRect();
+        // Determine mouse position
+        const clientOffset = monitor.getClientOffset();
 
         // Get vertical middle
         const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
 
-        // Determine mouse position
-        const clientOffset = monitor.getClientOffset();
-
         // Get pixels to the top
         const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+
+        // Get horizontal middle
+        const hoverMiddleX = (hoverBoundingRect.right - hoverBoundingRect.left) / 2;
+
+        // Get pixels to the left
+        const hoverClientX = clientOffset.x - hoverBoundingRect.left;
 
         // Only perform the move when the mouse has crossed half of the items height
         // When dragging downwards, only move when the cursor is below 50%
         // When dragging upwards, only move when the cursor is above 50%
 
         // Dragging downwards
-        if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+        if (dragVerticalIndex < hoverVerticalIndex && hoverClientY < hoverMiddleY) {
+            console.log('down');
             return;
         }
 
         // Dragging upwards
-        if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+        if (dragVerticalIndex > hoverVerticalIndex && hoverClientY > hoverMiddleY) {
+            console.log('up');
             return;
         }
 
-        props.moveBlock(dragIndex, hoverIndex);
-        monitor.getItem().index = hoverIndex;
+        // Dragging left
+        if (dragHorizontalIndex <= hoverHorizontalIndex && hoverClientX < hoverMiddleX) {
+            console.log('left');
+            return;
+        }
+
+        // Dragging right
+        if (dragHorizontalIndex >= hoverHorizontalIndex && hoverClientX > hoverMiddleX) {
+            console.log('right');
+            return;
+        }
+
+        // monitor.getItem().verticalIndex = hoverVerticalIndex;
+        // props.moveBlockVertical(dragVerticalIndex, hoverVerticalIndex);
+
+        // props.moveBlockHorizontal(dragHorizontalIndex, hoverHorizontalIndex);
+        // monitor.getItem().horizontalIndex = hoverHorizontalIndex;
     }
 };
 
