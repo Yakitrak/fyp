@@ -50,12 +50,41 @@ const blockSource = {
 };
 
 const blockTarget = {
-    hover(props, monitor, component) {
-        const dragVerticalIndex = monitor.getItem().verticalIndex;
-        const hoverVerticalIndex = props.verticalIndex;
 
+    drop(props, monitor, component) {
+
+        const dragVerticalIndex = monitor.getItem().verticalIndex;
         const dragHorizontalIndex = monitor.getItem().horizontalIndex;
         const hoverHorizontalIndex = props.horizontalIndex;
+
+        // Determine rectangle on screen
+        const hoverBoundingRect = findDOMNode(component).getBoundingClientRect();
+        // Determine mouse position
+        const clientOffset = monitor.getClientOffset();
+
+        // Get horizontal middle
+        const hoverMiddleX = (hoverBoundingRect.right - hoverBoundingRect.left) / 2;
+        // Get pixels to the left
+        const hoverClientX = clientOffset.x - hoverBoundingRect.left;
+
+        // Dragging left
+        if (dragHorizontalIndex <= hoverHorizontalIndex && hoverClientX < hoverMiddleX) {
+            console.log('left');
+        }
+
+        // Dragging right
+        if (dragHorizontalIndex >= hoverHorizontalIndex && hoverClientX > hoverMiddleX) {
+            console.log('right');
+        }
+
+        monitor.getItem().horizontalIndex = hoverHorizontalIndex;
+        props.moveBlockHorizontal(dragVerticalIndex, dragHorizontalIndex);
+    },
+
+    hover(props, monitor, component) {
+
+        const dragVerticalIndex = monitor.getItem().verticalIndex;
+        const hoverVerticalIndex = props.verticalIndex;
 
         // Don't replace items with themselves
         if (dragVerticalIndex === hoverVerticalIndex) {
@@ -69,15 +98,8 @@ const blockTarget = {
 
         // Get vertical middle
         const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-
         // Get pixels to the top
         const hoverClientY = clientOffset.y - hoverBoundingRect.top;
-
-        // Get horizontal middle
-        const hoverMiddleX = (hoverBoundingRect.right - hoverBoundingRect.left) / 2;
-
-        // Get pixels to the left
-        const hoverClientX = clientOffset.x - hoverBoundingRect.left;
 
         // Only perform the move when the mouse has crossed half of the items height
         // When dragging downwards, only move when the cursor is below 50%
@@ -95,23 +117,9 @@ const blockTarget = {
             return;
         }
 
-        // Dragging left
-        if (dragHorizontalIndex <= hoverHorizontalIndex && hoverClientX < hoverMiddleX) {
-            console.log('left');
-            return;
-        }
+        monitor.getItem().verticalIndex = hoverVerticalIndex;
+        props.moveBlockVertical(dragVerticalIndex, hoverVerticalIndex);
 
-        // Dragging right
-        if (dragHorizontalIndex >= hoverHorizontalIndex && hoverClientX > hoverMiddleX) {
-            console.log('right');
-            return;
-        }
-
-        // monitor.getItem().verticalIndex = hoverVerticalIndex;
-        // props.moveBlockVertical(dragVerticalIndex, hoverVerticalIndex);
-
-        // props.moveBlockHorizontal(dragHorizontalIndex, hoverHorizontalIndex);
-        // monitor.getItem().horizontalIndex = hoverHorizontalIndex;
     }
 };
 

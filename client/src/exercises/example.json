@@ -2,9 +2,9 @@
   "skillLevel": "?",
   "question": "Arrange the lines of code to print out the following: apple, banana, cherry",
   "startCode": [
-    { "id": 1, "line": "fruits = ['apple', 'banana', 'cherry']" },
-    { "id": 2, "line": "for x in fruits:" },
-    { "id": 3, "line": "print(x)" }
+    { "id": 1, "indent": 0, "line": "fruits = ['apple', 'banana', 'cherry']" },
+    { "id": 2, "indent": 0, "line": "for x in fruits:" },
+    { "id": 3, "indent": 0, "line": "print(x)" }
   ],
   "indentation": [
     0,

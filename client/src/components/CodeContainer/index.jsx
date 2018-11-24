@@ -11,8 +11,10 @@ class CodeContainer extends React.Component {
         this.state = {
             data: this.props.data, // not used yet
             blocks: this.props.data.startCode,
-            indent: [],
         };
+    }
+
+    componentDidMount() {
     }
 
     moveBlockVertical(dragVerticalIndex, hoverVerticalIndex, ) {
@@ -29,9 +31,20 @@ class CodeContainer extends React.Component {
         }));
     }
 
-    moveBlockHorizontal(dragHorizontalIndex, hoverHorizontalIndex, ) {
-        const { blocks } = this.state;
-        // console.log('HELP');
+    moveBlockHorizontal(verticalIndex, horizontalIndex) {
+        let x = { ...this.state.blocks };
+        x[verticalIndex].indent = horizontalIndex;
+
+        // if (blockIndent <= 0 || blockIndent >= 4) {
+        // } else {
+        //     newIndent += 1;
+        // }
+
+        console.log(x);
+
+        this.setState({
+            blocks: x
+        });
 
     }
 
