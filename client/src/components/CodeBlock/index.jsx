@@ -6,6 +6,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { DragSource, DropTarget } from 'react-dnd';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import Chip from '@material-ui/core/Chip';
 import DragButton from '@material-ui/icons/DragHandle';
 import flow from 'lodash/flow';
 
@@ -19,7 +21,6 @@ class CodeBlock extends React.Component {
         };
     }
 
-
     componentWillMount() {
         this.styleBlocks();
     }
@@ -29,7 +30,7 @@ class CodeBlock extends React.Component {
     }
 
     styleBlocks() {
-        const { block, isDragging } = this.props;
+        const { block } = this.props;
         let width = '';
 
         if (block.indent === 0) {
@@ -62,6 +63,9 @@ class CodeBlock extends React.Component {
             <div className={classes.block} style={{ opacity, width }}>
                 <ListItem>
                     <ListItemText primary={block.line} />
+                    <ListItemSecondaryAction>
+                        <Chip label={'Indent: ' + block.indent} />
+                    </ListItemSecondaryAction>
                 </ListItem>
             </div>
         ))));
