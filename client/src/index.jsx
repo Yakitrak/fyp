@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 import { theme } from 'theme';
 import ExerciseScreen from 'components/ExerciseScreen';
 import exampleData from 'exercises/example.json';
