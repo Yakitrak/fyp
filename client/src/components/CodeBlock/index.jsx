@@ -14,24 +14,53 @@ class CodeBlock extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            width: '',
+            opacity: 1,
         };
     }
 
+
+    componentWillMount() {
+        this.styleBlocks();
+    }
+
+    componentWillReceiveProps() {
+        this.styleBlocks();
+    }
+
+    styleBlocks() {
+        const { block, isDragging } = this.props;
+        let width = '';
+
+        if (block.indent === 0) {
+            width = '100%'
+        }
+        else if (block.indent === 1) {
+            width = 'calc(95%)'
+        }
+        else if (block.indent === 2) {
+            width = 'calc(90%)'
+        }
+        else if (block.indent === 3) {
+            width = 'calc(85%)'
+        }
+
+        this.setState({
+            width: width,
+        });
+    }
+
     render() {
-        const { classes, block, isDragging, connectDragSource, connectDropTarget, connectDragPreview } = this.props;
+        const { classes, block, connectDragSource, isDragging, connectDropTarget, connectDragPreview } = this.props;
+        const { width } = this.state;
         const opacity = isDragging ? 0 : 1;
 
         return (
             connectDragPreview &&
             connectDragSource &&
             connectDragPreview(connectDropTarget(connectDragSource(
-            //     connectDragPreview(connectDropTarget(
-            <div className={classes.block} style={{ opacity }}>
+            <div className={classes.block} style={{ opacity, width }}>
                 <ListItem>
-                    {/*<ListItemIcon>*/}
-                        {/*<div style={{ cursor: 'move' }}> <DragButton/> </div>*/}
-                        {/*{connectDragSource(<div style={{ cursor: 'move' }}> <DragButton/> </div>)}*/}
-                    {/*</ListItemIcon>*/}
                     <ListItemText primary={block.line} />
                 </ListItem>
             </div>
@@ -54,8 +83,7 @@ const blockTarget = {
     drop(props, monitor, component) {
 
         const dragVerticalIndex = monitor.getItem().verticalIndex;
-        const dragHorizontalIndex = monitor.getItem().horizontalIndex;
-        const hoverHorizontalIndex = props.horizontalIndex;
+        let dragHorizontalIndex = monitor.getItem().horizontalIndex;
 
         // Determine rectangle on screen
         const hoverBoundingRect = findDOMNode(component).getBoundingClientRect();
@@ -68,16 +96,18 @@ const blockTarget = {
         const hoverClientX = clientOffset.x - hoverBoundingRect.left;
 
         // Dragging left
-        if (dragHorizontalIndex <= hoverHorizontalIndex && hoverClientX < hoverMiddleX) {
+        if (hoverClientX < hoverMiddleX && dragHorizontalIndex > 0) {
             console.log('left');
+            dragHorizontalIndex-=1
         }
 
         // Dragging right
-        if (dragHorizontalIndex >= hoverHorizontalIndex && hoverClientX > hoverMiddleX) {
+        if ( hoverClientX > hoverMiddleX && dragHorizontalIndex < 3) {
             console.log('right');
+            dragHorizontalIndex+=1
         }
 
-        monitor.getItem().horizontalIndex = hoverHorizontalIndex;
+        monitor.getItem().horizontalIndex = 1;
         props.moveBlockHorizontal(dragVerticalIndex, dragHorizontalIndex);
     },
 

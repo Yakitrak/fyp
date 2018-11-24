@@ -17,7 +17,7 @@ class CodeContainer extends React.Component {
     componentDidMount() {
     }
 
-    moveBlockVertical(dragVerticalIndex, hoverVerticalIndex, ) {
+    moveBlockVertical(dragVerticalIndex, hoverVerticalIndex) {
         const { blocks } = this.state;
         const dragBlock = blocks[dragVerticalIndex];
 
@@ -32,20 +32,14 @@ class CodeContainer extends React.Component {
     }
 
     moveBlockHorizontal(verticalIndex, horizontalIndex) {
-        let x = { ...this.state.blocks };
-        x[verticalIndex].indent = horizontalIndex;
+        let newBlocks = [ ...this.state.blocks ];
+        newBlocks[verticalIndex].indent = horizontalIndex;
 
-        // if (blockIndent <= 0 || blockIndent >= 4) {
-        // } else {
-        //     newIndent += 1;
-        // }
-
-        console.log(x);
+        console.log(newBlocks);
 
         this.setState({
-            blocks: x
+            blocks: newBlocks
         });
-
     }
 
     render() {
@@ -61,7 +55,7 @@ class CodeContainer extends React.Component {
                         <CodeBlock
                             key={block.id}
                             verticalIndex={i}
-                            horizontalIndex={0}
+                            horizontalIndex={block.indent}
                             listId={this.props.id}
                             block={block}
                             moveBlockVertical={this.moveBlockVertical.bind(this)}
