@@ -17,7 +17,6 @@ class CodeBlock extends React.Component {
         super(props);
         this.state = {
             width: '',
-            opacity: 1,
         };
     }
 
@@ -94,24 +93,35 @@ const blockTarget = {
         // Determine mouse position
         const clientOffset = monitor.getClientOffset();
 
-        // Get horizontal middle
-        const hoverMiddleX = (hoverBoundingRect.right - hoverBoundingRect.left) / 2;
         // Get pixels to the left
         const hoverClientX = clientOffset.x - hoverBoundingRect.left;
+        // Get section
+        const rectSect = hoverBoundingRect.width / 10;
 
-        // Dragging left
-        if (hoverClientX < hoverMiddleX && dragHorizontalIndex > 0) {
-            console.log('left');
-            dragHorizontalIndex-=1
+        console.log(hoverBoundingRect);
+        console.log(hoverClientX);
+
+        // indent right two
+        if (hoverClientX > hoverBoundingRect.left + rectSect && dragHorizontalIndex < 2) {
+            dragHorizontalIndex+=2;
         }
 
-        // Dragging right
-        if ( hoverClientX > hoverMiddleX && dragHorizontalIndex < 3) {
-            console.log('right');
-            dragHorizontalIndex+=1
+        // indent right one
+        if (hoverClientX > hoverBoundingRect.left && dragHorizontalIndex < 3) {
+            dragHorizontalIndex+=1;
         }
 
-        monitor.getItem().horizontalIndex = 1;
+        // indent left two
+        else if (hoverClientX < hoverBoundingRect.left - rectSect && dragHorizontalIndex > 1) {
+            dragHorizontalIndex-=2;
+        }
+
+        // indent left one
+        else if (hoverClientX < hoverBoundingRect.left && dragHorizontalIndex > 0) {
+            dragHorizontalIndex-=1;
+        }
+
+        monitor.getItem().horizontalIndex = dragHorizontalIndex;
         props.moveBlockHorizontal(dragVerticalIndex, dragHorizontalIndex);
     },
 
@@ -141,13 +151,11 @@ const blockTarget = {
 
         // Dragging downwards
         if (dragVerticalIndex < hoverVerticalIndex && hoverClientY < hoverMiddleY) {
-            console.log('down');
             return;
         }
 
         // Dragging upwards
         if (dragVerticalIndex > hoverVerticalIndex && hoverClientY > hoverMiddleY) {
-            console.log('up');
             return;
         }
 
