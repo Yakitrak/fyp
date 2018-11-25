@@ -54,7 +54,7 @@ class CodeBlock extends React.Component {
         }
 
         // colour of unused code blocks
-        else if (this.props.dull === true) {
+        else if (this.props.dull) {
             backgroundColor = 'grey';
         }
 
