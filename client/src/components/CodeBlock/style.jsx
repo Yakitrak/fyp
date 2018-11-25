@@ -5,6 +5,7 @@ const style = theme => ({
         // margin: '.5rem',
         margin: '0.5em 0px',
         backgroundColor: 'white',
+        listStyleType: 'none',
         cursor: 'move',
     }
 });

@@ -1,5 +1,6 @@
 const style = theme => ({
     container: {
+        marginTop: 50,
         width: '60vw',
         border: '1px dashed gray',
         borderRadius: 10,

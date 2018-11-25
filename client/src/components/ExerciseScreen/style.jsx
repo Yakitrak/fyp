@@ -6,8 +6,15 @@ const style = theme => ({
         flexDirection: 'column',
         alignItems: 'center',
         textAlign: 'center',
-        justifyContent: 'center',
+        // justifyContent: 'center',
         height: '100vh',
+        paddingTop: '2em',
+    },
+    buttonSection: {
+        margin: 20,
+        width: '60vw',
+        display: 'flex',
+        justifyContent: 'space-between',
     },
 });
 

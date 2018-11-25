@@ -110,20 +110,10 @@ const blockTarget = {
         // Get pixels to the left
         const hoverClientX = clientOffset.x - hoverBoundingRect.left;
 
-        // indent right two
-        // if (hoverClientX > hoverBoundingRect.left + rectSect && dragHorizontalIndex < 2) {
-        //     dragHorizontalIndex+=2;
-        // }
-
         // indent right one
         if (hoverClientX > hoverBoundingRect.left && dragHorizontalIndex < 3) {
             dragHorizontalIndex+=1;
         }
-
-        // indent left two
-        // else if (hoverClientX < hoverBoundingRect.left - rectSect && dragHorizontalIndex > 1) {
-        //     dragHorizontalIndex-=2;
-        // }
 
         // indent left one
         else if (hoverClientX < hoverBoundingRect.left && dragHorizontalIndex > 0) {

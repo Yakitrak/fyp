@@ -10,17 +10,17 @@ const theme = createMuiTheme({
     },
     palette: {
         primary: {
-            light: '#64B5F6',
-            main: '#696969',
+            light: '#64B6G6',
+            main: '#F59E9E',
             dark: '#0D47A1',
             contrastText: '#fff',
         },
-        // secondary: {
-        //     light: '#EF9A9A',
-        //     main: '#EF5350',
-        //     dark: '#C62828',
-        //     contrastText: '#fff',
-        // },
+        secondary: {
+            light: '#EF9A9A',
+            main: '#EF5350',
+            dark: '#C62828',
+            contrastText: '#fff',
+        },
     },
     typography: {
         fontFamily: '"Roboto", "Helvetica", "Arial"',

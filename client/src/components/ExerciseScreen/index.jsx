@@ -26,14 +26,10 @@ class Exercise extends React.Component {
 
                 <CodeContainer data={this.props.data}/>
 
-                <Button variant="contained" color="secondary" className={classes.button}>
-                    Back
-                </Button>
-
-                <Button variant="contained" color="primary" className={classes.button}>
-                    Check
-                </Button>
-
+                <div className={classes.buttonSection}>
+                    <Button variant="contained" color="secondary" className={classes.button}> Back </Button>
+                    <Button variant="contained" color="primary" className={classes.button}> Check </Button>
+                </div>
             </div>
         );
     }
