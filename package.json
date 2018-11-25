@@ -31,6 +31,7 @@
     "express-react-views": "^0.10.5",
     "express-session": "^1.15.6",
     "express-validator": "^5.2.0",
+    "highlight.js": "^9.13.1",
     "lodash": "^4.17.11",
     "mdi-react": "^4.0.0",
     "react": "^16.6.0",
@@ -39,6 +40,7 @@
     "react-dnd": "^5.0.0",
     "react-dnd-html5-backend": "^5.0.1",
     "react-dom": "^16.3.2",
+    "react-syntax-highlighter": "^10.1.1",
     "serve-favicon": "^2.5.0",
     "svg-loader": "0.0.2"
   },

@@ -8,9 +8,9 @@ import { DragSource, DropTarget } from 'react-dnd';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Chip from '@material-ui/core/Chip';
-import DragButton from '@material-ui/icons/DragHandle';
 import flow from 'lodash/flow';
-
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { monokai as codeStyle } from 'react-syntax-highlighter/styles/hljs';
 
 class CodeBlock extends React.Component {
     constructor(props) {
@@ -75,7 +75,11 @@ class CodeBlock extends React.Component {
             connectDragPreview(connectDropTarget(connectDragSource(
             <div className={classes.block} style={{ opacity, width, backgroundColor }}>
                 <ListItem>
-                    <ListItemText primary={block.line} />
+                    <ListItemText primary={
+                        block.id === 0 ? block.line :
+                        <SyntaxHighlighter language='python' style={codeStyle}>{block.line}</SyntaxHighlighter>
+                    }
+                        />
                     <ListItemSecondaryAction>
                         <Chip label={'Indent: ' + block.indent} />
                     </ListItemSecondaryAction>
