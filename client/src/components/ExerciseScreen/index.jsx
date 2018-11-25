@@ -5,6 +5,7 @@ import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import CodeContainer from 'components/CodeContainer';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 class Exercise extends React.Component {
     constructor(props) {
@@ -18,11 +19,21 @@ class Exercise extends React.Component {
 
         return (
             <div className={classes.root}>
+
                 <Typography variant="display1" gutterBottom>
                     {this.props.data.question}
                 </Typography>
 
                 <CodeContainer data={this.props.data}/>
+
+                <Button variant="contained" color="secondary" className={classes.button}>
+                    Back
+                </Button>
+
+                <Button variant="contained" color="primary" className={classes.button}>
+                    Check
+                </Button>
+
             </div>
         );
     }

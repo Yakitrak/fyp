@@ -4,14 +4,24 @@ import Style from './style';
 import CodeBlock from 'components/CodeBlock';
 import { DropTarget } from 'react-dnd';
 import update from 'react-addons-update';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 
 class CodeContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: this.props.data, // not used yet
-            blocks: this.props.data.startCode,
+            data: this.props.data,
+            blocks: [],
         };
+    }
+
+    componentDidMount() {
+        let slider = { "id": 0, "line": "Anything below this block is not used!" };
+
+        this.setState({
+            blocks: [slider, ...this.props.data.startCode]
+        })
     }
 
     moveBlockVertical(dragVerticalIndex, hoverVerticalIndex) {
@@ -43,16 +53,26 @@ class CodeContainer extends React.Component {
         const isActive = canDrop && isOver;
         const backgroundColor = isActive ? 'lightgreen' : '#FFF';
 
+        let x;
+
+        for (let i = 0; i < blocks.length; i++) {
+            if (blocks[i].id === 0)
+                x = i;
+        }
+
         return connectDropTarget(
             <div className={classes.container} style={{ backgroundColor }}>
                 {blocks.map((block, i) => {
+                    let isDull = i > x ? true : false;
+
                     return (
                         <CodeBlock
                             key={block.id}
                             verticalIndex={i}
                             horizontalIndex={block.indent}
-                            listId={this.props.id}
+                            id={block.id}
                             block={block}
+                            dull={isDull}
                             moveBlockVertical={this.moveBlockVertical.bind(this)}
                             moveBlockHorizontal={this.moveBlockHorizontal.bind(this)}
                         />

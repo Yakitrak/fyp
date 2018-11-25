@@ -17,6 +17,7 @@ class CodeBlock extends React.Component {
         super(props);
         this.state = {
             width: '',
+            backgroundColor: '',
         };
     }
 
@@ -30,8 +31,10 @@ class CodeBlock extends React.Component {
 
     styleBlocks() {
         const { block } = this.props;
-        let width = '';
+        let width = '100%';
+        let backgroundColor = 'white';
 
+        // determine width
         if (block.indent === 0) {
             width = '100%'
         }
@@ -45,21 +48,32 @@ class CodeBlock extends React.Component {
             width = 'calc(85%)'
         }
 
+        // colour of slider
+        if (block.id === 0) {
+            backgroundColor = 'yellow';
+        }
+
+        // colour of unused code blocks
+        else if (this.props.dull === true) {
+            backgroundColor = 'grey';
+        }
+
         this.setState({
             width: width,
+            backgroundColor: backgroundColor,
         });
     }
 
     render() {
         const { classes, block, connectDragSource, isDragging, connectDropTarget, connectDragPreview } = this.props;
-        const { width } = this.state;
+        const { width, backgroundColor } = this.state;
         const opacity = isDragging ? 0 : 1;
 
         return (
             connectDragPreview &&
             connectDragSource &&
             connectDragPreview(connectDropTarget(connectDragSource(
-            <div className={classes.block} style={{ opacity, width }}>
+            <div className={classes.block} style={{ opacity, width, backgroundColor }}>
                 <ListItem>
                     <ListItemText primary={block.line} />
                     <ListItemSecondaryAction>
