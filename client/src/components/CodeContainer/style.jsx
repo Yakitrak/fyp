@@ -3,11 +3,11 @@ const style = theme => ({
         marginTop: 50,
         width: '60vw',
         border: '1px dashed gray',
-        borderRadius: 10,
+        // borderRadius: 10,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-end',
-        padding: '0.5em',
+        backgroundColor: 'rgb(241, 239, 238) !important',
     },
 });
 

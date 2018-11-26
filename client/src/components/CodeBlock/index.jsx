@@ -10,7 +10,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Chip from '@material-ui/core/Chip';
 import flow from 'lodash/flow';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { monokai as codeStyle } from 'react-syntax-highlighter/styles/hljs';
+import { atelierForestLight as codeStyle } from 'react-syntax-highlighter/styles/hljs';
 
 class CodeBlock extends React.Component {
     constructor(props) {
@@ -55,7 +55,11 @@ class CodeBlock extends React.Component {
 
         // colour of unused code blocks
         else if (this.props.dull) {
-            backgroundColor = 'grey';
+            backgroundColor = 'rgba(0, 0, 0, 0.26)  ';
+        }
+
+        else if (!this.props.dull && block.id !== 0) {
+            backgroundColor = 'rgb(241, 239 , 238)';
         }
 
         this.setState({
@@ -76,7 +80,7 @@ class CodeBlock extends React.Component {
             <div className={classes.block} style={{ opacity, width, backgroundColor }}>
                 <ListItem>
                     <ListItemText primary={
-                        block.id === 0 ? block.line :
+                        this.props.dull || block.id === 0 ? <pre>{block.line}</pre> :
                         <SyntaxHighlighter language='python' style={codeStyle}>{block.line}</SyntaxHighlighter>
                     }
                         />
