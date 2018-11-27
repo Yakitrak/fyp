@@ -81,7 +81,7 @@ class CodeBlock extends React.Component {
                 <ListItem>
                     <ListItemText primary={
                         this.props.dull || block.id === 0 ? <pre>{block.line}</pre> :
-                        <SyntaxHighlighter language='python' style={codeStyle}>{block.line}</SyntaxHighlighter>
+                        <SyntaxHighlighter showLineNumbers={false} startingLineNumber={this.props.verticalIndex} language='python' style={codeStyle}>{block.line}</SyntaxHighlighter>
                     }
                         />
                     <ListItemSecondaryAction>

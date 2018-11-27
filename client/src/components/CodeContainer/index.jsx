@@ -72,7 +72,7 @@ class CodeContainer extends React.Component {
                             block={block}
                             dull={isDull}
                             moveBlockVertical={this.moveBlockVertical.bind(this)}
-                            moveBlockHorizontal={this.moveBlockHorizontal.bind(this)}
+                            moveBlockHorizontal={!isDull && this.moveBlockHorizontal.bind(this)}
                         />
                     );
                 })}

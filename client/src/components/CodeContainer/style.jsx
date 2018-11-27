@@ -2,7 +2,7 @@ const style = theme => ({
     container: {
         marginTop: 50,
         width: '60vw',
-        border: '1px dashed gray',
+        border: '1px solid grey',
         // borderRadius: 10,
         display: 'flex',
         flexDirection: 'column',
