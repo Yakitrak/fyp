@@ -22,69 +22,42 @@ class CodeBlock extends React.Component {
     }
 
     componentWillMount() {
-        this.styleBlocks();
     }
 
     componentWillReceiveProps() {
-        this.styleBlocks();
-    }
-
-    styleBlocks() {
-        const { block } = this.props;
-        let width = '100%';
-        let backgroundColor = 'white';
-
-        // determine width
-        // if (block.indent === 0) {
-        //     width = '100%'
-        // }
-        // else if (block.indent === 1) {
-        //     width = 'calc(95%)'
-        // }
-        // else if (block.indent === 2) {
-        //     width = 'calc(90%)'
-        // }
-        // else if (block.indent === 3) {
-        //     width = 'calc(85%)'
-        // }
-
-        // colour of slider
-        if (block.id === 0) {
-            backgroundColor = 'yellow';
-        }
-
-        // colour of unused code blocks
-        else if (this.props.dull) {
-            backgroundColor = 'rgba(0, 0, 0, 0.26)  ';
-        }
-
-        else if (!this.props.dull && block.id !== 0) {
-            backgroundColor = 'rgb(241, 239 , 238)';
-        }
-
-        this.setState({
-            width: width,
-            backgroundColor: backgroundColor,
-        });
     }
 
     render() {
         const { classes, block, connectDragSource, isDragging, connectDropTarget, connectDragPreview } = this.props;
-        const { width, backgroundColor } = this.state;
         const opacity = isDragging ? 0 : 1;
+        let width = '100%';
+        let backgroundColor = 'white';
+
+        // colour of unused code blocks
+        if (this.props.dull) {
+            backgroundColor = 'rgba(0, 0, 0, 0.26)';
+        }
+        // colour of used blocks
+        else  {
+            backgroundColor = 'rgb(241, 239 , 238)';
+        }
+        const sliderStyle = block.id === 0 ? {
+            borderTop: '1px dashed grey',
+            borderBottom: '1px dashed grey',
+        } : {};
 
         return (
             connectDragPreview &&
             connectDragSource &&
             connectDragPreview(connectDropTarget(connectDragSource(
-            <div className={classes.block} style={{ opacity, width, backgroundColor }}>
+            <div className={classes.block} style={{ opacity, width, backgroundColor, ...sliderStyle}}>
                 <ListItem classes={{
                     root: classes.listRoot,
                 }} >
                     <ListItemText primary={
-                        this.props.dull || block.id === 0 ? <pre>{block.line}</pre> :
-                        <SyntaxHighlighter showLineNumbers={false} startingLineNumber={this.props.verticalIndex} language='python' style={codeStyle}>{' '.repeat(this.props.horizontalIndex * 4) + block.line}</SyntaxHighlighter>
-                    }
+                        (this.props.dull) ?
+                            (<pre>{block.line}</pre>) :
+                            (<SyntaxHighlighter showLineNumbers={false} startingLineNumber={this.props.verticalIndex} language='python' style={codeStyle}>{' '.repeat(this.props.horizontalIndex * 4) + block.line}</SyntaxHighlighter>)}
                         />
                     {/*<ListItemSecondaryAction>*/}
                         {/*<Chip label={'Indent: ' + block.indent} />*/}

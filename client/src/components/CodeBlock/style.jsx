@@ -6,14 +6,13 @@ const style = theme => ({
         // margin: '0.5em 0px',
         // fontFamily: 'monospace !important',
         listStyleType: 'none',
-        padding: '0px !important',
         cursor: 'move',
     },
     listRoot: {
-      paddingLeft: '5px',
-      paddingRight: '5px',
-      paddingTop: '10px',
-      paddingBottom: '10px',
+        paddingLeft: '5px',
+        paddingRight: '5px',
+        paddingTop: '10px',
+        paddingBottom: '10px',
     },
 });
 
