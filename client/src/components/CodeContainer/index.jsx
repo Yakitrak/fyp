@@ -61,19 +61,20 @@ class CodeContainer extends React.Component {
 
         return connectDropTarget(
             <div className={classes.container} style={{ backgroundColor }}>
+
                 {blocks.map((block, i) => {
                     let isDull = i > dullIndex;
                     return (
-                        <CodeBlock
-                            key={block.id}
-                            verticalIndex={i}
-                            horizontalIndex={block.indent}
-                            id={block.id}
-                            block={block}
-                            dull={isDull}
-                            moveBlockVertical={this.moveBlockVertical.bind(this)}
-                            moveBlockHorizontal={!isDull && this.moveBlockHorizontal.bind(this)}
-                        />
+                            <CodeBlock
+                                key={block.id}
+                                verticalIndex={i}
+                                horizontalIndex={block.indent}
+                                id={block.id}
+                                block={block}
+                                dull={isDull}
+                                moveBlockVertical={this.moveBlockVertical.bind(this)}
+                                moveBlockHorizontal={!isDull && this.moveBlockHorizontal.bind(this)}
+                            />
                     );
                 })}
             </div>

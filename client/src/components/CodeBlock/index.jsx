@@ -35,18 +35,18 @@ class CodeBlock extends React.Component {
         let backgroundColor = 'white';
 
         // determine width
-        if (block.indent === 0) {
-            width = '100%'
-        }
-        else if (block.indent === 1) {
-            width = 'calc(95%)'
-        }
-        else if (block.indent === 2) {
-            width = 'calc(90%)'
-        }
-        else if (block.indent === 3) {
-            width = 'calc(85%)'
-        }
+        // if (block.indent === 0) {
+        //     width = '100%'
+        // }
+        // else if (block.indent === 1) {
+        //     width = 'calc(95%)'
+        // }
+        // else if (block.indent === 2) {
+        //     width = 'calc(90%)'
+        // }
+        // else if (block.indent === 3) {
+        //     width = 'calc(85%)'
+        // }
 
         // colour of slider
         if (block.id === 0) {
@@ -78,15 +78,17 @@ class CodeBlock extends React.Component {
             connectDragSource &&
             connectDragPreview(connectDropTarget(connectDragSource(
             <div className={classes.block} style={{ opacity, width, backgroundColor }}>
-                <ListItem>
+                <ListItem classes={{
+                    root: classes.listRoot,
+                }} >
                     <ListItemText primary={
                         this.props.dull || block.id === 0 ? <pre>{block.line}</pre> :
-                        <SyntaxHighlighter showLineNumbers={false} startingLineNumber={this.props.verticalIndex} language='python' style={codeStyle}>{block.line}</SyntaxHighlighter>
+                        <SyntaxHighlighter showLineNumbers={false} startingLineNumber={this.props.verticalIndex} language='python' style={codeStyle}>{' '.repeat(this.props.horizontalIndex * 4) + block.line}</SyntaxHighlighter>
                     }
                         />
-                    <ListItemSecondaryAction>
-                        <Chip label={'Indent: ' + block.indent} />
-                    </ListItemSecondaryAction>
+                    {/*<ListItemSecondaryAction>*/}
+                        {/*<Chip label={'Indent: ' + block.indent} />*/}
+                    {/*</ListItemSecondaryAction>*/}
                 </ListItem>
             </div>
         ))));

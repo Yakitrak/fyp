@@ -8,7 +8,13 @@ const style = theme => ({
         listStyleType: 'none',
         padding: '0px !important',
         cursor: 'move',
-    }
+    },
+    listRoot: {
+      paddingLeft: '5px',
+      paddingRight: '5px',
+      paddingTop: '10px',
+      paddingBottom: '10px',
+    },
 });
 
 export default style;
