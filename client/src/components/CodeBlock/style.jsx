@@ -4,7 +4,6 @@ const style = theme => ({
         // padding: '0.5rem 1rem',
         // margin: '.5rem',
         // margin: '0.5em 0px',
-        // fontFamily: 'monospace !important',
         listStyleType: 'none',
         cursor: 'move',
     },

@@ -56,7 +56,7 @@ class CodeBlock extends React.Component {
                 }} >
                     <ListItemText primary={
                         (this.props.dull) ?
-                            (<pre>{block.line}</pre>) :
+                            (<pre>{' '.repeat(this.props.horizontalIndex * 4) + block.line}</pre>) :
                             (<SyntaxHighlighter showLineNumbers={false} startingLineNumber={this.props.verticalIndex} language='python' style={codeStyle}>{' '.repeat(this.props.horizontalIndex * 4) + block.line}</SyntaxHighlighter>)}
                         />
                     {/*<ListItemSecondaryAction>*/}
