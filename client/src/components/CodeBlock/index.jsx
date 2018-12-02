@@ -35,15 +35,17 @@ class CodeBlock extends React.Component {
 
         // colour of unused code blocks
         if (this.props.dull) {
-            backgroundColor = 'rgba(0, 0, 0, 0.26)';
+            backgroundColor = 'rgba(0, 0, 0, 0.20)';
         }
         // colour of used blocks
         else  {
             backgroundColor = 'rgb(241, 239 , 238)';
         }
         const sliderStyle = block.id === 0 ? {
-            borderTop: '1px dashed grey',
-            borderBottom: '1px dashed grey',
+            borderTop: '1px solid black',
+            borderBottom: '1px solid black',
+            background: 'black',
+            cursor: 'default',
         } : {};
 
         return (
@@ -54,8 +56,11 @@ class CodeBlock extends React.Component {
                 <ListItem classes={{
                     root: classes.listRoot,
                 }} >
-                    <ListItemText primary={
-                        (this.props.dull) ?
+                    <ListItemText classes={{
+                        primary: block.id === 0 ? classes.primaryClass : ''
+                    }}
+                        primary={
+                        (this.props.dull || block.id === 0 ) ?
                             (<pre>{' '.repeat(this.props.horizontalIndex * 4) + block.line}</pre>) :
                             (<SyntaxHighlighter showLineNumbers={false} startingLineNumber={this.props.verticalIndex} language='python' style={codeStyle}>{' '.repeat(this.props.horizontalIndex * 4) + block.line}</SyntaxHighlighter>)}
                         />
@@ -75,6 +80,9 @@ const blockSource = {
             horizontalIndex: props.horizontalIndex,
             block: props.block
         };
+    },
+    canDrag(props, monitor) {
+      return props.block.id !== 0;
     },
 };
 

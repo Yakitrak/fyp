@@ -6,6 +6,8 @@ const style = theme => ({
         // margin: '0.5em 0px',
         listStyleType: 'none',
         cursor: 'move',
+        borderTop: '1px dashed grey',
+        borderBottom: '1px dashed grey',
     },
     listRoot: {
         paddingLeft: '5px',
@@ -13,6 +15,9 @@ const style = theme => ({
         paddingTop: '10px',
         paddingBottom: '10px',
     },
+    primaryClass: {
+        color: 'grey'
+    }
 });
 
 export default style;
