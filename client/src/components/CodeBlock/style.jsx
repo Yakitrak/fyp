@@ -12,8 +12,8 @@ const style = theme => ({
     listRoot: {
         paddingLeft: '5px',
         paddingRight: '5px',
-        paddingTop: '10px',
-        paddingBottom: '10px',
+        paddingTop: '5px',
+        paddingBottom: '5px',
     },
     primaryClass: {
         color: 'grey'
