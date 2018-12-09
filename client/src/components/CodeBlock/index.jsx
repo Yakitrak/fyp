@@ -93,16 +93,22 @@ const blockTarget = {
         const endPos = monitor.getClientOffset();
         const startPos = monitor.getInitialClientOffset();
 
+        // Don't indent if trying to move vertically
+        const allow = (Math.abs(startPos.y - endPos.y) < 50);
+
+        console.log(startPos);
+        console.log(endPos);
+
         // Get pixels to the left
         // const hoverClientX = clientOffset.x - hoverBoundingRect.left;
 
         // indent right one
-        if (endPos.x > startPos.x && dragHorizontalIndex < 3) {
+        if (endPos.x > startPos.x && dragHorizontalIndex < 3 && allow) {
             dragHorizontalIndex+=1;
         }
 
         // indent left one
-        else if (endPos.x < startPos.x && dragHorizontalIndex > 0) {
+        else if (endPos.x < startPos.x && dragHorizontalIndex > 0 && allow) {
             dragHorizontalIndex-=1;
         }
 

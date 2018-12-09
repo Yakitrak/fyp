@@ -23,10 +23,6 @@ class Exercise extends React.Component {
     handleCheck = () => {
         alert('Next Button');
 
-
-
-
-
     };
 
     render() {
