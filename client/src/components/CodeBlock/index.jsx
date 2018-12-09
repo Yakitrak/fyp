@@ -30,7 +30,7 @@ class CodeBlock extends React.Component {
     render() {
         const { classes, block, connectDragSource, isDragging, connectDropTarget, connectDragPreview } = this.props;
         const opacity = isDragging ? 0 : 1;
-        let width = '100%';
+        let width = 'calc(100% - ' + this.props.horizontalIndex*40 + 'px )';
         let backgroundColor = 'white';
 
         // colour of unused code blocks
@@ -61,12 +61,13 @@ class CodeBlock extends React.Component {
                     }}
                         primary={
                         (this.props.dull || block.id === 0 ) ?
-                            (<pre>{' '.repeat(this.props.horizontalIndex * 4) + block.line}</pre>) :
-                            (<SyntaxHighlighter showLineNumbers={false} startingLineNumber={this.props.verticalIndex} language='python' style={codeStyle}>{' '.repeat(this.props.horizontalIndex * 4) + block.line}</SyntaxHighlighter>)}
+                            (<pre>{block.line}</pre>) :
+                            (<SyntaxHighlighter showLineNumbers={false} startingLineNumber={this.props.verticalIndex} language='python' style={codeStyle}>{block.line}</SyntaxHighlighter>)}
                         />
                     {/*<ListItemSecondaryAction>*/}
                         {/*<Chip label={'Indent: ' + block.indent} />*/}
                     {/*</ListItemSecondaryAction>*/}
+                    {/*' '.repeat(this.props.horizontalIndex * 4) +*/}
                 </ListItem>
             </div>
         ))));

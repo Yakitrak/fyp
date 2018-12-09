@@ -17,7 +17,7 @@ class CodeContainer extends React.Component {
     }
 
     componentDidMount() {
-        let slider = { "id": 0, "line": "# Anything below this block is not executed / marked!" };
+        let slider = { "id": 0, indent: "0", "line": "# Anything below this block is not executed / marked!" };
 
         this.setState({
             blocks: [slider, ...this.props.data.startCode]
