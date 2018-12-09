@@ -5,9 +5,6 @@ import Style from './style';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { DragSource, DropTarget } from 'react-dnd';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import Chip from '@material-ui/core/Chip';
 import flow from 'lodash/flow';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atelierForestLight as codeStyle } from 'react-syntax-highlighter/styles/hljs';
@@ -16,8 +13,6 @@ class CodeBlock extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            width: '',
-            backgroundColor: '',
         };
     }
 
@@ -28,14 +23,16 @@ class CodeBlock extends React.Component {
     }
 
     render() {
-        const { classes, block, connectDragSource, isDragging, connectDropTarget, connectDragPreview } = this.props;
+        const { classes, block, dull, horizontalIndex, connectDragSource, isDragging, connectDropTarget, connectDragPreview } = this.props;
         const opacity = isDragging ? 0 : 1;
-        let width = 'calc(100% - ' + this.props.horizontalIndex*40 + 'px )';
-        let backgroundColor = 'white';
+        let width = !dull ? 'calc(100% - ' + 3*40 + 'px )' : '100%';
+        let marginLeft = !dull ? horizontalIndex * 40 : 0;
 
+        let backgroundColor = 'white';
         // colour of unused code blocks
-        if (this.props.dull) {
+        if (dull) {
             backgroundColor = 'rgba(0, 0, 0, 0.20)';
+            // backgroundColor = 'rgb(220,220,220)';
         }
         // colour of used blocks
         else  {
@@ -46,13 +43,15 @@ class CodeBlock extends React.Component {
             borderBottom: '1px solid black',
             background: 'black',
             cursor: 'default',
+            width: '100%',
+            margin: 0,
         } : {};
 
         return (
             connectDragPreview &&
             connectDragSource &&
             connectDragPreview(connectDropTarget(connectDragSource(
-            <div className={classes.block} style={{ opacity, width, backgroundColor, ...sliderStyle}}>
+            <div className={classes.block} style={{ opacity, width, backgroundColor, marginLeft, ...sliderStyle}}>
                 <ListItem classes={{
                     root: classes.listRoot,
                 }} >
@@ -64,10 +63,6 @@ class CodeBlock extends React.Component {
                             (<pre>{block.line}</pre>) :
                             (<SyntaxHighlighter showLineNumbers={false} startingLineNumber={this.props.verticalIndex} language='python' style={codeStyle}>{block.line}</SyntaxHighlighter>)}
                         />
-                    {/*<ListItemSecondaryAction>*/}
-                        {/*<Chip label={'Indent: ' + block.indent} />*/}
-                    {/*</ListItemSecondaryAction>*/}
-                    {/*' '.repeat(this.props.horizontalIndex * 4) +*/}
                 </ListItem>
             </div>
         ))));
@@ -75,11 +70,11 @@ class CodeBlock extends React.Component {
 }
 
 const blockSource = {
-    beginDrag(props) {
+    beginDrag(props, monitor) {
         return {
             verticalIndex: props.verticalIndex,
             horizontalIndex: props.horizontalIndex,
-            block: props.block
+            block: props.block,
         };
     },
     canDrag(props, monitor) {
@@ -94,21 +89,20 @@ const blockTarget = {
         const dragVerticalIndex = monitor.getItem().verticalIndex;
         let dragHorizontalIndex = monitor.getItem().horizontalIndex;
 
-        // Determine rectangle on screen
-        const hoverBoundingRect = findDOMNode(component).getBoundingClientRect();
         // Determine mouse position
-        const clientOffset = monitor.getClientOffset();
+        const endPos = monitor.getClientOffset();
+        const startPos = monitor.getInitialClientOffset();
 
         // Get pixels to the left
-        const hoverClientX = clientOffset.x - hoverBoundingRect.left;
+        // const hoverClientX = clientOffset.x - hoverBoundingRect.left;
 
         // indent right one
-        if (hoverClientX > hoverBoundingRect.left && dragHorizontalIndex < 3) {
+        if (endPos.x > startPos.x && dragHorizontalIndex < 3) {
             dragHorizontalIndex+=1;
         }
 
         // indent left one
-        else if (hoverClientX < hoverBoundingRect.left && dragHorizontalIndex > 0) {
+        else if (endPos.x < startPos.x && dragHorizontalIndex > 0) {
             dragHorizontalIndex-=1;
         }
 

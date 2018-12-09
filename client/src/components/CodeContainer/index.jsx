@@ -68,7 +68,7 @@ class CodeContainer extends React.Component {
                             <CodeBlock
                                 key={block.id}
                                 verticalIndex={i}
-                                horizontalIndex={block.indent}
+                                horizontalIndex={isDull ? 0 : block.indent}
                                 id={block.id}
                                 block={block}
                                 dull={isDull}
