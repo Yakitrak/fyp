@@ -12,17 +12,26 @@ class Exercise extends React.Component {
         super(props);
         this.state = {
             data: this.props.data,
+            currentCode: this.props.data.startCode,
         };
     }
 
     handleBack = () => {
         alert('No Back Yet');
-
     };
 
     handleCheck = () => {
-        alert('Next Button');
+        alert('Check Button');
 
+        console.log(this.state.data.correctCode);
+        console.log(this.state.currentCode);
+
+    };
+
+    getCurrentCode = (blocks) => {
+        this.setState({
+            currentCode: blocks,
+        })
     };
 
     render() {
@@ -35,7 +44,10 @@ class Exercise extends React.Component {
                     {this.props.data.question}
                 </Typography>
 
-                <CodeContainer data={this.props.data}/>
+                <CodeContainer
+                    data={this.props.data}
+                    getCurrentCode={(blocks) => this.getCurrentCode(blocks)}
+                />
 
                 <div className={classes.buttonSection}>
                     <Button onClick={this.handleBack} variant="contained" color="secondary" className={classes.button}> Back </Button>

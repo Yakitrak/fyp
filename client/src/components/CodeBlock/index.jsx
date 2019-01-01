@@ -96,8 +96,8 @@ const blockTarget = {
         // Don't indent if trying to move vertically
         const allow = (Math.abs(startPos.y - endPos.y) < 50);
 
-        console.log(startPos);
-        console.log(endPos);
+        // console.log(startPos);
+        // console.log(endPos);
 
         // Get pixels to the left
         // const hoverClientX = clientOffset.x - hoverBoundingRect.left;

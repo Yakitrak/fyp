@@ -24,7 +24,7 @@ class CodeContainer extends React.Component {
         })
     }
 
-    moveBlockVertical(dragVerticalIndex, hoverVerticalIndex) {
+    moveBlockVertical = (dragVerticalIndex, hoverVerticalIndex) => {
         const { blocks } = this.state;
         const dragBlock = blocks[dragVerticalIndex];
 
@@ -36,16 +36,20 @@ class CodeContainer extends React.Component {
                 ]
             }
         }));
-    }
 
-    moveBlockHorizontal(verticalIndex, horizontalIndex) {
+        this.props.getCurrentCode(this.state.blocks);
+    };
+
+    moveBlockHorizontal = (verticalIndex, horizontalIndex) => {
         let newBlocks = [ ...this.state.blocks ];
         newBlocks[verticalIndex].indent = horizontalIndex;
 
         this.setState({
             blocks: newBlocks
         });
-    }
+
+        this.props.getCurrentCode(this.state.blocks);
+    };
 
     render() {
         const { blocks } = this.state;
