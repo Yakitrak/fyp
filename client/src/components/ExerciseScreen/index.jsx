@@ -4,6 +4,7 @@ import Style from './style';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import CodeContainer from 'components/CodeContainer';
+import FeedbackModal from 'components/FeedbackModal';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
@@ -13,6 +14,7 @@ class Exercise extends React.Component {
         this.state = {
             data: this.props.data,
             currentCode: this.props.data.startCode,
+            feedbackOpen: false,
         };
     }
 
@@ -21,10 +23,49 @@ class Exercise extends React.Component {
     };
 
     handleCheck = () => {
-        alert('Check Button');
+        let correctList = this.state.data.correctCode;
+        let currentList = this.state.currentCode;
 
-        console.log(this.state.data.correctCode);
-        console.log(this.state.currentCode);
+        console.log(correctList);
+        console.log(currentList);
+
+        // currentList.forEach((block, index) => {
+        //     if (block.id === 0) {
+        //         console.log('end of marking');
+        //     }
+        //     else if (block.id === correctList[index].id) {
+        //         console.log('correct');
+        //     } else {
+        //         console.log('wrong');
+        //     }
+        // });
+
+        // work out point system
+        let linePoint = 100 / correctList.length;
+        let totalPoints = 0;
+
+        // begin marking
+        for (let i = 0; i < 5 ; i++) {
+            let currentBlock = currentList[i];
+            let correctBlock = correctList[i];
+
+            if (currentBlock.id === 0) {
+                console.log('end of marking');
+                break;
+            }
+            else if (currentBlock.id === correctBlock.id) {
+                console.log('correct');
+                totalPoints += linePoint
+            } else if (currentBlock.id !== correctBlock.id) {
+                console.log('wrong');
+                totalPoints -= linePoint
+            }
+        }
+
+        console.log(totalPoints);
+        this.handleOpenFeedback();
+
+
 
     };
 
@@ -32,6 +73,10 @@ class Exercise extends React.Component {
         this.setState({
             currentCode: blocks,
         })
+    };
+
+    handleOpenFeedback = () => {
+        this.setState({ feedbackOpen: true });
     };
 
     render() {
@@ -53,6 +98,10 @@ class Exercise extends React.Component {
                     <Button onClick={this.handleBack} variant="contained" color="secondary" className={classes.button}> Back </Button>
                     <Button onClick={this.handleCheck} variant="contained" color="primary" className={classes.button}> Check </Button>
                 </div>
+
+                <FeedbackModal
+                    open={this.state.feedbackOpen}
+                />
             </div>
         );
     }

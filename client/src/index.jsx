@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import { theme } from 'theme';
 import ExerciseScreen from 'components/ExerciseScreen';
-import exampleData from 'exercises/example.json';
+import exampleData from 'exercises/example1.json';
 
 class Index extends React.Component {
     constructor() {
