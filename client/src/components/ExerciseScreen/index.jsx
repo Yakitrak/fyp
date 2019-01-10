@@ -15,6 +15,7 @@ class Exercise extends React.Component {
             data: this.props.data,
             currentCode: this.props.data.startCode,
             feedbackOpen: false,
+            feedbackList: false,
         };
     }
 
@@ -24,48 +25,61 @@ class Exercise extends React.Component {
 
     handleCheck = () => {
         let correctList = this.state.data.correctCode;
-        let currentList = this.state.currentCode;
+        let blockList = this.state.currentCode;
+        let currentList = [];
+        let marks = 0;
+        let feedback = [];
 
-        console.log(correctList);
-        console.log(currentList);
-
-        // currentList.forEach((block, index) => {
-        //     if (block.id === 0) {
-        //         console.log('end of marking');
-        //     }
-        //     else if (block.id === correctList[index].id) {
-        //         console.log('correct');
-        //     } else {
-        //         console.log('wrong');
-        //     }
-        // });
-
-        // work out point system
-        let linePoint = 100 / correctList.length;
-        let totalPoints = 0;
-
-        // begin marking
-        for (let i = 0; i < 5 ; i++) {
-            let currentBlock = currentList[i];
-            let correctBlock = correctList[i];
-
-            if (currentBlock.id === 0) {
-                console.log('end of marking');
+        // determine blocks to be marked
+        for (let i = 0; i < blockList.length ; i++) {
+            if (blockList[i].id === 0) {
                 break;
             }
-            else if (currentBlock.id === correctBlock.id) {
-                console.log('correct');
-                totalPoints += linePoint
+            currentList.push(blockList[i]);
+        }
+
+        // validate blocks
+        for (let i = 0; i < currentList.length ; i++) {
+            let currentBlock = currentList[i];
+            let correctBlock = correctList[i];
+            console.log('Line ' + (i+1));
+
+            // define block if doesn't exist
+            if (!correctBlock) correctBlock = {id: -1};
+
+            // check block is in correct position
+            if (currentBlock.id === correctBlock.id) {
+                // check indentation
+                if (correctBlock.indent === currentBlock.indent) {
+                    console.log('full correct');
+                    marks += 1
+                } else {
+                    console.log('half correct');
+                    marks += 0.8;
+                    if (!feedback.includes('indent')) feedback.push('indent');
+                }
             } else if (currentBlock.id !== correctBlock.id) {
                 console.log('wrong');
-                totalPoints -= linePoint
             }
         }
 
-        console.log(totalPoints);
-        this.handleOpenFeedback();
+        // handle extra blocks
+        if (currentList.length > correctList.length) {
+            if (!feedback.includes('extra')) feedback.push('extra');
+            if (marks === correctList.length) {
+                marks+=5;
+            }
+        }
 
+        // give score
+        let totalPossible = correctList.length;
+        let total = (marks / totalPossible) * 100;
+        console.log(total);
 
+        this.setState({
+            feedbackOpen: true,
+            feedbackList: feedback,
+        });
 
     };
 
@@ -75,8 +89,10 @@ class Exercise extends React.Component {
         })
     };
 
-    handleOpenFeedback = () => {
-        this.setState({ feedbackOpen: true });
+    closeModal = () => {
+      this.setState({
+          feedbackOpen: false
+      })
     };
 
     render() {
@@ -99,9 +115,11 @@ class Exercise extends React.Component {
                     <Button onClick={this.handleCheck} variant="contained" color="primary" className={classes.button}> Check </Button>
                 </div>
 
-                <FeedbackModal
-                    open={this.state.feedbackOpen}
-                />
+                { this.state.feedbackOpen ? (<FeedbackModal
+                    feedback={this.state.feedbackList}
+                    handleClose={this.closeModal}
+                 />) : ''}
+
             </div>
         );
     }

@@ -1,6 +1,6 @@
 {
   "skillLevel": "?",
-  "question": "Arrange and indent the lines of code to print out the fruits in order: apple, banana, cherry",
+  "question": "Output the number 29 by adding 2 numbers below",
   "startCode": [
     { "id": 1, "indent": 0, "line": "fruits = ['apple', 'banana', 'cherry']" },
     { "id": 2, "indent": 0, "line": "for fruit in fruits:" },

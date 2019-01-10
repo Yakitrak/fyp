@@ -7,7 +7,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { atelierForestLight as codeStyle } from 'react-syntax-highlighter/styles/hljs';
+import { atelierForestLight as codeStyle } from 'react-syntax-highlighter/dist/styles/hljs';
 
 class CodeBlock extends React.Component {
     constructor(props) {

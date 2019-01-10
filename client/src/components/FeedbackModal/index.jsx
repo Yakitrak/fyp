@@ -3,19 +3,40 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Style from './style';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import Modal from '@material-ui/core/Modal';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Paper from '@material-ui/core/Paper';
+import Draggable from 'react-draggable';
 
+function draggablePaper(props) {
+    return (
+        <Draggable>
+            <Paper {...props} />
+        </Draggable>
+    );
+}
 
 class Feedback extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            open: this.props.open,
         };
     }
 
-    handleClose = () => {
-        this.setState({ open: false });
+    componentDidMount = () => {
+      this.createFeedback();
+    };
+
+    createFeedback = () => {
+
+        console.log(this.props.feedback);
+
+        this.setState({
+
+        });
     };
 
 
@@ -23,21 +44,28 @@ class Feedback extends React.Component {
         const { classes } = this.props;
 
         return (
-            <Modal
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
-                open={this.state.open}
-                onClose={this.handleClose}
+            <Dialog
+                open={true}
+                onClose={this.props.handleClose}
+                PaperComponent={draggablePaper}
+                aria-labelledby="draggable-dialog-title"
             >
-                <div >
-                    <Typography variant="h6" id="modal-title">
-                        Text in a modal
-                    </Typography>
-                    <Typography variant="subtitle1" id="simple-modal-description">
-                        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                    </Typography>
-                </div>
-            </Modal>
+                <DialogTitle id="draggable-dialog-title"> Feedback </DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        To subscribe to this website, please enter your email address here. We will send
+                        updates occasionally.
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={this.props.handleClose} color="primary">
+                        Close
+                    </Button>
+                    {/*<Button onClick={this.props.handleClose} color="primary">*/}
+                        {/*Other*/}
+                    {/*</Button>*/}
+                </DialogActions>
+            </Dialog>
         );
     }
 }

@@ -1,6 +1,6 @@
 {
   "skillLevel": "?",
-  "question": "Arrange and indent the lines of code to print out the fruits in order: apple, banana, cherry",
+  "question": "Print out the fruits in order: apple, banana, cherry",
   "startCode": [
     { "id": 0, "indent": 0, "line": "# Anything below this block is not executed / marked!" },
     { "id": 1, "indent": 0, "line": "fruits = ['apple', 'banana', 'cherry']" },
@@ -11,7 +11,7 @@
   ],
   "correctCode": [
     { "id": 1, "indent": 0 },
-    { "id": 2, "indent": 1 },
+    { "id": 2, "indent": 0 },
     { "id": 4, "indent": 1 }
   ]
 }
