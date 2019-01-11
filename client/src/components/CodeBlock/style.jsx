@@ -6,10 +6,6 @@ const style = theme => ({
         // margin: '0.5em 0px',
         listStyleType: 'none',
         cursor: 'move',
-        borderTop: '1px dashed grey',
-        borderBottom: '1px dashed grey',
-        borderLeft: '1px dashed grey',
-        borderRight: '1px dashed grey',
     },
     listRoot: {
         paddingLeft: '5px',

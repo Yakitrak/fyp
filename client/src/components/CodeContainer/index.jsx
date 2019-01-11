@@ -52,14 +52,13 @@ class CodeContainer extends React.Component {
 
     render() {
         const { blocks } = this.state;
-        const { classes, canDrop, isOver, connectDropTarget } = this.props;
+        const { classes, canDrop, isOver, connectDropTarget, wrongBlocks } = this.props;
         const isActive = canDrop && isOver;
         const backgroundColor = isActive ? 'lightgreen' : '#FFF';
-
         let dullIndex;
+
         for (let i = 0; i < blocks.length; i++) {
-            if (blocks[i].id === 0)
-                dullIndex = i;
+            if (blocks[i].id === 0) dullIndex = i;
         }
 
         return connectDropTarget(
@@ -77,6 +76,8 @@ class CodeContainer extends React.Component {
                                 dull={isDull}
                                 moveBlockVertical={this.moveBlockVertical.bind(this)}
                                 moveBlockHorizontal={this.moveBlockHorizontal.bind(this)}
+                                errorIndex={wrongBlocks.indexWrong.includes(block.id)}
+                                errorIndent={wrongBlocks.indentWrong.includes(block.id)}
                             />
                     );
                 })}

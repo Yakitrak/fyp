@@ -15,7 +15,12 @@ class Exercise extends React.Component {
             data: this.props.data,
             currentCode: this.props.data.startCode,
             feedbackOpen: false,
+            feedbackTotal: 0,
             feedbackList: false,
+            wrongBlocks: {
+                indexWrong: [],
+                indentWrong: [],
+            },
         };
     }
 
@@ -29,6 +34,10 @@ class Exercise extends React.Component {
         let currentList = [];
         let marks = 0;
         let feedback = [];
+        let wrongBlocks = {
+            indexWrong: [],
+            indentWrong: [],
+        };
 
         // determine blocks to be marked
         for (let i = 0; i < blockList.length ; i++) {
@@ -42,43 +51,47 @@ class Exercise extends React.Component {
         for (let i = 0; i < currentList.length ; i++) {
             let currentBlock = currentList[i];
             let correctBlock = correctList[i];
-            console.log('Line ' + (i+1));
 
             // define block if doesn't exist
             if (!correctBlock) correctBlock = {id: -1};
 
             // check block is in correct position
             if (currentBlock.id === correctBlock.id) {
-                // check indentation
+                // full correct
                 if (correctBlock.indent === currentBlock.indent) {
-                    console.log('full correct');
                     marks += 1
+                // half correct
                 } else {
-                    console.log('half correct');
+                    wrongBlocks.indentWrong.push(currentBlock.id);
                     marks += 0.8;
                     if (!feedback.includes('indent')) feedback.push('indent');
                 }
+            // full wrong
             } else if (currentBlock.id !== correctBlock.id) {
-                console.log('wrong');
+                wrongBlocks.indexWrong.push(currentBlock.id);
             }
         }
 
-        // handle extra blocks
+        // too many blocks
         if (currentList.length > correctList.length) {
-            if (!feedback.includes('extra')) feedback.push('extra');
-            if (marks === correctList.length) {
-                marks+=5;
-            }
+            feedback.push('extra');
+            marks-=0.5;
         }
 
-        // give score
+        // too little blocks
+        if (correctList.length < correctList) {
+            feedback.push('few');
+        }
+
+        // calculate score
         let totalPossible = correctList.length;
         let total = (marks / totalPossible) * 100;
-        console.log(total);
 
         this.setState({
             feedbackOpen: true,
+            feedbackTotal: total,
             feedbackList: feedback,
+            wrongBlocks: wrongBlocks,
         });
 
     };
@@ -107,6 +120,7 @@ class Exercise extends React.Component {
 
                 <CodeContainer
                     data={this.props.data}
+                    wrongBlocks={this.state.wrongBlocks}
                     getCurrentCode={(blocks) => this.getCurrentCode(blocks)}
                 />
 
@@ -116,7 +130,8 @@ class Exercise extends React.Component {
                 </div>
 
                 { this.state.feedbackOpen ? (<FeedbackModal
-                    feedback={this.state.feedbackList}
+                    feedbackTotal={this.state.feedbackTotal}
+                    feedbackList={this.state.feedbackList}
                     handleClose={this.closeModal}
                  />) : ''}
 

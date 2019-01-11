@@ -23,6 +23,8 @@ class Feedback extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            feedbackText: '',
+            feedbackTitle: '',
         };
     }
 
@@ -31,12 +33,38 @@ class Feedback extends React.Component {
     };
 
     createFeedback = () => {
+        const {feedbackTotal, feedbackList } = this.props;
+        let feedbackString = '';
 
-        console.log(this.props.feedback);
+        if (feedbackTotal === 100) {
+            feedbackString += 'Perfect, you got everything right! ';
+        } else if (feedbackTotal > 50) {
+            feedbackString += 'Well done, you are almost there! ';
+        } else if (feedbackTotal > 20 ) {
+            feedbackString += 'You have some lines right, keep trying! ';
+        } else if (feedbackTotal === 0) {
+            feedbackString += 'Keep trying! ';
+        }
+
+        if (feedbackList.includes('indent')) {
+            feedbackString += 'Try fixing some indentations! ';
+        }
+
+        if (feedbackList.includes('extra')) {
+            feedbackString += 'You have more lines than you need! ';
+        }
+
+        if (feedbackList.includes('few')) {
+            feedbackString += 'Try adding more lines ';
+        }
+
+        console.log(feedbackTotal);
 
         this.setState({
-
+            feedbackText: feedbackString,
+            feedbackTitle: Math.round(feedbackTotal) + '%',
         });
+
     };
 
 
@@ -48,22 +76,18 @@ class Feedback extends React.Component {
                 open={true}
                 onClose={this.props.handleClose}
                 PaperComponent={draggablePaper}
-                aria-labelledby="draggable-dialog-title"
+                aria-labelledby="draggable-dialog-feedback"
             >
-                <DialogTitle id="draggable-dialog-title"> Feedback </DialogTitle>
+                <DialogTitle id="draggable-dialog-feedback"> {this.state.feedbackTitle} </DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        To subscribe to this website, please enter your email address here. We will send
-                        updates occasionally.
+                        {this.state.feedbackText}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={this.props.handleClose} color="primary">
                         Close
                     </Button>
-                    {/*<Button onClick={this.props.handleClose} color="primary">*/}
-                        {/*Other*/}
-                    {/*</Button>*/}
                 </DialogActions>
             </Dialog>
         );

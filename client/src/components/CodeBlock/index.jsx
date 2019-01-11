@@ -23,20 +23,27 @@ class CodeBlock extends React.Component {
     }
 
     render() {
-        const { classes, block, dull, horizontalIndex, connectDragSource, isDragging, connectDropTarget, connectDragPreview } = this.props;
+        const { classes, block, dull, horizontalIndex, errorIndex, errorIndent, connectDragSource, isDragging, connectDropTarget, connectDragPreview } = this.props;
         const opacity = isDragging ? 0 : 1;
         let width = !dull ? 'calc(100% - ' + 3*40 + 'px )' : '100%';
         let marginLeft = !dull ? horizontalIndex * 40 : 0;
 
         let backgroundColor = 'white';
+        let border = '1px dashed grey';
+
         // colour of unused code blocks
         if (dull) {
             backgroundColor = 'rgba(0, 0, 0, 0.20)';
-            // backgroundColor = 'rgb(220,220,220)';
         }
         // colour of used blocks
         else  {
             backgroundColor = 'rgb(241, 239 , 238)';
+             if (errorIndex) {
+                 border = '1px dashed red';
+             }
+            if (errorIndent) {
+                border = '1px dashed orange';
+            }
         }
         const sliderStyle = block.id === 0 ? {
             borderTop: '1px solid black',
@@ -51,7 +58,7 @@ class CodeBlock extends React.Component {
             connectDragPreview &&
             connectDragSource &&
             connectDragPreview(connectDropTarget(connectDragSource(
-            <div className={classes.block} style={{ opacity, width, backgroundColor, marginLeft, ...sliderStyle}}>
+            <div className={classes.block} style={{ border, opacity, width, backgroundColor, marginLeft, ...sliderStyle}}>
                 <ListItem classes={{
                     root: classes.listRoot,
                 }} >
@@ -71,6 +78,9 @@ class CodeBlock extends React.Component {
 
 const blockSource = {
     beginDrag(props, monitor) {
+
+
+
         return {
             verticalIndex: props.verticalIndex,
             horizontalIndex: props.horizontalIndex,
