@@ -66,6 +66,8 @@ class Exercise extends React.Component {
 
             // check block is in correct position
             if (currentBlock.id === correctBlock.id) {
+                console.log(currentBlock);
+                console.log(correctBlock);
                 // full correct
                 if (correctBlock.indent === currentBlock.indent) {
                     marks += 1
@@ -90,13 +92,17 @@ class Exercise extends React.Component {
         }
 
         // too little blocks
-        if (correctList.length < correctList) {
+        if (currentList.length < correctList.length) {
             feedback.push('few');
         }
 
         // calculate score
         let totalPossible = correctList.length;
         let total = (marks / totalPossible) * 100;
+
+        if (total !== 100 && correctList.length === currentList.length) {
+            feedback.push('arrange');
+        }
 
         this.setState({
             feedbackOpen: true,
@@ -138,7 +144,7 @@ class Exercise extends React.Component {
 
                 <div className={classes.buttonSection}>
                     <Button disabled onClick={this.handleBack} variant="contained" color="secondary" className={classes.button}> Back </Button>
-                    <Button onClick={this.handleCheck} variant="contained" color="primary" className={classes.button}> Feedback </Button>
+                    <Button onClick={this.handleCheck} variant="contained" color="secondary" className={classes.button}> Feedback </Button>
                 </div>
 
                 { this.state.feedbackOpen ? (<FeedbackModal

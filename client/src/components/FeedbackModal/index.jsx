@@ -10,6 +10,9 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Paper from '@material-ui/core/Paper';
 import Draggable from 'react-draggable';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
 function draggablePaper(props) {
     return (
@@ -25,6 +28,7 @@ class Feedback extends React.Component {
         this.state = {
             feedbackText: '',
             feedbackTitle: '',
+            feedbackTips: [],
         };
     }
 
@@ -35,34 +39,41 @@ class Feedback extends React.Component {
     createFeedback = () => {
         const {feedbackTotal, feedbackList } = this.props;
         let feedbackString = '';
+        let feedbackTips = [];
 
         if (feedbackTotal === 100) {
             feedbackString += 'Perfect, you got everything right! ';
         } else if (feedbackTotal > 50) {
-            feedbackString += 'Well done, you are almost there! ';
+            feedbackString += 'Well done, you are almost there! This may help: ';
         } else if (feedbackTotal > 20 ) {
-            feedbackString += 'You have some lines right, keep trying! ';
+            feedbackString += 'You have some lines right, keep trying! This may help: ';
         } else if (feedbackTotal === 0) {
-            feedbackString += 'Keep trying! ';
+            feedbackString += 'Unlucky, keep going! This may help: ';
         }
 
+
+
         if (feedbackList.includes('indent')) {
-            feedbackString += 'Try fixing some indentations! ';
+            feedbackTips.push(<ListItem > <ListItemText primary="Try fixing some indentations" /> </ListItem>)
         }
 
         if (feedbackList.includes('extra')) {
-            feedbackString += 'You have more lines than you need! ';
+            feedbackTips.push(<ListItem > <ListItemText primary="You have more lines than you need" /> </ListItem>)
+
         }
 
         if (feedbackList.includes('few')) {
-            feedbackString += 'Try adding more lines ';
+            feedbackTips.push(<ListItem > <ListItemText primary="Try adding more lines" /> </ListItem>)
         }
 
-        console.log(feedbackTotal);
+        if (feedbackList.includes('arrange')) {
+            feedbackTips.push(<ListItem > <ListItemText primary="Blocks are in the wrong place" /> </ListItem>)
+        }
 
         this.setState({
             feedbackText: feedbackString,
             feedbackTitle: Math.round(feedbackTotal) + '%',
+            feedbackTips: feedbackTips,
         });
 
     };
@@ -78,14 +89,21 @@ class Feedback extends React.Component {
                 PaperComponent={draggablePaper}
                 aria-labelledby="draggable-dialog-feedback"
             >
-                <DialogTitle id="draggable-dialog-feedback"> {this.state.feedbackTitle} </DialogTitle>
-                <DialogContent>
+                <DialogTitle className={classes.title} id="draggable-dialog-feedback">
+                    <Typography variant="h4">
+                        {this.state.feedbackTitle}
+                    </Typography>
+                </DialogTitle>
+                <DialogContent className={classes.content}>
                     <DialogContentText>
-                        {this.state.feedbackText}
+                        <Typography variant="subtitle1" gutterBottom>
+                            {this.state.feedbackText}
+                        </Typography>
+                        <List> {this.state.feedbackTips} </List>
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={this.props.handleClose} color="primary">
+                    <Button onClick={this.props.handleClose} color="secondary">
                         Close
                     </Button>
                 </DialogActions>

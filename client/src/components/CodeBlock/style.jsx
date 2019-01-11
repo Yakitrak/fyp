@@ -6,6 +6,7 @@ const style = theme => ({
         // margin: '0.5em 0px',
         listStyleType: 'none',
         cursor: 'move',
+        margin: 2,
     },
     listRoot: {
         paddingLeft: '5px',

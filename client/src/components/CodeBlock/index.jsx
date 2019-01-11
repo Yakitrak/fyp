@@ -19,8 +19,8 @@ class CodeBlock extends React.Component {
     render() {
         const { classes, block, dull, horizontalIndex, errorIndex, errorIndent, connectDragSource, isDragging, connectDropTarget, connectDragPreview } = this.props;
         const opacity = isDragging ? 0 : 1;
-        let width = !dull ? 'calc(100% - ' + 3*40 + 'px )' : '100%';
-        let marginLeft = !dull ? horizontalIndex * 40 : 0;
+        let width = !dull ? 'calc(100% - ' + 3*40 + 'px )' : 'default';
+        let marginLeft = !dull ? horizontalIndex * 40 : 'default';
 
         let backgroundColor = 'white';
         let border = '1px dashed grey';
@@ -32,20 +32,19 @@ class CodeBlock extends React.Component {
         // colour of used blocks
         else  {
             backgroundColor = 'rgb(241, 239 , 238)';
-             if (errorIndex) {
-                 border = '1px dashed red';
-             }
             if (errorIndent) {
                 border = '1px dashed orange';
             }
+            if (errorIndex) {
+                border = '1px dashed red';
+            }
         }
         const sliderStyle = block.id === 0 ? {
-            borderTop: '1px solid black',
-            borderBottom: '1px solid black',
             background: 'black',
             cursor: 'default',
-            width: '100%',
-            margin: 0,
+            width: 'default',
+            margin: 'default',
+            marginLeft: 1,
         } : {};
 
         return (

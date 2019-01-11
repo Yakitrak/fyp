@@ -7,8 +7,8 @@ const style = theme => ({
         alignItems: 'center',
         textAlign: 'center',
         // justifyContent: 'center',
-        height: '100vh',
-        // paddingTop: '2em',
+        height: '98vh',
+        paddingTop: '2vh',
     },
     buttonSection: {
         margin: 20,

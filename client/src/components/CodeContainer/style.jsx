@@ -6,9 +6,9 @@ const style = theme => ({
         // borderRadius: 10,
         display: 'flex',
         flexDirection: 'column',
-        // alignItems: 'flex-end',
         backgroundColor: 'rgb(241, 239, 238) !important',
         // backgroundColor: 'rgb(220,220,220) !important',
+        padding: 2,
 
     },
 });
