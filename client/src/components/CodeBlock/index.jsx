@@ -16,12 +16,6 @@ class CodeBlock extends React.Component {
         };
     }
 
-    componentWillMount() {
-    }
-
-    componentWillReceiveProps() {
-    }
-
     render() {
         const { classes, block, dull, horizontalIndex, errorIndex, errorIndent, connectDragSource, isDragging, connectDropTarget, connectDragPreview } = this.props;
         const opacity = isDragging ? 0 : 1;
@@ -79,7 +73,7 @@ class CodeBlock extends React.Component {
 const blockSource = {
     beginDrag(props, monitor) {
 
-
+        props.resetError();
 
         return {
             verticalIndex: props.verticalIndex,

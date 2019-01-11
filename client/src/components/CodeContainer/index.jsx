@@ -13,13 +13,19 @@ class CodeContainer extends React.Component {
         this.state = {
             data: this.props.data,
             blocks: [],
+            wrongBlocks: this.props.wrongBlocks,
         };
     }
 
     componentDidMount() {
-
         this.setState({
-            blocks: this.props.data.startCode
+            blocks: this.props.data.startCode,
+        });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            wrongBlocks: nextProps.wrongBlocks,
         });
     }
 
@@ -51,8 +57,8 @@ class CodeContainer extends React.Component {
     };
 
     render() {
-        const { blocks } = this.state;
-        const { classes, canDrop, isOver, connectDropTarget, wrongBlocks } = this.props;
+        const { blocks, wrongBlocks } = this.state;
+        const { classes, canDrop, isOver, connectDropTarget } = this.props;
         const isActive = canDrop && isOver;
         const backgroundColor = isActive ? 'lightgreen' : '#FFF';
         let dullIndex;
@@ -78,6 +84,7 @@ class CodeContainer extends React.Component {
                                 moveBlockHorizontal={this.moveBlockHorizontal.bind(this)}
                                 errorIndex={wrongBlocks.indexWrong.includes(block.id)}
                                 errorIndent={wrongBlocks.indentWrong.includes(block.id)}
+                                resetError={this.props.resetError}
                             />
                     );
                 })}

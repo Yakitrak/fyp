@@ -1,15 +1,19 @@
 {
   "skillLevel": "?",
-  "question": "Output the number 29 by adding 2 numbers below",
+  "question": "Call the hello function to print 'hello Bill' then 'hello Jim'",
   "startCode": [
-    { "id": 1, "indent": 0, "line": "fruits = ['apple', 'banana', 'cherry']" },
-    { "id": 2, "indent": 0, "line": "for fruit in fruits:" },
-    { "id": 3, "indent": 0, "line": "print(cherry)" },
-    { "id": 4, "indent": 0, "line": "print(fruit)" }
+    { "id": 0, "indent": 0, "line": "# Anything below this block is not executed / marked!" },
+    { "id": 1, "indent": 0, "line": "hello('Jim')" },
+    { "id": 2, "indent": 0, "line": "print('Hello ', name)" },
+    { "id": 3, "indent": 0, "line": "hello('Bill')" },
+    { "id": 4, "indent": 0, "line": "def hello(Bill)" },
+    { "id": 5, "indent": 0, "line": "def hello(name)" }
+
   ],
   "correctCode": [
-    { "id": 1, "indent": 0 },
+    { "id": 5, "indent": 0 },
     { "id": 2, "indent": 1 },
-    { "id": 4, "indent": 1 }
+    { "id": 3, "indent": 0 },
+    { "id": 1, "indent": 0 }
   ]
 }

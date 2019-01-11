@@ -28,6 +28,15 @@ class Exercise extends React.Component {
         alert('No Back Yet');
     };
 
+    resetError = () => {
+      this.setState({
+          wrongBlocks: {
+              indexWrong: [],
+              indentWrong: [],
+          },
+      })
+    };
+
     handleCheck = () => {
         let correctList = this.state.data.correctCode;
         let blockList = this.state.currentCode;
@@ -75,7 +84,9 @@ class Exercise extends React.Component {
         // too many blocks
         if (currentList.length > correctList.length) {
             feedback.push('extra');
-            marks-=0.5;
+            if (marks > 1) {
+                marks-=0.5;
+            }
         }
 
         // too little blocks
@@ -122,11 +133,12 @@ class Exercise extends React.Component {
                     data={this.props.data}
                     wrongBlocks={this.state.wrongBlocks}
                     getCurrentCode={(blocks) => this.getCurrentCode(blocks)}
+                    resetError={this.resetError}
                 />
 
                 <div className={classes.buttonSection}>
-                    <Button onClick={this.handleBack} variant="contained" color="secondary" className={classes.button}> Back </Button>
-                    <Button onClick={this.handleCheck} variant="contained" color="primary" className={classes.button}> Check </Button>
+                    <Button disabled onClick={this.handleBack} variant="contained" color="secondary" className={classes.button}> Back </Button>
+                    <Button onClick={this.handleCheck} variant="contained" color="primary" className={classes.button}> Feedback </Button>
                 </div>
 
                 { this.state.feedbackOpen ? (<FeedbackModal
