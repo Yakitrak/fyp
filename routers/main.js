@@ -4,7 +4,7 @@ module.exports = function () {
     return {
         setRouting: function (router) {
             router.get('/login', this.login);
-            router.get('/', this.index);
+            router.get('/question/*', this.index);
         },
 
         login: function(req, res) {

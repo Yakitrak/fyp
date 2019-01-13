@@ -9,6 +9,12 @@ const style = theme => ({
     title: {
         backgroundColor: theme.palette.primary.main,
         color: theme.palette.primary.contrastText,
+    },
+    errorIndexText: {
+        color: 'red',
+    },
+    errorIndentText: {
+        color: 'orange',
     }
 });
 

@@ -13,6 +13,8 @@ import Draggable from 'react-draggable';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ErrorIcon from '@material-ui/icons/Error';
 
 function draggablePaper(props) {
     return (
@@ -40,6 +42,7 @@ class Feedback extends React.Component {
         const {feedbackTotal, feedbackList } = this.props;
         let feedbackString = '';
         let feedbackTips = [];
+        let colourText = '';
 
         if (feedbackTotal === 100) {
             feedbackString += 'Perfect, you got everything right! ';
@@ -47,28 +50,49 @@ class Feedback extends React.Component {
             feedbackString += 'Well done, you are almost there! This may help: ';
         } else if (feedbackTotal > 20 ) {
             feedbackString += 'You have some lines right, keep trying! This may help: ';
+        } else if (feedbackList.includes('empty')) {
+            feedbackString += 'You have no lines to be marked. Remember to drag blocks above the black slider!';
         } else if (feedbackTotal === 0) {
             feedbackString += 'Unlucky, keep going! This may help: ';
         }
 
 
+        if (feedbackList.includes('extra')) {
+            feedbackTips.push(<ListItem >
+                <ListItemIcon>
+                <ErrorIcon />
+                </ListItemIcon>
+                <ListItemText primary="Too many lines" secondary={<Typography variant="subtitle2" style={{color: 'red'}}> Blocks in red are in the incorrect position </Typography>} />
+            </ListItem>);
+        }
+
+        if (feedbackList.includes('few') && !feedbackList.includes('empty')) {
+            feedbackTips.push(<ListItem >
+                <ListItemIcon>
+                    <ErrorIcon />
+                </ListItemIcon>
+                <ListItemText primary="Too few lines" secondary={<Typography variant="caption" style={{color: 'red'}}> Blocks in red are in the incorrect position </Typography>} />
+            </ListItem>);
+        }
 
         if (feedbackList.includes('indent')) {
-            feedbackTips.push(<ListItem > <ListItemText primary="Try fixing some indentations" /> </ListItem>)
-        }
-
-        if (feedbackList.includes('extra')) {
-            feedbackTips.push(<ListItem > <ListItemText primary="You have more lines than you need" /> </ListItem>)
-
-        }
-
-        if (feedbackList.includes('few')) {
-            feedbackTips.push(<ListItem > <ListItemText primary="Try adding more lines" /> </ListItem>)
+            feedbackTips.push(<ListItem >
+                <ListItemIcon>
+                    <ErrorIcon />
+                </ListItemIcon>
+                <ListItemText primary="Some lines have wrong indentations" secondary={<Typography variant="subtitle2" style={{color: 'orange'}}> Blocks in orange are indented correctly </Typography>} />
+            </ListItem>);
         }
 
         if (feedbackList.includes('arrange')) {
-            feedbackTips.push(<ListItem > <ListItemText primary="Blocks are in the wrong place" /> </ListItem>)
+            feedbackTips.push(<ListItem >
+                <ListItemIcon>
+                    <ErrorIcon />
+                </ListItemIcon>
+                <ListItemText primary="Some lines are in the wrong positions" secondary={<Typography variant="caption" style={{color: 'red'}}> Blocks in red are in the incorrect position </Typography>} />
+            </ListItem>);
         }
+
 
         this.setState({
             feedbackText: feedbackString,
@@ -85,22 +109,19 @@ class Feedback extends React.Component {
         return (
             <Dialog
                 open={true}
+                // maxWidth={false}
                 onClose={this.props.handleClose}
                 PaperComponent={draggablePaper}
                 aria-labelledby="draggable-dialog-feedback"
             >
-                <DialogTitle className={classes.title} id="draggable-dialog-feedback">
+                <DialogTitle disableTypography={true} className={classes.title} id="draggable-dialog-feedback">
                     <Typography variant="h4">
                         {this.state.feedbackTitle}
                     </Typography>
                 </DialogTitle>
                 <DialogContent className={classes.content}>
-                    <DialogContentText>
-                        <Typography variant="subtitle1" gutterBottom>
-                            {this.state.feedbackText}
-                        </Typography>
+                        <Typography variant="h6" > {this.state.feedbackText} </Typography>
                         <List> {this.state.feedbackTips} </List>
-                    </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={this.props.handleClose} color="secondary">

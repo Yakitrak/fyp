@@ -2,7 +2,7 @@
   "skillLevel": "?",
   "question": "Print out the fruits in order: apple, banana, cherry",
   "startCode": [
-    { "id": 0, "indent": 0, "line": "# Anything below this block is not executed / marked!" },
+    { "id": 0, "indent": 0, "line": "# Drag correct blocks above this! Nothing below is marked!" },
     { "id": 1, "indent": 0, "line": "fruits = ['apple', 'banana', 'cherry']" },
     { "id": 2, "indent": 0, "line": "for fruit in fruits:" },
     { "id": 3, "indent": 0, "line": "print(cherry)" },

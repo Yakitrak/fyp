@@ -24,6 +24,13 @@ class Exercise extends React.Component {
         };
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            data: nextProps.data,
+            currentCode: nextProps.data.startCode,
+        });
+    }
+
     handleBack = () => {
         alert('No Back Yet');
     };
@@ -66,16 +73,15 @@ class Exercise extends React.Component {
 
             // check block is in correct position
             if (currentBlock.id === correctBlock.id) {
-                console.log(currentBlock);
-                console.log(correctBlock);
                 // full correct
                 if (correctBlock.indent === currentBlock.indent) {
                     marks += 1
-                // half correct
-                } else {
+                }
+                // position correct but too wrong indentation
+                else {
+                    if (!feedback.includes('indent')) feedback.push('indent');
                     wrongBlocks.indentWrong.push(currentBlock.id);
                     marks += 0.8;
-                    if (!feedback.includes('indent')) feedback.push('indent');
                 }
             // full wrong
             } else if (currentBlock.id !== correctBlock.id) {
@@ -93,16 +99,22 @@ class Exercise extends React.Component {
 
         // too little blocks
         if (currentList.length < correctList.length) {
-            feedback.push('few');
+            if (currentList.length === 0) {
+                feedback.push('empty');
+            } else {
+                feedback.push('few');
+            }
         }
 
         // calculate score
         let totalPossible = correctList.length;
         let total = (marks / totalPossible) * 100;
 
-        if (total !== 100 && correctList.length === currentList.length) {
+        if (total !== 100 && correctList.length === currentList.length && !feedback.includes('indent')) {
             feedback.push('arrange');
         }
+
+
 
         this.setState({
             feedbackOpen: true,
@@ -131,7 +143,7 @@ class Exercise extends React.Component {
         return (
             <div className={classes.root}>
 
-                <Typography variant="display1" gutterBottom>
+                <Typography variant="h3" gutterBottom>
                     {this.props.data.question}
                 </Typography>
 
@@ -144,7 +156,7 @@ class Exercise extends React.Component {
 
                 <div className={classes.buttonSection}>
                     <Button disabled onClick={this.handleBack} variant="contained" color="secondary" className={classes.button}> Back </Button>
-                    <Button onClick={this.handleCheck} variant="contained" color="secondary" className={classes.button}> Feedback </Button>
+                    <Button onClick={this.handleCheck} variant="contained" color="secondary" className={classes.button}> Check </Button>
                 </div>
 
                 { this.state.feedbackOpen ? (<FeedbackModal

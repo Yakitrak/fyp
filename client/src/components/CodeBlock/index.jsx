@@ -19,8 +19,8 @@ class CodeBlock extends React.Component {
     render() {
         const { classes, block, dull, horizontalIndex, errorIndex, errorIndent, connectDragSource, isDragging, connectDropTarget, connectDragPreview } = this.props;
         const opacity = isDragging ? 0 : 1;
-        let width = !dull ? 'calc(100% - ' + 3*40 + 'px )' : 'default';
-        let marginLeft = !dull ? horizontalIndex * 40 : 'default';
+        let width = !dull ? 'calc(100% - ' + 3*40 + 'px )' : '100%';
+        let marginLeft = !dull ? horizontalIndex * 40 : 0;
 
         let backgroundColor = 'white';
         let border = '1px dashed grey';
@@ -29,14 +29,14 @@ class CodeBlock extends React.Component {
         if (dull) {
             backgroundColor = 'rgba(0, 0, 0, 0.20)';
         }
-        // colour of used blocks
+        // colour of used blocks + error styling
         else  {
             backgroundColor = 'rgb(241, 239 , 238)';
             if (errorIndent) {
-                border = '1px dashed orange';
+                border = '2px solid orange';
             }
             if (errorIndex) {
-                border = '1px dashed red';
+                border = '2px solid red';
             }
         }
         const sliderStyle = block.id === 0 ? {
@@ -45,6 +45,8 @@ class CodeBlock extends React.Component {
             width: 'default',
             margin: 'default',
             marginLeft: 1,
+            borderRadius: 0,
+            border: '0px',
         } : {};
 
         return (
@@ -98,12 +100,6 @@ const blockTarget = {
 
         // Don't indent if trying to move vertically
         const allow = (Math.abs(startPos.y - endPos.y) < 50);
-
-        // console.log(startPos);
-        // console.log(endPos);
-
-        // Get pixels to the left
-        // const hoverClientX = clientOffset.x - hoverBoundingRect.left;
 
         // indent right one
         if (endPos.x > startPos.x && dragHorizontalIndex < 3 && allow) {

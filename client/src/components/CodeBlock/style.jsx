@@ -1,12 +1,11 @@
 const style = theme => ({
     block: {
-        // border: '1px dashed gray',
-        // padding: '0.5rem 1rem',
-        // margin: '.5rem',
-        // margin: '0.5em 0px',
         listStyleType: 'none',
         cursor: 'move',
         margin: 2,
+        borderRadius: 5,
+        overflowX: 'auto',
+        boxSizing: 'border-box',
     },
     listRoot: {
         paddingLeft: '5px',

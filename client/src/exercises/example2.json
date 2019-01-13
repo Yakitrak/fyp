@@ -1,8 +1,8 @@
 {
   "skillLevel": "?",
-  "question": "Call the hello function to print 'hello Bill' then 'hello Jim'",
+  "question": "Define and use the hello function to print 'hello Bill' then 'hello Jim'",
   "startCode": [
-    { "id": 0, "indent": 0, "line": "# Anything below this block is not executed / marked!" },
+    { "id": 0, "indent": 0, "line": "# Drag correct blocks above this! Nothing below is marked!" },
     { "id": 1, "indent": 0, "line": "hello('Jim')" },
     { "id": 2, "indent": 0, "line": "print('Hello ', name)" },
     { "id": 3, "indent": 0, "line": "hello('Bill')" },
