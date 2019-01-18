@@ -80,7 +80,7 @@ class Feedback extends React.Component {
                 <ListItemIcon>
                     <ErrorIcon />
                 </ListItemIcon>
-                <ListItemText primary="Some lines have wrong indentations" secondary={<Typography variant="subtitle2" style={{color: 'orange'}}> Blocks in orange are indented correctly </Typography>} />
+                <ListItemText primary="Some lines have wrong indentations" secondary={<Typography variant="caption" style={{color: 'orange'}}> Blocks in orange are indented incorrectly </Typography>} />
             </ListItem>);
         }
 
