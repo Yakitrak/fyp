@@ -3,15 +3,15 @@
 module.exports = function () {
     return {
         setRouting: function (router) {
-            router.get('/login', this.login);
             router.get('/question/*', this.index);
+            router.get('/welcome', this.welcome);
         },
 
-        login: function(req, res) {
-            // res.render('index/index.ejs', {title: 'Parsons Problem'});
+        welcome: function(req, res) {
+            res.render('index/indexWelcome.ejs', {title: 'Parsons Problem'});
         },
         index: function(req, res) {
-            res.render('index/index.ejs', {title: 'Parsons Problem'});
+            res.render('index/indexDashboard.ejs', {title: 'Parsons Problem'});
         },
     }
 };

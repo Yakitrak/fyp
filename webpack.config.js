@@ -1,16 +1,24 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
-const htmlWebpackPlugin = new HtmlWebPackPlugin({
-    chunks: ['index'],
-    template: '!!html-loader!client/src/template.ejs',
-    filename: 'index/index.ejs',
-});
+const plugins = [
+    new HtmlWebPackPlugin({
+        chunks: ['index'],
+        template: '!!html-loader!client/src/template.ejs',
+        filename: 'index/indexDashboard.ejs',
+    }),
+    new HtmlWebPackPlugin({
+        chunks: ['welcome'],
+        template: '!!html-loader!client/src/template.ejs',
+        filename: 'index/indexWelcome.ejs',
+    }),
+];
 
 module.exports = {
     mode: 'development',
     entry: {
-        index: path.join(__dirname, 'client/src/index.jsx'),
+        indexDashboard: path.join(__dirname, 'client/src/indexDashboard.jsx'),
+        indexWelcome: path.join(__dirname, 'client/src/indexWelcome.jsx'),
     },
     output: {
         path: path.join(__dirname, 'client/public'),
@@ -52,5 +60,5 @@ module.exports = {
             },
         ],
     },
-    plugins: [htmlWebpackPlugin],
+    plugins: plugins,
 };

@@ -6,8 +6,8 @@
     { "id": 1, "indent": 0, "line": "hello('Jim')" },
     { "id": 2, "indent": 0, "line": "print('Hello ', name)" },
     { "id": 3, "indent": 0, "line": "hello('Bill')" },
-    { "id": 4, "indent": 0, "line": "def hello(Bill)" },
-    { "id": 5, "indent": 0, "line": "def hello(name)" }
+    { "id": 4, "indent": 0, "line": "def hello(Bill):" },
+    { "id": 5, "indent": 0, "line": "def hello(name):" }
 
   ],
   "correctCode": [

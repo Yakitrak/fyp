@@ -7,7 +7,7 @@ import ExerciseScreen from 'components/ExerciseScreen';
 import exampleQ1 from 'exercises/example1.json';
 import exampleQ2 from 'exercises/example2.json';
 
-class Index extends React.Component {
+class IndexDashboard extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -38,4 +38,4 @@ class Index extends React.Component {
             );
     }
 }
-ReactDOM.render(<Index />, document.getElementById('app'));
+ReactDOM.render(<IndexDashboard />, document.getElementById('app'));
