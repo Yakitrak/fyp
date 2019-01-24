@@ -3,12 +3,12 @@ const path = require('path');
 
 const plugins = [
     new HtmlWebPackPlugin({
-        chunks: ['index'],
+        chunks: ['indexDashboard'],
         template: '!!html-loader!client/src/template.ejs',
         filename: 'index/indexDashboard.ejs',
     }),
     new HtmlWebPackPlugin({
-        chunks: ['welcome'],
+        chunks: ['indexWelcome'],
         template: '!!html-loader!client/src/template.ejs',
         filename: 'index/indexWelcome.ejs',
     }),
