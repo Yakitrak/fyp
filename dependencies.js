@@ -5,6 +5,7 @@ const dependable = require('dependable'),
 const modules = [
     ['async', 'async'],
     ['axios', 'axios'],
+    ['passport', 'passport'],
 ];
 
 modules.forEach(function(module){
