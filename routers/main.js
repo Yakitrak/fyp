@@ -14,7 +14,7 @@ module.exports = function (passport) {
             router.get('/question/*', this.index);
 
             router.get('/auth/google', this.googleAuth);
-            router.get('/google_callback', this.googleAuthCallback, this.googleAuthSuccess);
+            router.get('/auth/google/callback', this.googleAuthCallback, this.googleAuthSuccess);
         },
 
 

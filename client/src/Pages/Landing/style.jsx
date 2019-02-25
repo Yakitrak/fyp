@@ -6,11 +6,26 @@ const style = theme => ({
         flexDirection: 'column',
         alignItems: 'center',
         textAlign: 'center',
-        // justifyContent: 'center',
-        height: '98vh',
-        paddingTop: '2vh',
+        height: 'auto',
     },
-
+    splash: {
+        height : '100vh',
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+    },
+    info: {
+        height : '100vh',
+        background: 'green',
+    },
+    scrollArrow: {
+        position: 'absolute',
+        bottom: '25px',
+        animation: 'animate_arrow 3s infinite ease-in',
+        cursor: 'pointer',
+    },
 });
 
 export default style;

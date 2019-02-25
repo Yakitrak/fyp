@@ -19,6 +19,29 @@
             font-size: 20px;
         }
 
+        @keyframes animate_arrow {
+            0% {
+                opacity: 1;
+                -webkit-transform: translate(0, 0);
+                -ms-transform: translate(0, 0);
+                transform: translate(0, 0);
+            }
+            90% {
+                opacity: 1;
+                -webkit-transform: translate(0, 0);
+                -ms-transform: translate(0, 0);
+                transform: translate(0, 0);
+            }
+            100% {
+                opacity: 0;
+                -webkit-transform: translate(0, 36px);
+                -ms-transform: translate(0, 36px);
+                transform: translate(0, 36px);
+            }
+        }
+
+
+
     </style>
     <title> <%= title %> </title>
 </head>

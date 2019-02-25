@@ -20,7 +20,7 @@ module.exports = (passport) => {
         function(accessToken, refreshToken, profile, done) {
             console.log(profile);
 
-            /*User.findOne({username: profile.id}, (err, user) => {
+            User.findOne({username: profile.id}, (err, user) => {
                 if(err) return done(err);
 
                 if (user) {
@@ -37,7 +37,7 @@ module.exports = (passport) => {
                         return done(null, profile);
                     })
                 }
-            });*/
+            });
         }
     );
 
