@@ -1,7 +1,22 @@
 const mongoose = require('mongoose');
 
 const questionModelSchema = mongoose.Schema({
-
+    id: {type: String, unique: true},
+    question: {type: String },
+    startCode: [],
+    correctCode: [],
+    skillType: {
+        simple: {type: Number, default: 0 },
+        control_structure: {type: Number, default: 0 },
+        conditions: {type: Number, default: 0 },
+        read__write: {type: Number, default: 0 },
+        functions: {type: Number, default: 0 },
+        exception_handling: {type: Number, default: 0 },
+        dictionaries: {type: Number, default: 0 },
+        list: {type: Number, default: 0 },
+        data_types: {type: Number, default: 0 },
+        boolean_expressions: {type: Number, default: 0 },
+    },
 });
 
 module.exports = mongoose.model('Question', questionModelSchema);

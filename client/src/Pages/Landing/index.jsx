@@ -51,11 +51,11 @@ class Exercise extends React.Component {
 
                     <div>
                         <Typography variant="h2" gutterBottom>
-                            Programming Puzzles
+                            PyParson
                         </Typography>
 
                         <Typography variant="h3" gutterBottom>
-                            Progress your skills!
+                            Personalised efficient practice!
                         </Typography>
                     </div>
 

@@ -1,6 +1,7 @@
 node_modules/
 client/public/
 .idea/
+.eslintrc.js
 config/secretKeys.js
 config/secretKeys.js.swp
 
