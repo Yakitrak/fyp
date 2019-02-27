@@ -10,13 +10,29 @@ const ensureAuthenticated = (req, res, next) => {
 module.exports = function (passport) {
     return {
         setRouting: function (router) {
+            // application
+            router.get('/', ensureAuthenticated, this.loggedIn);
             router.get('/welcome', this.welcome);
-            router.get('/question/*', this.index);
+            // router.get('/logout');
 
+            // google
             router.get('/auth/google', this.googleAuth);
             router.get('/auth/google/callback', this.googleAuthCallback, this.googleAuthSuccess);
         },
 
+        // application
+        welcome: function(req, res) {
+            res.render('index/indexWelcome.ejs', {title: 'PyParson'});
+        },
+
+        loggedIn: function (req, res) {
+            res.render('index/IndexDashboard.ejs', {title: 'PyParson'});
+        },
+
+        logout: function(req, res){
+            req.logout();
+            res.redirect('/welcome');
+        },
 
         // google passport
         googleAuthSuccess: function (req, res) {
@@ -32,13 +48,6 @@ module.exports = function (passport) {
             failureFlash: true,
         }),
 
-        // custom redirects
-        welcome: function(req, res) {
-            res.render('index/indexWelcome.ejs', {title: 'PyParson'});
-        },
-        index: function(req, res) {
-            res.render('index/indexDashboard.ejs', {title: 'PyParson'});
-        },
     }
 };
 

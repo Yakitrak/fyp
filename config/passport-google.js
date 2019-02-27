@@ -18,24 +18,24 @@ module.exports = (passport) => {
             callbackURL: secretKeys.googleAuth.client_callback,
         },
         function(accessToken, refreshToken, profile, done) {
-            console.log(profile);
-
-            User.findOne({username: profile.id}, (err, user) => {
+            User.findOne({id: profile.id}, (err, user) => {
                 if(err) return done(err);
 
                 if (user) {
                     return done(null, user);
                 } else {
-                    let newUser = new User();
-                    newUser.id = profile.id;
-                    newUser.email = profile.displayName;
-                    newUser.avatar = true;
-                    newUser.skills = profile.photos;
-
-                    newUser.save((err) => {
-                        if(err) return done(err);
-                        return done(null, profile);
-                    })
+                    console.log(profile);
+                    // let newUser = new User();
+                    // newUser.id = profile.id;
+                    // newUser.email = profile.displayName;
+                    // newUser.avatar = profile.photos;
+                    // newUser.skills = {};
+                    // newUser.questionsActive = [];
+                    //
+                    // newUser.save((err) => {
+                    //     if(err) return done(err);
+                    //     return done(null, profile);
+                    // })
                 }
             });
         }

@@ -56,7 +56,7 @@ class Exercise extends React.Component {
                     className={classes.splash}
                     id={'splash'}
                     style={{
-                        backgroundImage: "url('https://i.imgur.com/IuDsmBr.jpg')",
+                        backgroundImage: `url(${require(`../../media/bg.png`)})`,
                         backgroundPosition: 'center',
                         backgroundSize: 'cover',
                         backgroundRepeat: 'no-repeat',
