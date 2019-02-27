@@ -34,10 +34,10 @@ module.exports = function (passport) {
 
         // custom redirects
         welcome: function(req, res) {
-            res.render('index/indexWelcome.ejs', {title: 'Welcome - Parsons Problem'});
+            res.render('index/indexWelcome.ejs', {title: 'PyParson'});
         },
         index: function(req, res) {
-            res.render('index/indexDashboard.ejs', {title: 'Parsons Problem'});
+            res.render('index/indexDashboard.ejs', {title: 'PyParson'});
         },
     }
 };
