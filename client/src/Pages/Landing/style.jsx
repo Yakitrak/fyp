@@ -16,6 +16,16 @@ const style = theme => ({
         alignItems: 'center',
         textAlign: 'center',
     },
+    googleButton: {
+      background: 'white',
+    margin: theme.spacing.unit,
+    },
+    rootOverride: {
+      height: '40px',
+    },
+    labelOverride: {
+        textTransform: 'none',
+    },
     info: {
         height : '100vh',
         background: 'green',

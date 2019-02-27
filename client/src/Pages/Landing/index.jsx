@@ -1,17 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Style from './style';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import GoogleIcon from 'mdi-react/GoogleIcon';
 import DownIcon from '@material-ui/icons/KeyboardArrowDown';
-import Fab from '@material-ui/core/Fab';
-import Icon from '@material-ui/core/Icon';
-import IconButton from '@material-ui/core/IconButton';
-
-
-
+import GoogleIcon from './google.svg'
 
 class Exercise extends React.Component {
     constructor(props) {
@@ -31,10 +24,7 @@ class Exercise extends React.Component {
 
     handleScroll = () => {
         const element = document.getElementById("info");
-        let x = element.getBoundingClientRect().top;
-        let y = document.documentElement.clientHeight;
-
-        if (x === y) {
+        if (element.getBoundingClientRect().top === document.documentElement.clientHeight) {
             this.setState({
                 showScrollArrow: true,
             });
@@ -61,15 +51,32 @@ class Exercise extends React.Component {
 
                     <div>
                         <Typography variant="h2" gutterBottom>
-                            Parson's Practice
+                            Programming Puzzles
                         </Typography>
 
                         <Typography variant="h3" gutterBottom>
-                            Progress your programming!
+                            Progress your skills!
                         </Typography>
                     </div>
 
-                    <Fab variant="extended" href={'/auth/google'} > <GoogleIcon /> Continue with Google </Fab>
+                    <Button
+                        className={classes.googleButton}
+                        variant="contained"
+                        size="medium"
+                        href={'/auth/google'}
+                        classes={{
+                            root: classes.rootOverride,
+                            label: classes.labelOverride,
+                        }}
+                    >
+                        <GoogleIcon width={'24px'}/>
+                        <Typography variant={'subtitle1'} style={{ fontSize: '14px', paddingLeft: '18px' , color: 'rgba(0,0,0,0.54)', fontWeight: '600'
+                        }} >
+                            Sign in with Google
+                        </Typography>
+                    </Button>
+
+
 
                     { this.state.showScrollArrow ? (
                             <DownIcon className={classes.scrollArrow} onClick={this.scrollDown} fontSize="large" />

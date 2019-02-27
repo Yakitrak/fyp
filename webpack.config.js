@@ -56,8 +56,9 @@ module.exports = {
             },
             {
                 test: /\.svg$/,
-                loader: 'svg-loader',
-            },
+                exclude: /node_modules/,
+                loader: 'svg-react-loader',
+            }
         ],
     },
     plugins: plugins,
