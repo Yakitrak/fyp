@@ -13,7 +13,7 @@ module.exports = function (passport) {
             // application
             router.get('/', ensureAuthenticated, this.loggedIn);
             router.get('/welcome', this.welcome);
-            // router.get('/logout');
+            router.get('/logout', this.logout);
 
             // google
             router.get('/auth/google', this.googleAuth);

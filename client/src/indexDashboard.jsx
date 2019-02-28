@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import { theme } from 'theme';
-import ExerciseScreen from 'components/ExerciseScreen';
-// import ExerciseSelection from 'pages/ExerciseSelection';
+import ExerciseSelection from 'pages/ExerciseSelection';
+// import ExerciseScreen from 'components/ExerciseScreen';
 
 class IndexDashboard extends React.Component {
     constructor() {
@@ -17,7 +17,7 @@ class IndexDashboard extends React.Component {
     render () {
         return (
             <MuiThemeProvider theme={theme}>
-                Exercise Selection Screen
+                <ExerciseSelection/>
             </MuiThemeProvider>
             );
     }

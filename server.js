@@ -17,12 +17,10 @@ const port = 80;
 
 function configureExpress(app) {
     app.use(express.static('client/public'));
-    app.use(favicon(path.join(__dirname, 'client/src/media', 'favicon.png')));
     app.use(cookieParser());
-
     app.set('views', __dirname + '/client/public');
     app.set('view engine', 'ejs');
-
+    app.use(favicon(path.join(__dirname, 'client/src/media', 'favicon.png')));
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(validator());
@@ -42,6 +40,7 @@ function configureExpress(app) {
 dependencies.resolve(function(main) {
 
     function setupExpress() {
+        const router = expressPromiseRouter();
         const app = express();
         const server = http.createServer(app);
 
@@ -49,10 +48,9 @@ dependencies.resolve(function(main) {
             console.log('Listening on port ' + port);
         });
 
-        const router = expressPromiseRouter();
+        configureExpress(app);
         main.setRouting(router);
         app.use(router);
-        configureExpress(app);
 
     }
 

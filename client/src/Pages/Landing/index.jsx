@@ -11,7 +11,7 @@ import EmailIcon from 'mdi-react/EmailIcon';
 import LinkedInIcon from 'mdi-react/LinkedinIcon';
 import { theme } from 'theme';
 
-class Exercise extends React.Component {
+class Landing extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -170,4 +170,4 @@ class Exercise extends React.Component {
     }
 }
 
-export default withStyles(Style)(Exercise);
+export default withStyles(Style)(Landing);

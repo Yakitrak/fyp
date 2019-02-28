@@ -11,6 +11,7 @@ module.exports = (passport) => {
     passport.deserializeUser(function(obj, done) {
         done(null, obj);
     });
+    console.log('Hi');
 
     let strategy = new GoogleStrategy({
             clientID: secretKeys.googleAuth.client_id,
@@ -18,13 +19,13 @@ module.exports = (passport) => {
             callbackURL: secretKeys.googleAuth.client_callback,
         },
         function(accessToken, refreshToken, profile, done) {
+        console.log(profile);
             User.findOne({id: profile.id}, (err, user) => {
                 if(err) return done(err);
 
                 if (user) {
                     return done(null, user);
                 } else {
-                    console.log(profile);
                     // let newUser = new User();
                     // newUser.id = profile.id;
                     // newUser.email = profile.displayName;
@@ -36,6 +37,7 @@ module.exports = (passport) => {
                     //     if(err) return done(err);
                     //     return done(null, profile);
                     // })
+                    return done(null, profile);
                 }
             });
         }
