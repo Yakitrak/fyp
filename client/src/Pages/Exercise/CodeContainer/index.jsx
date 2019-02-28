@@ -1,7 +1,7 @@
 import React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Style from './style';
-import CodeBlock from 'components/CodeBlock';
+import CodeBlock from 'Pages/Exercise/CodeBlock/index';
 import { DropTarget } from 'react-dnd';
 import update from 'react-addons-update';
 import Paper from '@material-ui/core/Paper';

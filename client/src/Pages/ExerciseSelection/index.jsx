@@ -1,9 +1,7 @@
 import React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Style from './style';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import { theme } from 'theme';
+import Topbar from 'components/TopBar';
 
 class ExerciseSelection extends React.Component {
     constructor(props) {
@@ -17,6 +15,7 @@ class ExerciseSelection extends React.Component {
 
         return (
             <div className={classes.root}>
+                <Topbar />
                 Hello Exercise Selection Screen
             </div>
         );

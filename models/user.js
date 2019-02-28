@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 const userModelSchema = mongoose.Schema({
     id: {type: String, unique: true},
-    email: {type: String },
-    avatar: {type: String, default:'#'},
+    name: {type: String },
+    avatar: {type: String },
     skills: {
         simple: {type: Number, default: 0 },
         control_structure: {type: Number, default: 0 },
@@ -16,6 +16,7 @@ const userModelSchema = mongoose.Schema({
         data_types: {type: Number, default: 0 },
         boolean_expressions: {type: Number, default: 0 },
     },
+    questionsComplete: [],
     questionsActive: [],
 
 });

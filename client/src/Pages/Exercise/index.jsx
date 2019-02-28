@@ -3,8 +3,8 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Style from './style';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
-import CodeContainer from 'components/CodeContainer';
-import FeedbackModal from 'components/FeedbackModal';
+import CodeContainer from 'Pages/Exercise/CodeContainer/index';
+import FeedbackModal from 'Pages/Exercise/FeedbackModal/index';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
