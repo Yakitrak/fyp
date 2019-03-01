@@ -2,8 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import { theme } from 'theme';
-import ExerciseSelection from 'pages/ExerciseSelection';
-// import ExerciseScreen from 'components/ExerciseScreen';
+import ExerciseSelection from 'Pages/ExerciseSelection';
 
 class IndexDashboard extends React.Component {
     constructor() {

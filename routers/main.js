@@ -26,7 +26,8 @@ module.exports = function (passport) {
         },
 
         loggedIn: function (req, res) {
-            res.render('index/IndexDashboard.ejs', {title: 'PyParson'});
+            console.log(req);
+            res.render('index/indexDashboard.ejs', {title: 'PyParson'});
         },
 
         logout: function(req, res){
