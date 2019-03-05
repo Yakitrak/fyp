@@ -10,6 +10,15 @@ class ExerciseSelection extends React.Component {
         }
     }
 
+    createQuestionsSection = () => {
+
+        // call finished questions
+
+        // call active questions
+
+    };
+
+
     render() {
         const { classes } = this.props;
 

@@ -19,6 +19,7 @@ module.exports = (passport) => {
             callbackURL: secretKeys.googleAuth.client_callback,
         },
         function(accessToken, refreshToken, profile, done) {
+        console.log(profile);
             User.findOne({id: profile.id}, (err, user) => {
                 if(err) return done(err);
                 if (user) {
@@ -26,6 +27,7 @@ module.exports = (passport) => {
                 } else {
                     let newUser = new User();
                     newUser.id = profile.id;
+                    newUser.email = profile.emails[0].value;
                     newUser.name = profile.name.givenName;
                     newUser.avatar = profile.photos[0].value;
                     newUser.skills = {};

@@ -41,7 +41,7 @@ module.exports = function (passport) {
         },
 
         googleAuth: passport.authenticate('google', {
-            scope: ['profile'],
+            scope: ['profile', 'https://www.googleapis.com/auth/userinfo.email'],
         }),
 
         googleAuthCallback: passport.authenticate('google', {
