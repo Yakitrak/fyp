@@ -18,6 +18,10 @@ const userModelSchema = mongoose.Schema({
     },
     questionsComplete: [],
     questionsActive: [],
+    google: {
+        access_token: {type: String},
+        refresh_token: {type: String}
+    }
 
 });
 

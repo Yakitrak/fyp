@@ -34,6 +34,9 @@ module.exports = (passport) => {
                     newUser.questionsActive = [];
                     newUser.questionsComplete = [];
 
+                    newUser.google.access_token = accessToken;
+                    newUser.google.refresh_token = refreshToken;
+
                     newUser.save((err) => {
                         if(err) return done(err);
                         return done(null, profile);
