@@ -48,6 +48,9 @@ const style = theme => ({
         height: 38,
         width: 38,
     },
+    avatar: {
+        cursor: 'pointer',
+    }
 });
 
 export default style;

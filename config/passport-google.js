@@ -28,12 +28,11 @@ module.exports = (passport) => {
                     let newUser = new User();
                     newUser.id = profile.id;
                     newUser.email = profile.emails[0].value;
-                    newUser.name = profile.name.givenName;
+                    newUser.name = profile.displayName;
                     newUser.avatar = profile.photos[0].value;
                     newUser.skills = {};
                     newUser.questionsActive = [];
                     newUser.questionsComplete = [];
-
                     newUser.google.access_token = accessToken;
                     newUser.google.refresh_token = refreshToken;
 

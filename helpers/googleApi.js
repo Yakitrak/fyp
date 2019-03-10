@@ -1,4 +1,4 @@
-const keys = require('../config/config');
+const keys = require('../config/secretKeys');
 const {google} = require('googleapis');
 const client_id = keys.googleAuth.client_id;
 const client_secret = keys.googleAuth.client_secret;

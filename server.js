@@ -37,7 +37,7 @@ function configureExpress(app) {
     app.use(passport.session());
 }
 
-dependencies.resolve(function(main) {
+dependencies.resolve(function(main, requests) {
 
     function setupExpress() {
         const router = expressPromiseRouter();
@@ -50,6 +50,7 @@ dependencies.resolve(function(main) {
 
         configureExpress(app);
         main.setRouting(router);
+        requests.setRouting(router);
         app.use(router);
 
     }

@@ -24,6 +24,8 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import Axios from 'axios';
+import Avatar from '@material-ui/core/Avatar';
 
 class Topbar extends React.Component {
     constructor(props) {
@@ -37,6 +39,29 @@ class Topbar extends React.Component {
             userAvatar: '',
         }
     }
+
+    componentDidMount() {
+        this.initialiseProfile();
+    };
+
+    initialiseProfile = () => {
+        Axios.get('/initial')
+            .then((resp) => {
+                if(resp.data.success){
+                    this.setState({
+                        userName: resp.data.name,
+                        userMail: resp.data.email ,
+                        userAvatar: resp.data.avatar,
+                    });
+                } else {
+                    console.log('Profile load failed');
+                }
+            })
+            .catch((err) => {
+                console.log("Initial load error: ", err);
+            });
+    };
+
 
     handleProfileMenuOpen = event => {
         this.setState({anchorEl: event.currentTarget, open: !this.state.open });
@@ -56,11 +81,18 @@ class Topbar extends React.Component {
         this.setState({mobileMoreAnchorEl: null});
     };
 
+    handleLogOut =() => {
+        // add confirmation
+        window.location.href='/logout';
+    };
+
+    handleStats = () => {
+      alert('for demo');
+    };
+
     render() {
-        const {anchorEl, mobileMoreAnchorEl, open} = this.state;
+        const {anchorEl, open} = this.state;
         const {classes} = this.props;
-        const isMenuOpen = Boolean(anchorEl);
-        const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
         const id = open ? 'simple-popper' : null;
 
         const renderMenu = (
@@ -82,55 +114,33 @@ class Topbar extends React.Component {
                                     <List
                                         component="nav"
                                     >
-                                        <ListItem button onClick={this.handleMenuClose} className={classes.menuItem}>
-                                            <ListItemIcon className={classes.icon}>
-                                                <ShowStatisticsIcon/>
-                                            </ListItemIcon>
-                                            <ListItemText classes={{primary: classes.primary}} inset
-                                                          primary="Show Statistics"/>
-                                        </ListItem>
-                                        <ListItem button onClick={this.handleMenuClose} className={classes.menuItem}>
+
+                                        <ListItem button onClick={this.handleLogOut} className={classes.menuItem}>
                                             <ListItemIcon className={classes.icon}>
                                                 <LogoutIcon/>
                                             </ListItemIcon>
                                             <ListItemText classes={{primary: classes.primary}} inset primary="Logout"/>
                                         </ListItem>
-                                        <ListItem button onClick={this.handleMenuClose} className={classes.menuItem}>
+                                        <ListItem button onClick={this.handleStats} className={classes.menuItem}>
                                             <ListItemIcon className={classes.icon}>
-                                                <DeleteAccountIcon/>
+                                                <ShowStatisticsIcon/>
                                             </ListItemIcon>
-                                            <ListItemText classes={{primary: classes.primary}} inset primary="Delete Account"/>
+                                            <ListItemText classes={{primary: classes.primary}} inset
+                                                          primary="Statistics Overlay"/>
                                         </ListItem>
+                                        {/*<ListItem button onClick={this.handleMenuClose} className={classes.menuItem}>*/}
+                                            {/*<ListItemIcon className={classes.icon}>*/}
+                                                {/*<DeleteAccountIcon/>*/}
+                                            {/*</ListItemIcon>*/}
+                                            {/*<ListItemText classes={{primary: classes.primary}} inset primary="Delete Account"/>*/}
+                                        {/*</ListItem>*/}
                                     </List>
                                 </div>
                             </div>
-                            <CardMedia
-                                className={classes.cover}
-                                image="https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg"
-                                title="Live from space album cover"
-                            />
                         </Card>
                     </Fade>
                 )}
             </Popper>
-        );
-
-        const renderMobileMenu = (
-            <Menu
-                anchorEl={mobileMoreAnchorEl}
-                anchorOrigin={{vertical: 'top', horizontal: 'right'}}
-                transformOrigin={{vertical: 'top', horizontal: 'right'}}
-                open={isMobileMenuOpen}
-                onClose={this.handleMenuClose}
-            >
-                <MenuItem onClick={this.handleMobileMenuClose}>
-                    <IconButton color="inherit">
-                        <LogoutIcon/>
-                    </IconButton>
-                    <p> Logout </p>
-                </MenuItem>
-
-            </Menu>
         );
 
         return (
@@ -143,24 +153,16 @@ class Topbar extends React.Component {
 
                         <div className={classes.grow}/>
                         <div className={classes.sectionDesktop}>
-                            <IconButton
-                                aria-owns={isMenuOpen ? 'material-appbar' : undefined}
-                                aria-haspopup="true"
-                                onClick={this.handleProfileMenuOpen}
-                                color="inherit"
-                            >
-                                <AccountCircle/>
-                            </IconButton>
+                            <Avatar onClick={this.handleProfileMenuOpen} alt={'User Avatar'} src={this.state.userAvatar} className={classes.avatar} />
                         </div>
                         <div className={classes.sectionMobile}>
-                            <IconButton aria-haspopup="true" onClick={this.handleMobileMenuOpen} color="inherit">
-                                <MoreIcon/>
+                            <IconButton aria-haspopup="true" onClick={this.handleProfileMenuOpen} color="inherit">
+                                <Avatar alt={'User Avatar'} src={this.state.userAvatar} className={classes.avatar} />
                             </IconButton>
                         </div>
                     </Toolbar>
                 </AppBar>
                 {renderMenu}
-                {renderMobileMenu}
             </div>
         );
     }
