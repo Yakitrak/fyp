@@ -22,9 +22,9 @@ module.exports = function () {
     return {
         setRouting: function (router) {
             router.get('/initial', this.initialise);
+            router.get('/getActiveQuestions', this.getActiveQuestions);
             // router.get('/getFinishedQuestions', this.getFinishedQuestions);
             // router.post('/updateFinishedQuestions', this.updateFinishedQuestions);
-            // router.get('/getActiveQuestions', this.getActiveQuestions);
             // router.post('/updateUserSkill', this.updateUserSkill);
             // router.post('/deleteUserAccount', this.deleteUserAccount);
             // router.post('/refreshToken', this.refreshToken);
@@ -32,7 +32,6 @@ module.exports = function () {
 
         initialise: function (req, res) {
             mongooseHelper('user_info', {identifier: {id: req.user.id }}, resp => {
-                console.log(resp);
                 if (resp.success) {
                     res.json({
                         success: true,
@@ -44,6 +43,19 @@ module.exports = function () {
                     res.json({success: false});
                 }
             })
-        }
+        },
+
+        getActiveQuestions: function (req, res) {
+            mongooseHelper('get_active_questions', {identifier: {id: req.user.id }}, resp => {
+                if (resp.success) {
+                    res.json({
+                        success: true,
+                        questions: resp.data,
+                    });
+                } else {
+                    res.json({success: false});
+                }
+            })
+        },
     };
 };

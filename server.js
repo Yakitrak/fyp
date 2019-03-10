@@ -13,6 +13,7 @@ const ejs = require('ejs');
 const session = require('express-session');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
+const Question = require('./models/question');
 const port = 80;
 
 function configureExpress(app) {
@@ -58,4 +59,5 @@ dependencies.resolve(function(main, requests) {
     setupExpress();
     mongoose.Promise = global.Promise;
     mongoose.connect('mongodb://localhost:27017/PyParson');
+    Question.questionsInsert();
 });

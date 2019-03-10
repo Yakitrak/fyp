@@ -1,7 +1,8 @@
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const passportRefreshToken = require('passport-oauth2-refresh');
-const User = require('../models/user');
+const User = require('../models/userSchema');
 const secretKeys = require('./secretKeys');
+const mongooseHelper = require('../helpers/mongoose');
 
 module.exports = (passport) => {
 
@@ -19,27 +20,38 @@ module.exports = (passport) => {
             callbackURL: secretKeys.googleAuth.client_callback,
         },
         function(accessToken, refreshToken, profile, done) {
-        console.log(profile);
             User.findOne({id: profile.id}, (err, user) => {
                 if(err) return done(err);
                 if (user) {
                     return done(null, user);
                 } else {
-                    let newUser = new User();
-                    newUser.id = profile.id;
-                    newUser.email = profile.emails[0].value;
-                    newUser.name = profile.displayName;
-                    newUser.avatar = profile.photos[0].value;
-                    newUser.skills = {};
-                    newUser.questionsActive = [];
-                    newUser.questionsComplete = [];
-                    newUser.google.access_token = accessToken;
-                    newUser.google.refresh_token = refreshToken;
 
-                    newUser.save((err) => {
-                        if(err) return done(err);
-                        return done(null, profile);
-                    })
+                    // get beginner questions
+                    mongooseHelper('get_start_questions', {}, resp => {
+
+                        if (resp.success) {
+                            let newUser = new User();
+                            newUser.id = profile.id;
+                            newUser.email = profile.emails[0].value;
+                            newUser.name = profile.displayName;
+                            newUser.avatar = profile.photos[0].value;
+                            newUser.skills = {};
+                            newUser.questions.active = resp.data;
+                            newUser.questions.complete = [];
+                            newUser.google.access_token = accessToken;
+                            newUser.google.refresh_token = refreshToken;
+
+                            newUser.save((err) => {
+                                if(err) return done(err);
+                                return done(null, profile);
+                            })
+                        } else {
+                            console.log('Cant grab starter questions');
+                        }
+                    });
+
+
+
                 }
             });
         }
