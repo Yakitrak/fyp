@@ -4,8 +4,7 @@ import Style from './style';
 import CodeBlock from 'Pages/Exercise/CodeBlock/index';
 import { DropTarget } from 'react-dnd';
 import update from 'react-addons-update';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+
 
 class CodeContainer extends React.Component {
     constructor(props) {

@@ -31,10 +31,6 @@ class Exercise extends React.Component {
         });
     }
 
-    handleBack = () => {
-        alert('No Back Yet');
-    };
-
     resetError = () => {
       this.setState({
           wrongBlocks: {
@@ -155,7 +151,7 @@ class Exercise extends React.Component {
                 />
 
                 <div className={classes.buttonSection}>
-                    <Button disabled onClick={this.handleBack} variant="contained" color="secondary" className={classes.button}> Back </Button>
+                    <Button onClick={this.props.handleBack} variant="contained" color="secondary" className={classes.button}> Back </Button>
                     <Button onClick={this.handleCheck} variant="contained" color="secondary" className={classes.button}> Check </Button>
                 </div>
 
