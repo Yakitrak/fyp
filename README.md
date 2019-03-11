@@ -7,7 +7,7 @@ Parson's Puzzles are a way to practice programming logic and syntax. Instead of 
 ## What is PyParson?
 PyParson uses Parson's puzzles which are proven to be very useful. But unlike other applications, you sign up to keep track of your progress. PyParson will use a smart algorithm to monitor your skills in different areas of programming and only give questions which are personalised to challenge you. 
 
-This is my final year project for my Bsc(Hons) Software Engineering course. I hope it will help students independently improve on their weaknesses and getting a better understanding of programming concepts. The latest stable version of this repository is live [here](http://kjfyp.ddns.net)
+This is my final year project for my Bsc(Hons) Software Engineering course. I hope it will help students independently improve on their weaknesses and getting a better understanding of programming concepts. The latest stable version of this repository is live [here](http://kjfyp.ddns.net).
 
 ## Installing / Running Locally
 
