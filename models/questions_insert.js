@@ -1,5 +1,6 @@
 module.exports.questions = [
     {
+        id: "1",
         question: "Print out the fruits in order: apple, banana, cherry",
         starter: true,
         startCode: [
@@ -20,6 +21,7 @@ module.exports.questions = [
         },
     },
     {
+        id: "2",
         question: "Define and use the hello function to print 'hello Bill' then 'hello Jim'",
         starter: true,
         startCode: [
@@ -42,6 +44,7 @@ module.exports.questions = [
         },
     },
     {
+        id: "3",
         question: "Define and use the hello function to print 'hello Bill' then 'hello Jim'",
         starter: true,
         startCode: [
@@ -62,7 +65,9 @@ module.exports.questions = [
         skills: {
 
         },
-    },    {
+    },
+    {
+        id: "4",
         question: "Define and use the hello function to print 'hello Bill' then 'hello Jim'",
         starter: false,
         startCode: [
