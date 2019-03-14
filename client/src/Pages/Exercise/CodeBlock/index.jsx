@@ -8,6 +8,10 @@ import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atelierForestLight as codeStyle } from 'react-syntax-highlighter/dist/styles/hljs';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import IconButton from '@material-ui/core/IconButton';
+import LeftIcon from 'mdi-react/ArrowLeftDropCircleIcon';
+import RightIcon from 'mdi-react/ArrowRightDropCircleIcon';
 
 class CodeBlock extends React.Component {
     constructor(props) {
@@ -17,7 +21,7 @@ class CodeBlock extends React.Component {
     }
 
     render() {
-        const { classes, block, dull, horizontalIndex, errorIndex, errorIndent, connectDragSource, isDragging, connectDropTarget, connectDragPreview } = this.props;
+        const { classes, block, dull, horizontalIndex, verticalIndex, errorIndex, errorIndent, connectDragSource, isDragging, connectDropTarget, connectDragPreview } = this.props;
         const opacity = isDragging ? 0 : 1;
         let width = !dull ? 'calc(100% - ' + 3*40 + 'px )' : '100%';
         let marginLeft = !dull ? horizontalIndex * 40 : 0;
@@ -53,7 +57,7 @@ class CodeBlock extends React.Component {
             connectDragPreview &&
             connectDragSource &&
             connectDragPreview(connectDropTarget(connectDragSource(
-            <div className={classes.block} style={{ border, opacity, width, backgroundColor, marginLeft, ...sliderStyle}}>
+            <div className={classes.block} style={{ overflowY: 'hidden', border, opacity, width, backgroundColor, marginLeft, ...sliderStyle}}>
                 <ListItem classes={{
                     root: classes.listRoot,
                 }} >
@@ -65,7 +69,18 @@ class CodeBlock extends React.Component {
                             (<pre>{block.line}</pre>) :
                             (<SyntaxHighlighter showLineNumbers={false} startingLineNumber={this.props.verticalIndex} language='python' style={codeStyle}>{block.line}</SyntaxHighlighter>)}
                         />
+                    {(this.props.dull || block.id === 0 ) ?
+                    '' :
+                    (  <ListItemSecondaryAction> 
+                    <IconButton disabled={horizontalIndex === 0} aria-label="Indent Left" onClick={() => this.props.moveBlockHorizontal(verticalIndex, horizontalIndex - 1)} >
+                        <LeftIcon/>
+                    </IconButton>
+                    <IconButton disabled={horizontalIndex === 3}  aria-label="Indent Right" onClick={() => this.props.moveBlockHorizontal(verticalIndex, horizontalIndex + 1)}>
+                        <RightIcon />
+                    </IconButton>
+                </ListItemSecondaryAction>)}
                 </ListItem>
+
             </div>
         ))));
     }

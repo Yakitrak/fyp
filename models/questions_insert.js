@@ -17,7 +17,15 @@ module.exports.questions = [
             { "id": 4, "indent": 1 }
         ],
         skills: {
-
+            basic: '',
+            control_structure: '',
+            conditions_and_boolean: '',
+            read__write: '',
+            functions: '',
+            exception_handling: '',
+            dictionaries: '',
+            list: '',
+            data_types: '',
         },
     },
     {
