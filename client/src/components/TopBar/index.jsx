@@ -1,31 +1,25 @@
 import React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Style from './style';
-import Button from '@material-ui/core/Button';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MoreIcon from '@material-ui/icons/More';
 import LogoutIcon from 'mdi-react/LogoutVariantIcon';
-import DeleteAccountIcon from 'mdi-react/UserRemoveIcon';
 import ShowStatisticsIcon from 'mdi-react/GraphqlIcon';
 import Popper from '@material-ui/core/Popper';
 import Fade from '@material-ui/core/Fade';
-import Paper from '@material-ui/core/Paper';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Axios from 'axios';
 import Avatar from '@material-ui/core/Avatar';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import Switch from '@material-ui/core/Switch';
+
 
 class Topbar extends React.Component {
     constructor(props) {
@@ -34,9 +28,10 @@ class Topbar extends React.Component {
             open: false,
             anchorEl: null,
             mobileMoreAnchorEl: null,
-            userName: 'Fname Lname',
-            userMail: 'email@email.com',
+            userName: 'Loading..',
+            userMail: 'loading...',
             userAvatar: '',
+            statsToggle: false,
         }
     }
 
@@ -82,12 +77,19 @@ class Topbar extends React.Component {
     };
 
     handleLogOut =() => {
-        // add confirmation
-        window.location.href='/logout';
+        let result = window.confirm('Are you sure you want to log out?');
+        if (result === true) window.location.href='/logout';
     };
 
-    handleStats = () => {
-      alert('for demo');
+    handleStatToggle =  () => {
+        let StatPrompt = prompt("Please enter admin password", "");
+        if (StatPrompt === 'admin') {
+            this.setState({
+                statsToggle: !this.state.statsToggle,
+            });
+
+            this.props.showStatistics();
+        }
     };
 
     render() {
@@ -113,27 +115,28 @@ class Topbar extends React.Component {
                                 <div className={classes.controls}>
                                     <List
                                         component="nav"
+                                        style={{ width: '100%' }}
                                     >
-
                                         <ListItem button onClick={this.handleLogOut} className={classes.menuItem}>
                                             <ListItemIcon className={classes.icon}>
                                                 <LogoutIcon/>
                                             </ListItemIcon>
                                             <ListItemText classes={{primary: classes.primary}} inset primary="Logout"/>
                                         </ListItem>
-                                        <ListItem button onClick={this.handleStats} className={classes.menuItem}>
+                                        <ListItem className={classes.menuItem}>
                                             <ListItemIcon className={classes.icon}>
                                                 <ShowStatisticsIcon/>
                                             </ListItemIcon>
-                                            <ListItemText classes={{primary: classes.primary}} inset
-                                                          primary="Statistics Overlay"/>
+                                            <ListItemText classes={{primary: classes.primary}}
+                                                          primary="Statistics"
+                                            />
+                                            <ListItemSecondaryAction>
+                                                <Switch
+                                                    onChange={this.handleStatToggle}
+                                                    checked={this.state.statsToggle}
+                                                />
+                                            </ListItemSecondaryAction>
                                         </ListItem>
-                                        {/*<ListItem button onClick={this.handleMenuClose} className={classes.menuItem}>*/}
-                                            {/*<ListItemIcon className={classes.icon}>*/}
-                                                {/*<DeleteAccountIcon/>*/}
-                                            {/*</ListItemIcon>*/}
-                                            {/*<ListItemText classes={{primary: classes.primary}} inset primary="Delete Account"/>*/}
-                                        {/*</ListItem>*/}
                                     </List>
                                 </div>
                             </div>

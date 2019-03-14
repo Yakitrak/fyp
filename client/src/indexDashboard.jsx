@@ -5,6 +5,7 @@ import { theme } from 'theme';
 import ExerciseSelection from 'Pages/ExerciseSelection';
 import Topbar from 'components/TopBar';
 import ExericseQuestion from 'Pages/Exercise';
+import Statistics from 'components/Statistics';
 
 class IndexDashboard extends React.Component {
     constructor() {
@@ -12,11 +13,11 @@ class IndexDashboard extends React.Component {
         this.state = {
             questionData: {},
             showQuestion: false,
+            statOverlay: false,
         };
     }
 
     handleQuestionClick = (question) => {
-        console.log(question);
         this.setState({
             showQuestion: true,
             questionData: question,
@@ -24,17 +25,23 @@ class IndexDashboard extends React.Component {
     };
 
     handleBack = () => {
-        console.log('hi');
         this.setState({
             showQuestion: false,
         })
     };
 
+    showStatistics = () => {
+       this.setState({
+           statOverlay: !this.state.statOverlay
+       });
+   };
 
     render () {
         return (
             <MuiThemeProvider theme={theme}>
-                <Topbar />
+                <Topbar
+                    showStatistics={this.showStatistics}
+                />
                 {this.state.showQuestion ? (
                     <ExericseQuestion
                         data={this.state.questionData}
@@ -45,6 +52,9 @@ class IndexDashboard extends React.Component {
                         handleQuestionClick={this.handleQuestionClick}
                     />
                 )}
+                {this.state.statOverlay ? (
+                    <Statistics/>
+                ) : '' }
             </MuiThemeProvider>
             );
     }

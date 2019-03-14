@@ -71,7 +71,7 @@ class CodeBlock extends React.Component {
                         />
                     {(this.props.dull || block.id === 0 ) ?
                     '' :
-                    (  <ListItemSecondaryAction> 
+                    (  <ListItemSecondaryAction>
                     <IconButton disabled={horizontalIndex === 0} aria-label="Indent Left" onClick={() => this.props.moveBlockHorizontal(verticalIndex, horizontalIndex - 1)} >
                         <LeftIcon/>
                     </IconButton>
