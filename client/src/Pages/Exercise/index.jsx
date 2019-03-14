@@ -7,12 +7,24 @@ import CodeContainer from 'Pages/Exercise/CodeContainer/index';
 import FeedbackModal from 'Pages/Exercise/FeedbackModal/index';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
+
+
+function getSteps() {
+    return ['Drag the blocks above the black slider to use them',
+        'Drag the blocks left or right or use the buttons to indent',
+        'Press the feedback button when you are happy with your solution'];
+}
+
 
 class Exercise extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             data: this.props.data,
+            tutorialActive: '',
             currentCode: this.props.data.startCode,
             feedbackOpen: false,
             feedbackTotal: 0,
@@ -22,6 +34,14 @@ class Exercise extends React.Component {
                 indentWrong: [],
             },
         };
+    }
+
+    componentWillMount() {
+        if (this.props.data.starter) {
+            this.setState({
+                tutorialActive: true,
+            })
+        }
     }
 
     componentWillReceiveProps(nextProps) {
@@ -135,6 +155,8 @@ class Exercise extends React.Component {
 
     render() {
         const { classes } = this.props;
+        const steps = getSteps();
+        const activeStep = 0;
 
         return (
             <div className={classes.root}>
@@ -160,6 +182,21 @@ class Exercise extends React.Component {
                     feedbackList={this.state.feedbackList}
                     handleClose={this.closeModal}
                  />) : ''}
+
+                { this.state.tutorialActive ?
+                    (
+                        <Stepper activeStep={activeStep}>
+                            {steps.map((label, index) => {
+                                const stepProps = {};
+                                const labelProps = {};
+                                return (
+                                    <Step key={label} {...stepProps}>
+                                        <StepLabel {...labelProps}>{label}</StepLabel>
+                                    </Step>
+                                );
+                            })}
+                        </Stepper>
+                    ) : '' }
 
             </div>
         );

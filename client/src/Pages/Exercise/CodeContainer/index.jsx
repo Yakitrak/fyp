@@ -12,15 +12,10 @@ class CodeContainer extends React.Component {
         this.state = {
             blocks: [],
             wrongBlocks: this.props.wrongBlocks,
-            tutorialActive: '',
         };
     }
 
     componentDidMount() {
-        if (this.props.data.starter) {
-            console.log(true);
-        }
-
         this.setState({
             blocks: this.props.data.startCode,
         });

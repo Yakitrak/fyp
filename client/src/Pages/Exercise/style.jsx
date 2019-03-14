@@ -7,7 +7,7 @@ const style = theme => ({
         alignItems: 'center',
         textAlign: 'center',
         // justifyContent: 'center',
-        height: '98vh',
+        height: 'calc(98vh - 64px)',
         paddingTop: '2vh',
     },
     buttonSection: {

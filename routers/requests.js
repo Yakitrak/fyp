@@ -26,7 +26,6 @@ module.exports = function () {
             // router.get('/getFinishedQuestions', this.getFinishedQuestions);
             // router.post('/updateFinishedQuestions', this.updateFinishedQuestions);
             // router.post('/updateUserSkill', this.updateUserSkill);
-            // router.post('/deleteUserAccount', this.deleteUserAccount);
             // router.post('/refreshToken', this.refreshToken);
         },
 
