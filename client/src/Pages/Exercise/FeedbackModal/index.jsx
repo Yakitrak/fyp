@@ -58,7 +58,7 @@ class Feedback extends React.Component {
 
 
         if (feedbackList.includes('extra')) {
-            feedbackTips.push(<ListItem >
+            feedbackTips.push(<ListItem key={'extra'} >
                 <ListItemIcon>
                 <ErrorIcon />
                 </ListItemIcon>
@@ -67,7 +67,7 @@ class Feedback extends React.Component {
         }
 
         if (feedbackList.includes('few') && !feedbackList.includes('empty')) {
-            feedbackTips.push(<ListItem >
+            feedbackTips.push(<ListItem key={'few'}>
                 <ListItemIcon>
                     <ErrorIcon />
                 </ListItemIcon>
@@ -76,7 +76,7 @@ class Feedback extends React.Component {
         }
 
         if (feedbackList.includes('indent')) {
-            feedbackTips.push(<ListItem >
+            feedbackTips.push(<ListItem key={'indent'} >
                 <ListItemIcon>
                     <ErrorIcon />
                 </ListItemIcon>
@@ -85,7 +85,7 @@ class Feedback extends React.Component {
         }
 
         if (feedbackList.includes('arrange')) {
-            feedbackTips.push(<ListItem >
+            feedbackTips.push(<ListItem key={'arrange'} >
                 <ListItemIcon>
                     <ErrorIcon />
                 </ListItemIcon>

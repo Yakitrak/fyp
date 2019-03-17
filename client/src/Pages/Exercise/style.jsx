@@ -16,6 +16,9 @@ const style = theme => ({
         display: 'flex',
         justifyContent: 'space-between',
     },
+    pulseButton: {
+        animation: 'pulse 2s infinite',
+    },
 });
 
 export default style;

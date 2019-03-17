@@ -41,17 +41,25 @@ class CodeContainer extends React.Component {
         }));
 
         this.props.getCurrentCode(this.state.blocks);
+
+        if (hoverVerticalIndex === 0 ) {
+            this.props.tutorialStepsUpdate('vertical');
+        }
     };
 
     moveBlockHorizontal = (verticalIndex, horizontalIndex) => {
+
+        if (horizontalIndex !== this.state.blocks[verticalIndex].indent) {
+            this.props.getCurrentCode(this.state.blocks);
+            this.props.tutorialStepsUpdate('horizontal');
+        }
+
         let newBlocks = [ ...this.state.blocks ];
         newBlocks[verticalIndex].indent = horizontalIndex;
 
         this.setState({
             blocks: newBlocks
         });
-
-        this.props.getCurrentCode(this.state.blocks);
     };
 
     render() {

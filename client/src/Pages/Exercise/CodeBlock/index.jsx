@@ -44,13 +44,14 @@ class CodeBlock extends React.Component {
             }
         }
         const sliderStyle = block.id === 0 ? {
-            background: 'black',
+            background: '#101010',
             cursor: 'default',
             width: 'default',
             margin: 'default',
             marginLeft: 1,
             borderRadius: 0,
             border: '0px',
+            borderTop: '5px solid red',
         } : {};
 
         return (
