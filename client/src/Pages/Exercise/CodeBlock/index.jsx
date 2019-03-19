@@ -1,5 +1,6 @@
 import React from 'react';
 import { findDOMNode } from 'react-dom';
+import classNames from 'classnames';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Style from './style';
 import ListItem from '@material-ui/core/ListItem';
@@ -21,7 +22,8 @@ class CodeBlock extends React.Component {
     }
 
     render() {
-        const { classes, block, dull, horizontalIndex, verticalIndex, errorIndex, errorIndent, connectDragSource, isDragging, connectDropTarget, connectDragPreview } = this.props;
+        const { classes, block, dull, horizontalIndex, verticalIndex, errorIndex, errorIndent, connectDragSource,
+            isDragging, connectDropTarget, connectDragPreview, tutorialActiveVertical, tutorialActiveHorizontal } = this.props;
         const opacity = isDragging ? 0 : 1;
         let width = !dull ? 'calc(100% - ' + 3*40 + 'px )' : '100%';
         let marginLeft = !dull ? horizontalIndex * 40 : 0;
@@ -54,11 +56,12 @@ class CodeBlock extends React.Component {
             borderTop: '5px solid red',
         } : {};
 
+
         return (
             connectDragPreview &&
             connectDragSource &&
             connectDragPreview(connectDropTarget(connectDragSource(
-            <div className={classes.block} style={{ overflowY: 'hidden', border, opacity, width, backgroundColor, marginLeft, ...sliderStyle}}>
+            <div className={classNames(classes.block, tutorialActiveVertical ? classes.pulseButton : null)} style={{ overflowY: 'hidden', border, opacity, width, backgroundColor, marginLeft, ...sliderStyle}}>
                 <ListItem classes={{
                     root: classes.listRoot,
                 }} >
@@ -73,10 +76,10 @@ class CodeBlock extends React.Component {
                     {(this.props.dull || block.id === 0 ) ?
                     '' :
                     (  <ListItemSecondaryAction>
-                    <IconButton disabled={horizontalIndex === 0} aria-label="Indent Left" onClick={() => this.props.moveBlockHorizontal(verticalIndex, horizontalIndex - 1)} >
+                    <IconButton disabled={horizontalIndex === 0} className={tutorialActiveHorizontal && horizontalIndex !== 0 ? classes.pulseButton : ''} aria-label="Indent Left" onClick={() => this.props.moveBlockHorizontal(verticalIndex, horizontalIndex - 1)} >
                         <LeftIcon/>
                     </IconButton>
-                    <IconButton disabled={horizontalIndex === 3}  aria-label="Indent Right" onClick={() => this.props.moveBlockHorizontal(verticalIndex, horizontalIndex + 1)}>
+                    <IconButton disabled={horizontalIndex === 3} className={tutorialActiveHorizontal && horizontalIndex !== 3 ? classes.pulseButton : ''} aria-label="Indent Right" onClick={() => this.props.moveBlockHorizontal(verticalIndex, horizontalIndex + 1)}>
                         <RightIcon />
                     </IconButton>
                 </ListItemSecondaryAction>)}

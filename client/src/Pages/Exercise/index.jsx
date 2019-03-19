@@ -229,11 +229,13 @@ class Exercise extends React.Component {
                     getCurrentCode={(blocks) => this.getCurrentCode(blocks)}
                     resetError={this.resetError}
                     tutorialStepsUpdate={(step) => this.tutorialStepsUpdate(step)}
+                    tutorialActiveVertical={activeStep === 0}
+                    tutorialActiveHorizontal={activeStep === 1}
                 />
 
                 <div className={classes.buttonSection}>
                     <Button onClick={this.props.handleBack} variant="contained" color="secondary" > Back </Button>
-                    <Button onClick={this.handleCheck} className={classes.pulseButton} variant="contained" color="secondary" > Check </Button>
+                    <Button onClick={this.handleCheck} className={activeStep === 2 ? classes.pulseButton: ''} variant="contained" color="secondary" > Check </Button>
                 </div>
 
                 {this.state.feedbackOpen ? (<FeedbackModal

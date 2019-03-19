@@ -15,7 +15,10 @@ const style = theme => ({
     },
     primaryClass: {
         color: 'grey'
-    }
+    },
+    pulseButton: {
+        animation: 'pulse 2s infinite',
+    },
 });
 
 export default style;

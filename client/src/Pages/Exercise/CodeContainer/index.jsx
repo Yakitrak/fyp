@@ -91,6 +91,8 @@ class CodeContainer extends React.Component {
                                 errorIndex={wrongBlocks.indexWrong.includes(block.id)}
                                 errorIndent={wrongBlocks.indentWrong.includes(block.id)}
                                 resetError={this.props.resetError}
+                                tutorialActiveVertical={this.props.tutorialActiveVertical}
+                                tutorialActiveHorizontal={this.props.tutorialActiveHorizontal}
                             />
                     );
                 })}
