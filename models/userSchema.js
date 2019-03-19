@@ -6,7 +6,6 @@ const userModelSchema = mongoose.Schema({
     name: {type: String },
     avatar: {type: String },
     skills: {
-        basic: {type: Number, default: 0 },
         control_structure: {type: Number, default: 0 },
         conditions_and_boolean: {type: Number, default: 0 },
         read__write: {type: Number, default: 0 },
@@ -14,7 +13,6 @@ const userModelSchema = mongoose.Schema({
         exception_handling: {type: Number, default: 0 },
         dictionaries: {type: Number, default: 0 },
         list: {type: Number, default: 0 },
-        data_types: {type: Number, default: 0 },
     },
     questions: {
         complete: [],

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const questionInserts = require('./questions_insert');
 const mongoDB = 'mongodb://localhost:27017/PyParson';
 const db = mongoose.connection;
+const questionInserts = require('./question_data.json');
 const Question = require('./questionSchema');
 
 module.exports.questionsInsert = function() {
@@ -12,7 +12,7 @@ module.exports.questionsInsert = function() {
     db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
     // Question.collection.drop(); //empty questions collection
-    Question.collection.insert(questionInserts.questions, function (err, docs) {
+    Question.collection.insert(questionInserts, function (err, docs) {
         if (err){
             return console.error(err);
         } else {
