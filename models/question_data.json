@@ -6,27 +6,22 @@
     "startCode": [
       {
         "id": 0,
-        "indent": 0,
         "line": "# Drag correct blocks above this! Nothing below is marked!"
       },
       {
         "id": 1,
-        "indent": 0,
         "line": "fruits = ['apple', 'banana', 'cherry']"
       },
       {
         "id": 2,
-        "indent": 0,
         "line": "for fruit in fruits:"
       },
       {
         "id": 3,
-        "indent": 0,
         "line": "print(cherry)"
       },
       {
         "id": 4,
-        "indent": 0,
         "line": "print(fruit)"
       }
     ],
@@ -44,18 +39,9 @@
         "indent": 1
       }
     ],
+    "tags": ["list", "control"],
     "skills": {
-      "basic": 0,
-      "control_structure": 0,
-      "conditions_and_boolean": 0,
-      "read__write": 0,
-      "functions": 0,
-      "exception_handling": 0,
-      "dictionaries": 0,
-      "list": 0,
-      "data_types": 0
-    },
-    "tags": ["loops", "print"]
+    }
   },
   {
     "id": "2",
@@ -64,32 +50,26 @@
     "startCode": [
       {
         "id": 0,
-        "indent": 0,
         "line": "# Drag correct blocks above this! Nothing below is marked!"
       },
       {
         "id": 1,
-        "indent": 0,
         "line": "hello('Jim')"
       },
       {
         "id": 2,
-        "indent": 0,
         "line": "print('Hello ', name)"
       },
       {
         "id": 3,
-        "indent": 0,
         "line": "hello('Bill')"
       },
       {
         "id": 4,
-        "indent": 0,
         "line": "def hello(Bill):"
       },
       {
         "id": 5,
-        "indent": 0,
         "line": "def hello(name):"
       }
     ],
@@ -111,123 +91,421 @@
         "indent": 0
       }
     ],
+    "tags": ["function"],
     "skills": {
-      "basic": 0,
-      "control_structure": 0,
-      "conditions_and_boolean": 0,
-      "read__write": 0,
-      "functions": 0,
-      "exception_handling": 0,
-      "dictionaries": 0,
-      "list": 0,
-      "data_types": 0
     }
   },
   {
     "id": "3",
-    "question": "Define and use the hello function to print 'hello Bill' then 'hello Jim'",
+    "question": "Declare and append to the animal list, then print out in order: 'cat', 'dog', 'lion'",
     "starter": true,
     "startCode": [
       {
         "id": 0,
-        "indent": 0,
         "line": "# Drag correct blocks above this! Nothing below is marked!"
       },
       {
         "id": 1,
-        "indent": 0,
-        "line": "hello('Jim')"
+        "line": "animals = []"
       },
       {
         "id": 2,
-        "indent": 0,
-        "line": "print('Hello ', name)"
+        "line": "animals.append('tree')"
       },
       {
         "id": 3,
-        "indent": 0,
-        "line": "hello('Bill')"
+        "line": "animals.append('cat')"
       },
       {
         "id": 4,
-        "indent": 0,
-        "line": "def hello(Bill):"
+        "line": "animals.append('dog')"
       },
       {
         "id": 5,
-        "indent": 0,
-        "line": "def hello(name):"
+        "line": "for animal in animals:"
+      },
+      {
+        "id": 6,
+        "line": "animals.append('lion')"
+      },
+      {
+        "id": 7,
+        "line": "print(animal)"
       }
     ],
     "correctCode": [
       {
-        "id": 5,
+        "id": 1,
         "indent": 0
-      },
-      {
-        "id": 2,
-        "indent": 1
       },
       {
         "id": 3,
         "indent": 0
       },
       {
-        "id": 1,
+        "id": 4,
         "indent": 0
+      },
+      {
+        "id": 6,
+        "indent": 0
+      },
+      {
+        "id": 5,
+        "indent": 0
+      },
+      {
+        "id": 7,
+        "indent": 1
       }
     ],
+    "tags": ["list", "control"],
     "skills": {
-      "basic": 0,
-      "control_structure": 0,
-      "conditions_and_boolean": 0,
-      "read__write": 0,
-      "functions": 0,
-      "exception_handling": 0,
-      "dictionaries": 0,
-      "list": 0,
-      "data_types": 0
     }
   },
   {
     "id": "4",
-    "question": "Define and use the hello function to print 'hello Bill' then 'hello Jim'",
-    "starter": false,
+    "question": "Print out every 3rd element in the list 'numbers' starting at 0, such as: 0,3,6",
+    "starter": true,
     "startCode": [
       {
         "id": 0,
-        "indent": 0,
         "line": "# Drag correct blocks above this! Nothing below is marked!"
       },
       {
         "id": 1,
-        "indent": 0,
-        "line": "hello('Jim')"
+        "line": "print(numbers[i])"
       },
       {
         "id": 2,
-        "indent": 0,
-        "line": "print('Hello ', name)"
+        "line": "numbers = [0,1,2,3,4,5,6,7]"
       },
       {
         "id": 3,
-        "indent": 0,
-        "line": "hello('Bill')"
+        "line": "while i < len(numbers):"
       },
       {
         "id": 4,
-        "indent": 0,
-        "line": "def hello(Bill):"
+        "line": "i = i + 3"
       },
       {
         "id": 5,
-        "indent": 0,
-        "line": "def hello(name):"
+        "line": "i = 0"
+      },
+      {
+        "id": 6,
+        "line": "i = 1"
       }
     ],
     "correctCode": [
       {
+        "id": 2,
+        "indent": 0
+      },
+      {
         "id": 5,
+        "indent": 0
+      },
+      {
+        "id": 3,
+        "indent": 0
+      },
+      {
+        "id": 1,
+        "indent": 1
+      },
+      {
+        "id": 4,
+        "indent": 1
+      }
+    ],
+    "tags": ["list", "control"],
+    "skills": {
+    }
+  },
+  {
+    "id": "5",
+    "question": "Print out the all the contacts dictionary with everyone except Dave",
+    "starter": true,
+    "startCode": [
+      {
+        "id": 0,
+        "line": "# Drag correct blocks above this! Nothing below is marked!"
+      },
+      {
+        "id": 1,
+        "line": "del contacts['Dave']"
+      },
+      {
+        "id": 2,
+        "line": "contacts = {'Billy' : '07700 900631', 'Dave' : '07700 900402',  'Sam' : '07700 900112' }"
+      },
+      {
+        "id": 3,
+        "line": "del contacts['07700 900112']"
+      },
+      {
+        "id": 4,
+        "line": "print(contacts)"
+      }
+    ],
+    "correctCode": [
+      {
+        "id": 1,
+        "indent": 0
+      },
+      {
+        "id": 2,
+        "indent": 0
+      },
+      {
+        "id": 4,
+        "indent": 0
+      }
+    ],
+    "tags": ["dictionary"],
+    "skills": {
+    }
+  },
+  {
+    "id": "6",
+    "question": "Try an print the variable 'x' which does not exist and use try and except to print the error. Finally, print 'Hello' regardless of 'x' exists or not.",
+    "starter": true,
+    "startCode": [
+      {
+        "id": 0,
+        "line": "# Drag correct blocks above this! Nothing below is marked!"
+      },
+      {
+        "id": 1,
+        "line": "catch:"
+      },
+      {
+        "id": 2,
+        "line": "except:"
+      },
+      {
+        "id": 3,
+        "line": "print('An exception occurred')"
+      },
+      {
+        "id": 4,
+        "line": "print(x)"
+      },
+      {
+        "id": 5,
+        "line": "print('Hello')"
+      },
+      {
+        "id": 6,
+        "line": "try:"
+      },
+      {
+        "id": 7,
+        "line": "finally:"
+      }
+    ],
+    "correctCode": [
+      {
+        "id": 6,
+        "indent": 0
+      },
+      {
+        "id": 4,
+        "indent": 1
+      },
+      {
+        "id": 2,
+        "indent": 0
+      },     {
+        "id": 3,
+        "indent": 1
+      },
+      {
+        "id": 7,
+        "indent": 0
+      },
+      {
+        "id": 5,
+        "indent": 1
+      }
+    ],
+    "tags": ["exceptions"],
+    "skills": {
+    }
+  },
+  {
+    "id": "7",
+    "question": "Try and write 'Any Text' to the file 'PyParson.txt' using try, except and finally to ensure errors are handled correctly.",
+    "starter": true,
+    "startCode": [
+      {
+        "id": 0,
+        "line": "# Drag correct blocks above this! Nothing below is marked!"
+      },
+      {
+        "id": 1,
+        "line": "finally:"
+      },
+      {
+        "id": 2,
+        "line": "print('Error: unable to write to the file')"
+      },
+      {
+        "id": 3,
+        "line": "f.close()"
+      },
+      {
+        "id": 4,
+        "line": "f.write('Any text')"
+      },
+      {
+        "id": 5,
+        "line": "f = open('PyParson.txt', 'w')"
+      },
+      {
+        "id": 6,
+        "line": "except:"
+      },
+      {
+        "id": 7,
+        "line": "f = open('PyParson.txt', 'write')"
+      },
+      {
+        "id": 8,
+        "line": "try:"
+      }
+    ],
+    "correctCode": [
+      {
+        "id": 8,
+        "indent": 0
+      },
+      {
+        "id": 5,
+        "indent": 1
+      },
+      {
+        "id": 4,
+        "indent": 1
+      },
+      {
+        "id": 6,
+        "indent": 0
+      },
+      {
+        "id": 2,
+        "indent": 1
+      },
+      {
+        "id": 1,
+        "indent": 0
+      },
+      {
+        "id": 3,
+        "indent": 1
+      }
+    ],
+    "tags": [
+      "exceptions",
+      "readwrite"
+    ],
+    "skills": {
+    }
+  },
+  {
+    "id": "8",
+    "question": "Create a file called 'file.txt' and write 'Hello World' then write 'This is our new text file' in the next line",
+    "starter": true,
+    "startCode": [
+      {
+        "id": 0,
+        "line": "# Drag correct blocks above this! Nothing below is marked!"
+      },
+      {
+        "id": 1,
+        "line": "file.write('Hello World \n')"
+      },
+      {
+        "id": 2,
+        "line": "file.write('Hello World')"
+      },
+      {
+        "id": 3,
+        "line": "file = open('file.txt', 'w')"
+      },
+      {
+        "id": 4,
+        "line": "file.write('This is our new text file')"
+      },
+      {
+        "id": 5,
+        "line": "file.close()"
+      }
+    ],
+    "correctCode": [
+      {
+        "id": 3,
+        "indent": 0
+      },
+      {
+        "id": 2,
+        "indent": 0
+      },
+      {
+        "id": 4,
+        "indent": 0
+      },
+      {
+        "id": 5,
+        "indent": 0
+      }
+    ],
+    "tags": ["readwrite"],
+    "skills": {
+    }
+  },
+  {
+    "id": "9",
+    "question": "Using the input number, print if a number is even or odd",
+    "starter": true,
+    "startCode": [
+      {
+        "id": 0,
+        "line": "# Drag correct blocks above this! Nothing below is marked!"
+      },
+      {
+        "id": 1,
+        "line": "number = int(input('Enter a number: '))"
+      },
+      {
+        "id": 2,
+        "line": "print(number, ' is even.')"
+      },
+      {
+        "id": 3,
+        "line": "else:"
+      },
+      {
+        "id": 4,
+        "line": "if number % 2 == 0:"
+      },
+      {
+        "id": 5,
+        "line": "if number / 2 == 0:"
+      },
+      {
+        "id": 6,
+        "line": "print(number, ' is odd.')"
+      }
+    ],
+    "correctCode": [
+      {
+        "id": 1,
+        "indent": 0
+      },
+      {
+        "id": 4,
         "indent": 0
       },
       {
@@ -239,20 +517,344 @@
         "indent": 0
       },
       {
+        "id": 6,
+        "indent": 1
+      }
+    ],
+    "tags": ["bool_operators"],
+    "skills": {
+    }
+  },
+  {
+    "id": "10",
+    "question": "Print 'You are an adult' if the age if input is over 18, print 'You are a teenager' if age is between 13 - 17 or 'You are young' if none of the other conditions are true",
+    "starter": true,
+    "startCode": [
+      {
+        "id": 0,
+        "line": "# Drag correct blocks above this! Nothing below is marked!"
+      },
+      {
         "id": 1,
+        "line": "print('You are an adult')"
+      },
+      {
+        "id": 2,
+        "line": "elif (age >= 13):"
+      },
+      {
+        "id": 3,
+        "line": "age = int(input('Enter your age: '))"
+      },
+      {
+        "id": 4,
+        "line": "if (age >= 18):"
+      },
+      {
+        "id": 5,
+        "line": "print('You are a teenager')"
+      },
+      {
+        "id": 6,
+        "line": "else:"
+      },
+      {
+        "id": 7,
+        "line": "print('You are young')"
+      },
+      {
+        "id": 8,
+        "line": "if (age > 18):"
+      },
+      {
+        "id": 9,
+        "line": "if (age > 13):"
+      }
+    ],
+    "correctCode": [
+      {
+        "id": 3,
+        "indent": 0
+      },
+      {
+        "id": 4,
+        "indent": 0
+      },
+      {
+        "id": 1,
+        "indent": 0
+      },
+      {
+        "id": 2,
+        "indent": 0
+      },
+      {
+        "id": 5,
+        "indent": 0
+      },
+      {
+        "id": 6,
+        "indent": 0
+      },
+      {
+        "id": 7,
         "indent": 0
       }
     ],
+    "tags": ["bool_operators"],
     "skills": {
-      "basic": 0,
-      "control_structure": 0,
-      "conditions_and_boolean": 0,
-      "read__write": 0,
-      "functions": 0,
-      "exception_handling": 0,
-      "dictionaries": 0,
-      "list": 0,
-      "data_types": 0
+    }
+  },
+  {
+    "id": "11",
+    "question": "Declare the 'jake' dictionary, and set the age to 19, then set the address to 'Town'. Lastly delete the email and print out the dictionary",
+    "starter": true,
+    "startCode": [
+      {
+        "id": 0,
+        "line": "# Drag correct blocks above this! Nothing below is marked!"
+      },
+      {
+        "id": 1,
+        "line": "jake('address') = 'Town"
+      },
+      {
+        "id": 2,
+        "line": "jake = {'name':'jake', 'age': 18, 'email': 'wrong@mail.com'}"
+      },
+      {
+        "id": 3,
+        "line": "del jake['email']"
+      },
+      {
+        "id": 4,
+        "line": "jake('age') = 19"
+      },
+      {
+        "id": 5,
+        "line": "jake['age'] = 19"
+      },
+      {
+        "id": 6,
+        "line": "jake['address'] = 'Town'"
+      },
+      {
+        "id": 7,
+        "line": "print(jake)"
+      }
+    ],
+    "correctCode": [
+      {
+        "id": 2,
+        "indent": 0
+      },
+      {
+        "id": 5,
+        "indent": 0
+      },
+      {
+        "id": 6,
+        "indent": 0
+      },
+      {
+        "id": 3,
+        "indent": 0
+      },
+      {
+        "id": 7,
+        "indent": 0
+      }
+    ],
+    "tags": ["dictionary"],
+    "skills": {
+    }
+  },
+  {
+    "id": "12",
+    "question": "Using list comprehension print out the squared numbers of numbers from 1 to 10 which are odd. It should print: [1, 9, 25, 49, 81]",
+    "starter": true,
+    "startCode": [
+      {
+        "id": 0,
+        "line": "# Drag correct blocks above this! Nothing below is marked!"
+      },
+      {
+        "id": 1,
+        "line": "my_list = [x*x for x in range(1,10) if x%2 == 0]"
+      },
+      {
+        "id": 2,
+        "line": "my_list = [x*x for x in range(1,10) if x%2 != 0]"
+      },
+      {
+        "id": 3,
+        "line": "print(my_list)"
+      }
+    ],
+    "correctCode": [
+      {
+        "id": 2,
+        "indent": 0
+      },
+      {
+        "id": 3,
+        "indent": 0
+      }
+    ],
+    "tags": ["list", "control", "bool_operators"],
+    "skills": {
+    }
+  },
+  {
+    "id": "13",
+    "question": "Define a function which prints 'No presents for you' if the name is equal to 'bad', + else it prints 'You will get a [present]'. The default present is 'bike'. Next declare a dictionary people using the 'dict' function with Jake as good and Dave as bad. Test the function by calling it for Jake and Dave using the dictionary"
+    "starter": true,
+    "startCode": [
+      {
+        "id": 0,
+        "line": "# Drag correct blocks above this! Nothing below is marked!"
+      },
+      {
+        "id": 1,
+        "line": "if (name == 'bad'):"
+      },
+      {
+        "id": 2,
+        "line": "print('No presents for you!')"
+      },
+      {
+        "id": 3,
+        "line": "people = dict(Jake='bad', Dave='good')"
+      },
+      {
+        "id": 4,
+        "line": "def santa(name, present='bike'):"
+      },
+      {
+        "id": 5,
+        "line": "if (name = 'bad'):"
+      },
+      {
+        "id": 6,
+        "line": "santa(people['Jake'])"
+      },
+      {
+        "id": 7,
+        "line": "santa(people['Dave'])"
+      },
+      {
+        "id": 8,
+        "line": "else:"
+      },
+      {
+        "id": 9,
+        "line": "def santa(name, present):"
+      },
+      {
+        "id": 10,
+        "line": "print('You will get a ', present)"
+      }
+    ],
+    "correctCode": [
+      {
+        "id": 4,
+        "indent": 0
+      },
+      {
+        "id": 1,
+        "indent": 1
+      },
+      {
+        "id": 2,
+        "indent": 2
+      },
+      {
+        "id": 8,
+        "indent": 1
+      },
+      {
+        "id": 10,
+        "indent": 2
+      },
+      {
+        "id": 3,
+        "indent": 0
+      },
+      {
+        "id": 6,
+        "indent": 0
+      },
+      {
+        "id": 7,
+        "indent": 0
+      }
+    ],
+    "tags": ["functions", "dictionary", "bool_operators"],
+    "skills": {
+    }
+  },
+  {
+    "id": "14",
+    "question": "Firstly import the 'functools' library from 'partial'. Define a function which returns the product of 2 numbers, then call this as a partial function with 4. Lastly print the result.",
+    "starter": true,
+    "startCode": [
+      {
+        "id": 0,
+        "line": "# Drag correct blocks above this! Nothing below is marked!"
+      },
+      {
+        "id": 1,
+        "line": "partial_result = partial(multiply,4)"
+      },
+      {
+        "id": 2,
+        "line": "partial_result = multiple(partial, 4)"
+      },
+      {
+        "id": 3,
+        "line": "print(partial_result)"
+      },
+      {
+        "id": 4,
+        "line": "def multiply(x,y):"
+      },
+      {
+        "id": 5,
+        "line": "import partial from functools"
+      },
+      {
+        "id": 6,
+        "line": "return x * y"
+      },
+      {
+        "id": 7,
+        "line": "from functools import partial"
+      }
+    ],
+    "correctCode": [
+      {
+        "id": 7,
+        "indent": 0
+      },
+      {
+        "id": 4,
+        "indent": 0
+      },
+      {
+        "id": 6,
+        "indent": 1
+      },
+      {
+        "id": 1,
+        "indent": 0
+      },
+      {
+        "id": 3,
+        "indent": 0
+      }
+    ],
+    "tags": ["functions"],
+    "skills": {
     }
   }
 ]
