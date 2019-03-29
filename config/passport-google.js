@@ -28,7 +28,6 @@ module.exports = (passport) => {
 
                     // get beginner questions
                     mongooseHelper('get_start_questions', {}, resp => {
-
                         if (resp.success) {
                             let newUser = new User();
                             newUser.id = profile.id;
@@ -36,8 +35,7 @@ module.exports = (passport) => {
                             newUser.name = profile.displayName;
                             newUser.avatar = profile.photos[0].value;
                             newUser.skills = {};
-                            newUser.questions.active = resp.data;
-                            newUser.questions.complete = [];
+                            newUser.questionsActive = resp.data;
                             newUser.google.access_token = accessToken;
                             newUser.google.refresh_token = refreshToken;
 

@@ -22,25 +22,25 @@ module.exports = (func, data, callback) => {
                     if (err) return callback({ success: false, errorMsg: err});
                     let questionIds = [];
                     questions.forEach(function(element) {
-                        questionIds.push(element._id);
+                        questionIds.push({id: element._id, isComplete: false, score: 0 });
                     });
 
                     callback({success: true, data: questionIds});
                 });
                 break;
-            case 'get_active_questions':
+            case 'get_questions':
                 let questionsData = [];
                 // find the user's active questions
-                User.findOne({ 'id': data.identifier.id.toString() }, 'questions',  function (err, questionList) {
+                User.findOne({ 'id': data.identifier.id.toString() }, 'questionsActive',  function (err, questionList) {
                     if (err) return callback({ success: false, errorMsg: err});
                     // get the question data from id
                     let count =  0;
-                    questionList.questions.active.forEach(function(element) {
-                       Question.findById(element, null)
+                    questionList.questionsActive.forEach(function(element) {
+                       Question.findById(element.id, null)
                            .then(function (data) {
                                count++;
-                            questionsData.push(data);
-                            if (count === questionList.questions.active.length) {
+                            questionsData.push({data, isComplete: element.isComplete, score: element.score });
+                            if (count === questionList.questionsActive.length) {
                                 callback({success: true, data: questionsData});
                             }
                            })
@@ -48,6 +48,17 @@ module.exports = (func, data, callback) => {
                            console.log(errs);
                            });
                     });
+
+                });
+                break;
+            case 'update_questions':
+                let question_id = data.identifier.question_id;
+                let score = data.identifier.score;
+
+                User.findOneAndUpdate({ 'id': data.identifier.id.toString() }, { $set: { '' : true, '' : score }}, function(err, resp) {
+
+
+
 
                 });
                 break;

@@ -3,30 +3,13 @@ const Axios = require('axios');
 const google = require('../helpers/googleApi');
 const passportRefreshToken = require('passport-oauth2-refresh');
 
-
-// function grabNewToken(username, refreshToken, callback) {
-//     passportRefreshToken.requestNewAccessToken('google', refresherToken, {},function (err, accessToken, refreshToken) {
-//         if (err) return console.log("Refresh Token error: ", err);
-//         let newRefreshToken = refreshToken == null ? refresherToken : refreshToken;
-//
-//         spotify('setAccessToken', {username: username, access_token: accessToken});
-//
-//         mongooseHelper('update', {identifier: {username: username}, data: {'google': {access_token: accessToken, refresh_token: newRefreshToken}}});
-//         callback();
-//     });
-//
-// }
-
-
 module.exports = function () {
     return {
         setRouting: function (router) {
             router.get('/initial', this.initialise);
-            router.get('/getActiveQuestions', this.getActiveQuestions);
-            // router.get('/getFinishedQuestions', this.getFinishedQuestions);
-            // router.post('/updateFinishedQuestions', this.updateFinishedQuestions);
+            router.get('/getUserQuestions', this.getUserQuestions);
+            router.post('/updateUserQuestions', this.updateUserQuestions);
             // router.post('/updateUserSkill', this.updateUserSkill);
-            // router.post('/refreshToken', this.refreshToken);
         },
 
         initialise: function (req, res) {
@@ -44,8 +27,21 @@ module.exports = function () {
             })
         },
 
-        getActiveQuestions: function (req, res) {
-            mongooseHelper('get_active_questions', {identifier: {id: req.user.id }}, resp => {
+        getUserQuestions: function (req, res) {
+            mongooseHelper('get_questions', {identifier: {id: req.user.id }}, resp => {
+                if (resp.success) {
+                    res.json({
+                        success: true,
+                        questions: resp.data,
+                    });
+                } else {
+                    res.json({success: false});
+                }
+            })
+        },
+
+        updateUserQuestions: function (req, res) {
+            mongooseHelper('update_questions', {identifier: {id: req.user.id, question_id: req.query.id, score: req.query.score }}, resp => {
                 if (resp.success) {
                     res.json({
                         success: true,

@@ -15,6 +15,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import Card from '@material-ui/core/Card';
 import CloseIcon from 'mdi-react/CloseIcon';
+import Axios from "axios";
 
 function getSteps() {
     return ['Vertical Positioning',
@@ -53,6 +54,8 @@ class Exercise extends React.Component {
     }
 
     componentWillMount() {
+        console.log(this.props.data);
+
         if (this.props.data.starter) {
             this.setState({
                 tutorialActive: true,
@@ -146,6 +149,23 @@ class Exercise extends React.Component {
             feedback.push('arrange');
         }
 
+        this.tutorialStepsUpdate('feedback');
+
+
+        if (this.props.data.isComplete === false || this.props.data.score > total ) {
+            Axios.post('/updateUserQuestions', {
+                question_id: this.state.data._id,
+                score: total,
+            })
+                .then((resp) => {
+                    if(resp.data.success) {
+                        console.log('Questions for user updated!')
+                    }
+                })
+                .catch((err) => {
+                    console.log("User questions update error: ", err);
+                });
+        }
 
         this.setState({
             feedbackOpen: true,
@@ -154,7 +174,7 @@ class Exercise extends React.Component {
             wrongBlocks: wrongBlocks,
         });
 
-        this.tutorialStepsUpdate('feedback');
+
 
     };
 
@@ -219,9 +239,11 @@ class Exercise extends React.Component {
         return (
             <div className={classes.root}>
 
-                <Typography variant="h3" gutterBottom>
-                    {this.props.data.question}
-                </Typography>
+                <div style={{ paddingLeft: '15vw', paddingRight: '15vw' }}>
+                    <Typography variant="h4" gutterBottom>
+                        {this.props.data.question}
+                    </Typography>
+                </div>
 
                 <CodeContainer
                     data={this.props.data}
@@ -245,7 +267,7 @@ class Exercise extends React.Component {
                 />) : ''}
 
                 {this.state.tutorialActive ?
-                    ( <Card style={{ width: '100%', position: 'absolute', bottom: 0 }}>
+                    ( <Card style={{ width: '100%', position: 'absolute', bottom: '0' }}>
                             <CardHeader
                                 title="Welcome to the tutorial"
                                 subheader="Please read and follow the steps"

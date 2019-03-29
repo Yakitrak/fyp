@@ -91,7 +91,7 @@
         "indent": 0
       }
     ],
-    "tags": ["function"],
+    "tags": ["functions"],
     "skills": {
     }
   },
@@ -238,7 +238,7 @@
       },
       {
         "id": 2,
-        "line": "contacts = {'Billy' : '07700 900631', 'Dave' : '07700 900402',  'Sam' : '07700 900112' }"
+        "line": "contacts = {\n 'Billy' : '07700 900631', \n 'Dave' : '07700 900402',\n 'Sam' : '07700 900112' \n}"
       },
       {
         "id": 3,
@@ -424,7 +424,7 @@
       },
       {
         "id": 1,
-        "line": "file.write('Hello World \n')"
+        "line": "file.write('Hello World /n')"
       },
       {
         "id": 2,
@@ -707,7 +707,7 @@
   },
   {
     "id": "13",
-    "question": "Define a function which prints 'No presents for you' if the name is equal to 'bad', + else it prints 'You will get a [present]'. The default present is 'bike'. Next declare a dictionary people using the 'dict' function with Jake as good and Dave as bad. Test the function by calling it for Jake and Dave using the dictionary"
+    "question": "Define a function which prints 'No presents for you' if the name is equal to 'bad', + else it prints 'You will get a [present]'. The default present is 'bike'. Next declare a dictionary people using the 'dict' function with Jake as good and Dave as bad. Test the function by calling it for Jake and Dave using the dictionary",
     "starter": true,
     "startCode": [
       {

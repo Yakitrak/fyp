@@ -14,10 +14,7 @@ const userModelSchema = mongoose.Schema({
         dictionaries: {type: Number, default: 0 },
         list: {type: Number, default: 0 },
     },
-    questions: {
-        complete: [],
-        active: []
-    },
+    questionsActive: [],
     google: {
         access_token: {type: String},
         refresh_token: {type: String}
