@@ -10,6 +10,7 @@ module.exports = function () {
             router.get('/getUserQuestions', this.getUserQuestions);
             router.post('/updateUserQuestions', this.updateUserQuestions);
             // router.post('/updateUserSkill', this.updateUserSkill);
+            // router.post('/getUserSkill', this.getUserSkill);
         },
 
         initialise: function (req, res) {
@@ -41,7 +42,7 @@ module.exports = function () {
         },
 
         updateUserQuestions: function (req, res) {
-            mongooseHelper('update_questions', {identifier: {id: req.user.id, question_id: req.query.id, score: req.query.score }}, resp => {
+            mongooseHelper('update_questions', {identifier: {id: req.user.id, question_id: req.body.question_id, score: req.body.score }}, resp => {
                 if (resp.success) {
                     res.json({
                         success: true,

@@ -16,6 +16,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Card from '@material-ui/core/Card';
 import CloseIcon from 'mdi-react/CloseIcon';
 import Axios from "axios";
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 
 function getSteps() {
     return ['Vertical Positioning',
@@ -151,10 +152,11 @@ class Exercise extends React.Component {
 
         this.tutorialStepsUpdate('feedback');
 
-
+        console.log('sdfdsf');
+        console.log(this.props.data);
         if (this.props.data.isComplete === false || this.props.data.score > total ) {
             Axios.post('/updateUserQuestions', {
-                question_id: this.state.data._id,
+                question_id: this.props.data._id,
                 score: total,
             })
                 .then((resp) => {
@@ -241,7 +243,7 @@ class Exercise extends React.Component {
 
                 <div style={{ paddingLeft: '15vw', paddingRight: '15vw' }}>
                     <Typography variant="h4" gutterBottom>
-                        {this.props.data.question}
+                        { ReactHtmlParser(this.props.data.question) }
                     </Typography>
                 </div>
 

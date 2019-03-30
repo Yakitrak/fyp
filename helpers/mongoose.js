@@ -20,27 +20,34 @@ module.exports = (func, data, callback) => {
             case 'get_start_questions':
                 Question.find({ 'starter': true }, '_id', function (err, questions) {
                     if (err) return callback({ success: false, errorMsg: err});
-                    let questionIds = [];
+                    let questionIds = {};
                     questions.forEach(function(element) {
-                        questionIds.push({id: element._id, isComplete: false, score: 0 });
+                        questionIds[element._id] = {
+                            isComplete: false,
+                            score: 0,
+                        };
                     });
 
                     callback({success: true, data: questionIds});
                 });
                 break;
             case 'get_questions':
-                let questionsData = [];
+                let questionsData = {} ;
                 // find the user's active questions
                 User.findOne({ 'id': data.identifier.id.toString() }, 'questionsActive',  function (err, questionList) {
                     if (err) return callback({ success: false, errorMsg: err});
                     // get the question data from id
                     let count =  0;
-                    questionList.questionsActive.forEach(function(element) {
-                       Question.findById(element.id, null)
+                    Object.keys(questionList.questionsActive).forEach(function(key) {
+                       Question.findById(key, null)
                            .then(function (data) {
                                count++;
-                            questionsData.push({data, isComplete: element.isComplete, score: element.score });
-                            if (count === questionList.questionsActive.length) {
+                               questionsData[key] = {
+                                   data: data,
+                                   isComplete: questionList.questionsActive[key].isComplete,
+                                   score: questionList.questionsActive[key].score,
+                               };
+                            if (count === Object.keys(questionList.questionsActive).length) {
                                 callback({success: true, data: questionsData});
                             }
                            })
@@ -52,15 +59,19 @@ module.exports = (func, data, callback) => {
                 });
                 break;
             case 'update_questions':
+                console.log(data.identifier);
                 let question_id = data.identifier.question_id;
                 let score = data.identifier.score;
+                const query = 'questionsActive.' + question_id + '.score';
+                const queryA = 'questionsActive.' + question_id + '.isComplete';
 
-                User.findOneAndUpdate({ 'id': data.identifier.id.toString() }, { $set: { '' : true, '' : score }}, function(err, resp) {
-
-
-
-
-                });
+                User.findOneAndUpdate({ 'id': data.identifier.id.toString() }, { $set: { [queryA] : true, [query] : score }})
+                    .then(function (resp) {
+                        callback({ success: true, testing: resp });
+                    })
+                    .catch(function(errs) {
+                        callback({ success: false, error: errs });
+                    });
                 break;
         }
 };

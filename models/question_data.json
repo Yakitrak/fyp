@@ -1,7 +1,7 @@
 [
   {
     "id": "1",
-    "question": "Print out the fruits in order: apple, banana, cherry",
+    "question": "Print out the fruits in order: <code> apple, banana, cherry </code>",
     "starter": true,
     "startCode": [
       {
@@ -41,11 +41,13 @@
     ],
     "tags": ["list", "control"],
     "skills": {
+      "lists": 0,
+      "control": ""
     }
   },
   {
     "id": "2",
-    "question": "Define and use the hello function to print 'hello Bill' then 'hello Jim'",
+    "question": "Define and use the hello function to print  <code> hello bill </code> then  <code> hello jim </code>",
     "starter": true,
     "startCode": [
       {
@@ -527,7 +529,7 @@
   },
   {
     "id": "10",
-    "question": "Print 'You are an adult' if the age if input is over 18, print 'You are a teenager' if age is between 13 - 17 or 'You are young' if none of the other conditions are true",
+    "question": "Print 'You are an adult' if the age if input is 18 or over, print 'You are a teenager' if age is between 13 - 17 or 'You are young' if none of the other conditions are true",
     "starter": true,
     "startCode": [
       {
@@ -856,5 +858,54 @@
     "tags": ["functions"],
     "skills": {
     }
-  }
+  },
+  {
+    "id": "15",
+    "question": "",
+    "starter": true,
+    "startCode": [
+      {
+        "id": 0,
+        "line": "# Drag correct blocks above this! Nothing below is marked!"
+      },
+      {
+        "id": 1,
+        "line": "partial_result = partial(multiply,4)"
+      },
+      {
+        "id": 2,
+        "line": "partial_result = multiple(partial, 4)"
+      },
+      {
+        "id": 3,
+        "line": "print(partial_result)"
+      },
+      {
+        "id": 4,
+        "line": "def multiply(x,y):"
+      },
+      {
+        "id": 5,
+        "line": "import partial from functools"
+      },
+      {
+        "id": 6,
+        "line": "return x * y"
+      },
+      {
+        "id": 7,
+        "line": "from functools import partial"
+      }
+    ],
+    "correctCode": [
+      {
+        "id": 0,
+        "indent": 0
+      },
+    ],
+    "tags": ["f"],
+    "skills": {
+    }
+  },
+
 ]

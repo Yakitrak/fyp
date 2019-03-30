@@ -47,35 +47,32 @@ class ExerciseSelection extends React.Component {
         Axios.get('/getUserQuestions')
             .then((resp) => {
                 if(resp.data.success){
+                    console.log(resp.data);
                     let questions = resp.data.questions;
-                    console.log(questions);
                     let dynamicGrid = (
                         <Grid className={classNames(classes.layout, classes.cardGrid)} container spacing={40}>
-                            {questions.map(question => (
-                                <Grid item key={question.data._id} sm={6} md={4} lg={3}>
+                            {Object.keys(questions).map(question => (
+                                <Grid item key={questions[question].data._id} sm={6} md={4} lg={3}>
                                     <Card className={classes.card}>
                                         <CardHeader
                                             // title={'Question ' + question.data.id}
-                                            title={question.isComplete ? question.score + '%' : 'Incomplete' }
+                                            title={questions[question].isComplete ? questions[question].score + '%' : 'Incomplete' }
                                             // subheader={question.data.tags}
                                         />
                                         <CardMedia
                                             className={classes.cardMedia}
-                                            image={question.isComplete ? 'https://img.icons8.com/color/260/checkmark.png' : 'https://www.easyglasssplashbacks.co.uk/wp-content/uploads/product_images/coloured-glass-splashbacks-colour-bright-yellow.png'}
+                                            image={questions[question].isComplete ? 'https://img.icons8.com/color/260/checkmark.png' : 'https://www.easyglasssplashbacks.co.uk/wp-content/uploads/product_images/coloured-glass-splashbacks-colour-bright-yellow.png'}
                                             title="Image title"
                                         />
                                         <CardContent className={classes.cardContent}>
-                                            <Typography variant="subtitle2">
-                                                {question.isComplete ? question.score : '' }
-                                            </Typography>
-                                            <Typography variant="caption"> Tags: {question.data.tags.map(tag => ( prettyTags[tag]) ).join(", ")} </Typography>
+                                            <Typography variant="caption"> Tags: {questions[question].data.tags.map(tag => ( prettyTags[tag]) ).join(", ")} </Typography>
                                         </CardContent>
                                         <CardActions>
                                         <Button
-                                            onClick={() => this.props.handleQuestionClick({...question.data, isComplete: question.isComplete, score: question.score})}
+                                            onClick={() => this.props.handleQuestionClick({...questions[question].data, isComplete: questions[question].isComplete, score: questions[question].score})}
                                             size="small"
                                             color="primary">
-                                            {question.isComplete ? 'Restart Puzzle' : 'Start Puzzle' }
+                                            {questions[question].isComplete ? 'Restart Puzzle' : 'Start Puzzle' }
                                         </Button>
                                         </CardActions>
                                     </Card>
