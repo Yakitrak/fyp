@@ -861,7 +861,7 @@
   },
   {
     "id": "15",
-    "question": "",
+    "question": "Print all the letters in 'XPyParsonX' except 'X'.",
     "starter": true,
     "startCode": [
       {
@@ -870,42 +870,49 @@
       },
       {
         "id": 1,
-        "line": "partial_result = partial(multiply,4)"
+        "line": "continue"
       },
       {
         "id": 2,
-        "line": "partial_result = multiple(partial, 4)"
+        "line": "if (letter == 'x'): "
       },
       {
         "id": 3,
-        "line": "print(partial_result)"
+        "line": "break"
       },
       {
         "id": 4,
-        "line": "def multiply(x,y):"
+        "line": "print('Letter :', letter)"
       },
       {
         "id": 5,
-        "line": "import partial from functools"
+        "line": "for letter of 'XPyParsonX':"
       },
       {
         "id": 6,
-        "line": "return x * y"
-      },
-      {
-        "id": 7,
-        "line": "from functools import partial"
+        "line": "for letter in 'XPyParsanX':"
       }
     ],
     "correctCode": [
       {
-        "id": 0,
+        "id": 6,
         "indent": 0
       },
+      {
+        "id": 2,
+        "indent": 1
+      },
+      {
+        "id": 1,
+        "indent": 2
+      },
+      {
+        "id": 4,
+        "indent": 1
+      }
     ],
-    "tags": ["f"],
+    "tags": ["control"],
     "skills": {
     }
-  },
-
+  }
 ]

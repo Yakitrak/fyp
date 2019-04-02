@@ -16,8 +16,13 @@ class CodeContainer extends React.Component {
     }
 
     componentDidMount() {
+        //set up indent as 0
+        let blocks = this.props.data.startCode;
+        for (let block of blocks) {
+                block['indent'] = 0;
+        }
         this.setState({
-            blocks: this.props.data.startCode,
+            blocks: blocks,
         });
     }
 

@@ -65,6 +65,7 @@ class ExerciseSelection extends React.Component {
                                             title="Image title"
                                         />
                                         <CardContent className={classes.cardContent}>
+                                            <div style={{ background: 'red', height: 100, width: '100%'  }}> {questions[question].isComplete ? 'Incomplete' : 'Incomplete'} </div>
                                             <Typography variant="caption"> Tags: {questions[question].data.tags.map(tag => ( prettyTags[tag]) ).join(", ")} </Typography>
                                         </CardContent>
                                         <CardActions>
