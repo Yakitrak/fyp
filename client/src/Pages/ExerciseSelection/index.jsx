@@ -54,21 +54,24 @@ class ExerciseSelection extends React.Component {
                             {Object.keys(questions).map(question => (
                                 <Grid item key={questions[question].data._id} sm={6} md={4} lg={3}>
                                     <Card className={classes.card}>
-                                        <CardHeader
-                                            // title={'Question ' + question.data.id}
-                                            title={questions[question].isComplete ? questions[question].score + '%' : 'Incomplete' }
-                                            // subheader={question.data.tags}
-                                        />
-                                        <CardMedia
-                                            className={classes.cardMedia}
-                                            image={questions[question].isComplete ? 'https://img.icons8.com/color/260/checkmark.png' : 'https://www.easyglasssplashbacks.co.uk/wp-content/uploads/product_images/coloured-glass-splashbacks-colour-bright-yellow.png'}
-                                            title="Image title"
-                                        />
+                                        {/*<CardHeader*/}
+                                            {/*title={questions[question].isComplete ? questions[question].score.toFixed(2) + '%' : 'To do' }*/}
+                                            {/*// subheader={question.data.tags}*/}
+                                        {/*/>*/}
+                                        {/*<CardMedia*/}
+                                            {/*className={classes.cardMedia}*/}
+                                            {/*image={questions[question].isComplete ? 'https://img.icons8.com/color/260/checkmark.png' : 'https://www.easyglasssplashbacks.co.uk/wp-content/uploads/product_images/coloured-glass-splashbacks-colour-bright-yellow.png'}*/}
+                                            {/*title="Image title"*/}
+                                        {/*/>*/}
                                         <CardContent className={classes.cardContent}>
-                                            <div style={{ background: 'red', height: 100, width: '100%'  }}> {questions[question].isComplete ? 'Incomplete' : 'Incomplete'} </div>
-                                            <Typography variant="caption"> Tags: {questions[question].data.tags.map(tag => ( prettyTags[tag]) ).join(", ")} </Typography>
+                                            <div className={classes.cardThumb} style={{ background: questions[question].isComplete ? questions[question].score === 100 ? 'rgb(46, 204, 113)' : 'rgb(78, 205, 196)'  : 'rgb(255, 255, 126)'}}>
+                                                <Typography variant="button" style={{ fontSize: '1em' }}>
+                                                    {questions[question].isComplete ? questions[question].score.toFixed(0) + '%' : 'Not Attempted'}
+                                                </Typography>
+                                            </div>
+                                            <Typography style={{padding: 16}} variant="subtitle1"> Includes: {questions[question].data.tags.map(tag => ( prettyTags[tag]) ).join(", ")} </Typography>
                                         </CardContent>
-                                        <CardActions>
+                                        <CardActions style={{ justifyContent: 'center' }}>
                                         <Button
                                             onClick={() => this.props.handleQuestionClick({...questions[question].data, isComplete: questions[question].isComplete, score: questions[question].score})}
                                             size="small"
@@ -99,9 +102,9 @@ class ExerciseSelection extends React.Component {
         const { classes } = this.props;
 
         return (
-            <div >
+            <div className={classes.root}>
                 {this.state.loading ? (
-                    <LinearProgress color="secondary" />
+                    <LinearProgress style={{ marginTop: '-2vh' }} color="primary" />
                     ) : '' }
                 {this.state.questionGrid}
             </div>

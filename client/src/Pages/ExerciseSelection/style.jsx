@@ -1,4 +1,10 @@
 const style = theme => ({
+    root: {
+        background: theme.palette.customBackground,
+        width: '100%',
+        paddingTop: '2vh',
+        minHeight: 'calc(98vh - 64px)',
+    },
     layout: {
         width: 'auto',
         marginLeft: theme.spacing.unit * 3,
@@ -22,7 +28,14 @@ const style = theme => ({
     },
     cardContent: {
         flexGrow: 1,
+        padding: 0,
     },
+    cardThumb: {
+        height: 100,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
 });
 
 export default style;

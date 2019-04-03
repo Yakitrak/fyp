@@ -209,20 +209,11 @@ class Exercise extends React.Component {
 
     };
 
-    handleTutorialClose = wait => {
-        if (wait) {
-            setTimeout(() => {
-                this.setState({
-                    tutorialActive: false,
-                    activeStep: 0,
-                })
-            }, 1500)
-        } else {
-            this.setState({
-                tutorialActive: false,
-                activeStep: 0,
-            })
-        }
+    handleTutorialClose = () => {
+        this.setState({
+            tutorialActive: false,
+            activeStep: 0,
+        })
     };
 
     closeModal = () => {
@@ -236,46 +227,47 @@ class Exercise extends React.Component {
         const {activeStep} = this.state;
         const steps = getSteps();
         const stepsDesc = getStepsDesc();
-        // const highlightButton = activeStep === 3 ? { border: 'red 1px solid !important' } : {};
 
         return (
             <div className={classes.root}>
 
-                <div style={{ paddingLeft: '15vw', paddingRight: '15vw' }}>
-                    <Typography variant="h4" gutterBottom>
-                        { ReactHtmlParser(this.props.data.question) }
-                    </Typography>
+                <div className={classes.topSection}>
+                    <div style={{ paddingLeft: '15vw', paddingRight: '15vw' }}>
+                        <Typography variant="h6" gutterBottom style={{ textAlign: 'left'}}>
+                            { ReactHtmlParser(this.props.data.question) }
+                        </Typography>
+                    </div>
+
+                    <CodeContainer
+                        data={this.props.data}
+                        wrongBlocks={this.state.wrongBlocks}
+                        getCurrentCode={(blocks) => this.getCurrentCode(blocks)}
+                        resetError={this.resetError}
+                        tutorialStepsUpdate={(step) => this.tutorialStepsUpdate(step)}
+                        tutorialActiveVertical={activeStep === 0}
+                        tutorialActiveHorizontal={activeStep === 1}
+                    />
+
+                    <div className={classes.buttonSection}>
+                        <Button onClick={this.props.handleBack} variant="contained" color="primary" > Back </Button>
+                        <Button onClick={this.handleCheck} className={activeStep === 2 ? classes.pulseButton: ''} variant="contained" color="primary" > Check </Button>
+                    </div>
+
+                    {this.state.feedbackOpen ? (<FeedbackModal
+                        feedbackTotal={this.state.feedbackTotal}
+                        feedbackList={this.state.feedbackList}
+                        handleClose={this.closeModal}
+                    />) : ''}
                 </div>
-
-                <CodeContainer
-                    data={this.props.data}
-                    wrongBlocks={this.state.wrongBlocks}
-                    getCurrentCode={(blocks) => this.getCurrentCode(blocks)}
-                    resetError={this.resetError}
-                    tutorialStepsUpdate={(step) => this.tutorialStepsUpdate(step)}
-                    tutorialActiveVertical={activeStep === 0}
-                    tutorialActiveHorizontal={activeStep === 1}
-                />
-
-                <div className={classes.buttonSection}>
-                    <Button onClick={this.props.handleBack} variant="contained" color="secondary" > Back </Button>
-                    <Button onClick={this.handleCheck} className={activeStep === 2 ? classes.pulseButton: ''} variant="contained" color="secondary" > Check </Button>
-                </div>
-
-                {this.state.feedbackOpen ? (<FeedbackModal
-                    feedbackTotal={this.state.feedbackTotal}
-                    feedbackList={this.state.feedbackList}
-                    handleClose={this.closeModal}
-                />) : ''}
 
                 {this.state.tutorialActive ?
-                    ( <Card style={{ width: '100%', position: 'absolute', bottom: '0' }}>
+                    ( <Card style={{ width: '100%' }}>
                             <CardHeader
                                 title="Welcome to the tutorial"
                                 subheader="Please read and follow the steps"
                                 action={
                                     <IconButton>
-                                        <CloseIcon onClick={() => this.handleTutorialClose(false)}/>
+                                        <CloseIcon onClick={this.handleTutorialClose}/>
                                     </IconButton>
                                 }
                             />
