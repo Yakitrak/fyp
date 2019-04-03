@@ -99,7 +99,7 @@
   },
   {
     "id": "3",
-    "question": "Declare and append to the animal list, then print out in order: 'cat', 'dog', 'lion'",
+    "question": "Declare and append to the animal list, then print them out in order:  <code> cat, dog, lion </code>",
     "starter": true,
     "startCode": [
       {
@@ -167,7 +167,7 @@
   },
   {
     "id": "4",
-    "question": "Print out every 3rd element in the list 'numbers' starting at 0, such as: 0,3,6",
+    "question": "Print out every 3rd element in the list 'numbers' starting at 0, such as: <code>  0,3,6 </code>",
     "starter": true,
     "startCode": [
       {
@@ -227,7 +227,7 @@
   },
   {
     "id": "5",
-    "question": "Print out the all the contacts dictionary with everyone except Dave",
+    "question": "Print out the all the contacts in the 'contact' dictionary except Dave's contact",
     "starter": true,
     "startCode": [
       {
@@ -271,7 +271,7 @@
   },
   {
     "id": "6",
-    "question": "Try an print the variable 'x' which does not exist and use try and except to print the error. Finally, print 'Hello' regardless of 'x' exists or not.",
+    "question": "Try and write 'Any Text' to the file <code> PyParson.txt </code> using try, except and finally to ensure errors are handled correctly.",
     "starter": true,
     "startCode": [
       {
@@ -296,7 +296,7 @@
       },
       {
         "id": 5,
-        "line": "print('Hello')"
+        "line": "print('x may not exist')"
       },
       {
         "id": 6,
@@ -417,7 +417,7 @@
   },
   {
     "id": "8",
-    "question": "Create a file called 'file.txt' and write 'Hello World' then write 'This is our new text file' in the next line",
+    "question": "Create a file called <code> file.txt </code> and write 'Hello World' then write 'This is our new text file' in the next line.",
     "starter": true,
     "startCode": [
       {
@@ -469,7 +469,7 @@
   },
   {
     "id": "9",
-    "question": "Using the input number, print if a number is even or odd",
+    "question": "Using the input number, print if the number is even or odd.",
     "starter": true,
     "startCode": [
       {
@@ -609,7 +609,7 @@
   },
   {
     "id": "11",
-    "question": "Declare the 'jake' dictionary, and set the age to 19, then set the address to 'Town'. Lastly delete the email and print out the dictionary",
+    "question": "Declare the dictionary <code> dictionary </code>, and set the age to 19, then set the address to 'Town'. Lastly delete the email and print out the dictionary.",
     "starter": true,
     "startCode": [
       {
@@ -673,7 +673,7 @@
   },
   {
     "id": "12",
-    "question": "Using list comprehension print out the squared numbers of numbers from 1 to 10 which are odd. It should print: [1, 9, 25, 49, 81]",
+    "question": "Using list comprehension print out the squared numbers of numbers from 1 to 10 which are odd. It should print: <code> [1, 9, 25, 49, 81] </code> ",
     "starter": true,
     "startCode": [
       {
@@ -709,7 +709,7 @@
   },
   {
     "id": "13",
-    "question": "Define a function which prints 'No presents for you' if the name is equal to 'bad', + else it prints 'You will get a [present]'. The default present is 'bike'. Next declare a dictionary people using the 'dict' function with Jake as good and Dave as bad. Test the function by calling it for Jake and Dave using the dictionary",
+    "question": "Define a function which prints 'No presents for you' if the name is equal to 'bad', + else it prints 'You will get a [present]'. The default present is 'bike'. Next declare a dictionary <code> people </code> using the 'dict' function with Jake as good and Dave as bad. Test the function by calling it for Jake and Dave using the dictionary",
     "starter": true,
     "startCode": [
       {
@@ -797,7 +797,7 @@
   },
   {
     "id": "14",
-    "question": "Firstly import the 'functools' library from 'partial'. Define a function which returns the product of 2 numbers, then call this as a partial function with 4. Lastly print the result.",
+    "question": "Firstly import the <code> functools </code> library from <code> partial </code>. Define a function which returns the product of 2 numbers, then call this as a partial function with 4. Lastly print the result.",
     "starter": true,
     "startCode": [
       {
@@ -861,7 +861,7 @@
   },
   {
     "id": "15",
-    "question": "Print all the letters in 'XPyParsonX' except 'X'.",
+    "question": "Print all the letters in <code> 'XPyParsonX' </code> except <code> 'x' </code>",
     "starter": true,
     "startCode": [
       {

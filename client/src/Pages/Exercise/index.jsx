@@ -152,8 +152,6 @@ class Exercise extends React.Component {
 
         this.tutorialStepsUpdate('feedback');
 
-        console.log('sdfdsf');
-        console.log(this.props.data);
         if (this.props.data.isComplete === false || this.props.data.score > total ) {
             Axios.post('/updateUserQuestions', {
                 question_id: this.props.data._id,

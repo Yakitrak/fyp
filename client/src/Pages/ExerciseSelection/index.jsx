@@ -47,7 +47,7 @@ class ExerciseSelection extends React.Component {
         Axios.get('/getUserQuestions')
             .then((resp) => {
                 if(resp.data.success){
-                    console.log(resp.data);
+                    // console.log(resp.data);
                     let questions = resp.data.questions;
                     let dynamicGrid = (
                         <Grid className={classNames(classes.layout, classes.cardGrid)} container spacing={40}>
