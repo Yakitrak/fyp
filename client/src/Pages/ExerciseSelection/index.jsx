@@ -54,15 +54,6 @@ class ExerciseSelection extends React.Component {
                             {Object.keys(questions).map(question => (
                                 <Grid item key={questions[question].data._id} sm={6} md={4} lg={3}>
                                     <Card className={classes.card}>
-                                        {/*<CardHeader*/}
-                                            {/*title={questions[question].isComplete ? questions[question].score.toFixed(2) + '%' : 'To do' }*/}
-                                            {/*// subheader={question.data.tags}*/}
-                                        {/*/>*/}
-                                        {/*<CardMedia*/}
-                                            {/*className={classes.cardMedia}*/}
-                                            {/*image={questions[question].isComplete ? 'https://img.icons8.com/color/260/checkmark.png' : 'https://www.easyglasssplashbacks.co.uk/wp-content/uploads/product_images/coloured-glass-splashbacks-colour-bright-yellow.png'}*/}
-                                            {/*title="Image title"*/}
-                                        {/*/>*/}
                                         <CardContent className={classes.cardContent}>
                                             <div className={classes.cardThumb} style={{ background: questions[question].isComplete ? questions[question].score === 100 ? 'rgb(46, 204, 113)' : 'rgb(78, 205, 196)'  : 'rgb(255, 255, 126)'}}>
                                                 <Typography variant="button" style={{ fontSize: '1em' }}>

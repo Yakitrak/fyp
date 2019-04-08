@@ -152,7 +152,7 @@ class Exercise extends React.Component {
 
         this.tutorialStepsUpdate('feedback');
 
-        if (this.props.data.isComplete === false || this.props.data.score > total ) {
+        if ((this.props.data.isComplete === false || total > this.props.data.isComplete) && total !== 0 ) {
             Axios.post('/updateUserQuestions', {
                 question_id: this.props.data._id,
                 score: total,
@@ -210,7 +210,7 @@ class Exercise extends React.Component {
     handleTutorialClose = () => {
         this.setState({
             tutorialActive: false,
-            activeStep: 0,
+            activeStep: 3,
         })
     };
 

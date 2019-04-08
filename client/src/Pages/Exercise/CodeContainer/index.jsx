@@ -73,13 +73,15 @@ class CodeContainer extends React.Component {
         const isActive = canDrop && isOver;
         const backgroundColor = isActive ? 'lightgreen' : '#FFF';
         let dullIndex;
+        let paddingTop;
 
         for (let i = 0; i < blocks.length; i++) {
             if (blocks[i].id === 0) dullIndex = i;
+            paddingTop = blocks[0].id === 0 ? 40 : 0;
         }
 
         return connectDropTarget(
-            <div className={classes.container} style={{ backgroundColor }}>
+            <div className={classes.container} style={{ backgroundColor, paddingTop }}>
 
                 {blocks.map((block, i) => {
                     let isDull = i > dullIndex;

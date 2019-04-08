@@ -23,6 +23,7 @@ module.exports = (func, data, callback) => {
                     let questionIds = {};
                     questions.forEach(function(element) {
                         questionIds[element._id] = {
+                            id: element._id,
                             isComplete: false,
                             score: 0,
                         };
@@ -39,14 +40,14 @@ module.exports = (func, data, callback) => {
                     // get the question data from id
                     let count =  0;
                     Object.keys(questionList.questionsActive).forEach(function(key) {
+                        questionsData[key] = {
+                            isComplete: questionList.questionsActive[key].isComplete,
+                            score: questionList.questionsActive[key].score,
+                        };
                        Question.findById(key, null)
                            .then(function (data) {
                                count++;
-                               questionsData[key] = {
-                                   data: data,
-                                   isComplete: questionList.questionsActive[key].isComplete,
-                                   score: questionList.questionsActive[key].score,
-                               };
+                               questionsData[key].data = data;
                             if (count === Object.keys(questionList.questionsActive).length) {
                                 callback({success: true, data: questionsData});
                             }
@@ -55,17 +56,16 @@ module.exports = (func, data, callback) => {
                            console.log(errs);
                            });
                     });
-
                 });
                 break;
             case 'update_questions':
                 console.log(data.identifier);
                 let question_id = data.identifier.question_id;
                 let score = data.identifier.score;
-                const query = 'questionsActive.' + question_id + '.score';
-                const queryA = 'questionsActive.' + question_id + '.isComplete';
+                const queryQuestionScore = 'questionsActive.' + question_id + '.score';
+                const queryQuestionActive = 'questionsActive.' + question_id + '.isComplete';
 
-                User.findOneAndUpdate({ 'id': data.identifier.id.toString() }, { $set: { [queryA] : true, [query] : score }})
+                User.findOneAndUpdate({ 'id': data.identifier.id.toString() }, { $set: { [queryQuestionActive] : true, [queryQuestionScore] : score }})
                     .then(function (resp) {
                         callback({ success: true, testing: resp });
                     })
