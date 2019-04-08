@@ -41,8 +41,14 @@
     ],
     "tags": ["list", "control"],
     "skills": {
-      "lists": 0,
-      "control": ""
+      "required": {
+        "lists": 0,
+        "control": 0
+      },
+      "granted": {
+        "lists": 20,
+        "control": 20
+      }
     }
   },
   {
@@ -95,6 +101,12 @@
     ],
     "tags": ["functions"],
     "skills": {
+      "required": {
+        "functions": 0
+      },
+      "granted": {
+        "functions": 20
+      }
     }
   },
   {
@@ -163,12 +175,20 @@
     ],
     "tags": ["list", "control"],
     "skills": {
+      "required": {
+        "lists": 20,
+        "control": 20
+      },
+      "granted": {
+        "lists": 20,
+        "control": 20
+      }
     }
   },
   {
     "id": "4",
     "question": "Print out every 3rd element in the list 'numbers' starting at 0, such as: <code>  0,3,6 </code>",
-    "starter": true,
+    "starter": false,
     "startCode": [
       {
         "id": 0,
@@ -223,12 +243,20 @@
     ],
     "tags": ["list", "control"],
     "skills": {
+      "required": {
+        "lists": 30,
+        "control": 30
+      },
+      "granted": {
+        "lists": 20,
+        "control": 20
+      }
     }
   },
   {
     "id": "5",
     "question": "Print out the all the contacts in the 'contact' dictionary except Dave's contact",
-    "starter": true,
+    "starter": false,
     "startCode": [
       {
         "id": 0,
@@ -267,12 +295,18 @@
     ],
     "tags": ["dictionary"],
     "skills": {
+      "required": {
+        "dictionary": 0
+      },
+      "granted": {
+        "dictionary": 20
+      }
     }
   },
   {
     "id": "6",
     "question": "Try and write 'Any Text' to the file <code> PyParson.txt </code> using try, except and finally to ensure errors are handled correctly.",
-    "starter": true,
+    "starter": false,
     "startCode": [
       {
         "id": 0,
@@ -334,12 +368,18 @@
     ],
     "tags": ["exceptions"],
     "skills": {
+      "required": {
+        "exceptions": 0
+      },
+      "granted": {
+        "exceptions": 20
+      }
     }
   },
   {
     "id": "7",
     "question": "Try and write 'Any Text' to the file 'PyParson.txt' using try, except and finally to ensure errors are handled correctly.",
-    "starter": true,
+    "starter": false,
     "startCode": [
       {
         "id": 0,
@@ -413,12 +453,20 @@
       "readwrite"
     ],
     "skills": {
+      "required": {
+        "exceptions": 20,
+        "readwrite": 20
+      },
+      "granted": {
+        "exceptions": 20,
+        "readwrite": 20
+      }
     }
   },
   {
     "id": "8",
     "question": "Create a file called <code> file.txt </code> and write 'Hello World' then write 'This is our new text file' in the next line.",
-    "starter": true,
+    "starter": false,
     "startCode": [
       {
         "id": 0,
@@ -465,12 +513,18 @@
     ],
     "tags": ["readwrite"],
     "skills": {
+      "required": {
+        "readwrite": 0
+      },
+      "granted": {
+        "readwrite": 20
+      }
     }
   },
   {
     "id": "9",
     "question": "Using the input number, print if the number is even or odd.",
-    "starter": true,
+    "starter": false,
     "startCode": [
       {
         "id": 0,
@@ -525,12 +579,18 @@
     ],
     "tags": ["bool_operators"],
     "skills": {
+      "required": {
+        "bool_operators": 0
+      },
+      "granted": {
+        "bool_operators": 20
+      }
     }
   },
   {
     "id": "10",
     "question": "Print 'You are an adult' if the age if input is 18 or over, print 'You are a teenager' if age is between 13 - 17 or 'You are young' if none of the other conditions are true",
-    "starter": true,
+    "starter": false,
     "startCode": [
       {
         "id": 0,
@@ -605,12 +665,18 @@
     ],
     "tags": ["bool_operators"],
     "skills": {
+      "required": {
+        "bool_operators": 15
+      },
+      "granted": {
+        "bool_operators": 20
+      }
     }
   },
   {
     "id": "11",
     "question": "Declare the dictionary <code> dictionary </code>, and set the age to 19, then set the address to 'Town'. Lastly delete the email and print out the dictionary.",
-    "starter": true,
+    "starter": false,
     "startCode": [
       {
         "id": 0,
@@ -669,12 +735,18 @@
     ],
     "tags": ["dictionary"],
     "skills": {
+      "required": {
+        "dictionary": 20
+      },
+      "granted": {
+        "dictionary": 40
+      }
     }
   },
   {
     "id": "12",
     "question": "Using list comprehension print out the squared numbers of numbers from 1 to 10 which are odd. It should print: <code> [1, 9, 25, 49, 81] </code> ",
-    "starter": true,
+    "starter": false,
     "startCode": [
       {
         "id": 0,
@@ -705,12 +777,22 @@
     ],
     "tags": ["list", "control", "bool_operators"],
     "skills": {
+      "required": {
+        "list": 40,
+        "control": 40,
+        "bool_operators": 20
+      },
+      "granted": {
+        "list": 20,
+        "control": 20,
+        "bool_operators": 20
+      }
     }
   },
   {
     "id": "13",
     "question": "Define a function which prints 'No presents for you' if the name is equal to 'bad', + else it prints 'You will get a [present]'. The default present is 'bike'. Next declare a dictionary <code> people </code> using the 'dict' function with Jake as good and Dave as bad. Test the function by calling it for Jake and Dave using the dictionary",
-    "starter": true,
+    "starter": false,
     "startCode": [
       {
         "id": 0,
@@ -793,12 +875,22 @@
     ],
     "tags": ["functions", "dictionary", "bool_operators"],
     "skills": {
+      "required": {
+        "functions": 20,
+        "dictionary": 40,
+        "bool_operators": 30
+      },
+      "granted": {
+        "functions": 20,
+        "dictionary": 15,
+        "bool_operators": 20
+      }
     }
   },
   {
     "id": "14",
     "question": "Firstly import the <code> functools </code> library from <code> partial </code>. Define a function which returns the product of 2 numbers, then call this as a partial function with 4. Lastly print the result.",
-    "starter": true,
+    "starter": false,
     "startCode": [
       {
         "id": 0,
@@ -857,12 +949,18 @@
     ],
     "tags": ["functions"],
     "skills": {
+      "required": {
+        "functions": 50
+      },
+      "granted": {
+        "functions": 20
+      }
     }
   },
   {
     "id": "15",
     "question": "Print all the letters in <code> 'XPyParsonX' </code> except <code> 'x' </code>",
-    "starter": true,
+    "starter": false,
     "startCode": [
       {
         "id": 0,
@@ -913,6 +1011,12 @@
     ],
     "tags": ["control"],
     "skills": {
+      "required": {
+        "control": 40
+      },
+      "granted": {
+        "control": 20
+      }
     }
   }
 ]
