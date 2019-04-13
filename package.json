@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack --watch && nodemon server",
+    "dev": "start nodemon server.js && start webpack --config webpack.config.js --watch",
     "host": "sudo node server > out.log & disown"
   },
   "repository": {

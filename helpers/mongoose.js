@@ -17,10 +17,20 @@ module.exports = (func, data, callback) => {
                     callback({success: true, data: userInformation[0]});
                 });
                 break;
-            case 'get_start_questions':
-                Question.find({ 'starter': true }, '_id', function (err, questions) {
+            case 'get_suitable_questions_start':
+                Question.find({
+                    $and : [
+                        { "skills.required.control": { $eq: 0 }},
+                        { "skills.required.bool_operators": { $eq: 0 }},
+                        { "skills.required.readwrite": { $eq: 0 }},
+                        { "skills.required.functions": { $eq: 0 }},
+                        { "skills.required.exceptions": { $eq: 0 }},
+                        { "skills.required.dictionary": { $eq: 0 }},
+                        { "skills.required.list": { $eq: 0 }},
+                    ]}, '_id', function (err, questions) {
                     if (err) return callback({ success: false, errorMsg: err});
                     let questionIds = {};
+                    console.log(questions);
                     questions.forEach(function(element) {
                         questionIds[element._id] = {
                             id: element._id,
@@ -58,8 +68,7 @@ module.exports = (func, data, callback) => {
                     });
                 });
                 break;
-            case 'update_questions':
-                console.log(data.identifier);
+            case 'update_questions_progress':
                 let question_id = data.identifier.question_id;
                 let score = data.identifier.score;
                 const queryQuestionScore = 'questionsActive.' + question_id + '.score';
@@ -67,11 +76,48 @@ module.exports = (func, data, callback) => {
 
                 User.findOneAndUpdate({ 'id': data.identifier.id.toString() }, { $set: { [queryQuestionActive] : true, [queryQuestionScore] : score }})
                     .then(function (resp) {
-                        callback({ success: true, testing: resp });
+                        callback({ success: true, response: resp });
                     })
                     .catch(function(errs) {
                         callback({ success: false, error: errs });
                     });
+                break;
+            case 'update_skill_level':
+                let newSkills = {};
+
+                User.findOne({ 'id': data.identifier.id.toString() }, 'skills')
+                    .then(function (resp) {
+
+                        // console.log('SKILL_LIST', resp);
+                        // console.log('UPDATE_VALUES', data.identifier.updateValues);
+
+                        // create new skills object
+                        Object.keys(resp.skills).forEach(function(key) {
+                            if (resp.skills.hasOwnProperty(key)) {
+                            // if needs to update
+                            if (data.identifier.updateValues[key] === undefined) {
+                                newSkills[key] = resp.skills[key];
+                            } else {
+                                newSkills[key] = resp.skills[key] + data.identifier.updateValues[key];
+                            }
+                        }
+                        });
+
+                        // console.log('NEW_SKILLS', newSkills);
+
+                        // set new skills
+                        User.findOneAndUpdate({'id': data.identifier.id.toString()}, {$set: {'skills': newSkills }})
+                            .then(function (resp) {
+                                callback({success: true, response: resp});
+                            })
+                            .catch(function (errs) {
+                                callback({success: false, error: errs});
+                            });
+                    })
+                    .catch(function (errs) {
+                        callback({success: false, error: errs});
+                    });
+
                 break;
         }
 };

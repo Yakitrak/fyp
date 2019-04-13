@@ -42,11 +42,16 @@
     "tags": ["list", "control"],
     "skills": {
       "required": {
-        "lists": 0,
-        "control": 0
+        "control": 0,
+        "functions": 0,
+        "readwrite": 0,
+        "bool_operators": 0,
+        "exceptions": 0,
+        "list": 0,
+        "dictionary": 0
       },
       "granted": {
-        "lists": 20,
+        "list": 20,
         "control": 20
       }
     }
@@ -102,7 +107,13 @@
     "tags": ["functions"],
     "skills": {
       "required": {
-        "functions": 0
+        "control": 0,
+        "functions": 0,
+        "readwrite": 0,
+        "bool_operators": 0,
+        "exceptions": 0,
+        "list": 0,
+        "dictionary": 0
       },
       "granted": {
         "functions": 20
@@ -176,11 +187,16 @@
     "tags": ["list", "control"],
     "skills": {
       "required": {
-        "lists": 20,
-        "control": 20
+        "control": 20,
+        "functions": 0,
+        "readwrite": 0,
+        "bool_operators": 0,
+        "exceptions": 0,
+        "list": 0,
+        "dictionary": 0
       },
       "granted": {
-        "lists": 20,
+        "list": 20,
         "control": 20
       }
     }
@@ -244,11 +260,17 @@
     "tags": ["list", "control"],
     "skills": {
       "required": {
-        "lists": 30,
-        "control": 30
+        "list": 30,
+        "control": 30,
+        "functions": 0,
+        "readwrite": 0,
+        "bool_operators": 0,
+        "exceptions": 0,
+        "list": 0,
+        "dictionary": 0
       },
       "granted": {
-        "lists": 20,
+        "list": 20,
         "control": 20
       }
     }
@@ -296,6 +318,12 @@
     "tags": ["dictionary"],
     "skills": {
       "required": {
+        "list": 0,
+        "control": 0,
+        "functions": 0,
+        "readwrite": 0,
+        "bool_operators": 0,
+        "exceptions": 0,
         "dictionary": 0
       },
       "granted": {
@@ -369,7 +397,13 @@
     "tags": ["exceptions"],
     "skills": {
       "required": {
-        "exceptions": 0
+        "control": 0,
+        "functions": 0,
+        "readwrite": 0,
+        "bool_operators": 0,
+        "exceptions": 0,
+        "list": 0,
+        "dictionary": 0
       },
       "granted": {
         "exceptions": 20
@@ -455,7 +489,12 @@
     "skills": {
       "required": {
         "exceptions": 20,
-        "readwrite": 20
+        "readwrite": 20,
+        "control": 0,
+        "functions": 0,
+        "bool_operators": 0,
+        "list": 0,
+        "dictionary": 0
       },
       "granted": {
         "exceptions": 20,
@@ -514,7 +553,13 @@
     "tags": ["readwrite"],
     "skills": {
       "required": {
-        "readwrite": 0
+        "control": 0,
+        "functions": 0,
+        "readwrite": 0,
+        "bool_operators": 0,
+        "exceptions": 0,
+        "list": 0,
+        "dictionary": 0
       },
       "granted": {
         "readwrite": 20
@@ -580,7 +625,14 @@
     "tags": ["bool_operators"],
     "skills": {
       "required": {
-        "bool_operators": 0
+        "list": 0,
+        "control": 0,
+        "functions": 0,
+        "readwrite": 0,
+        "bool_operators": 0,
+        "exceptions": 0,
+        "list": 0,
+        "dictionary": 0
       },
       "granted": {
         "bool_operators": 20
@@ -666,7 +718,13 @@
     "tags": ["bool_operators"],
     "skills": {
       "required": {
-        "bool_operators": 15
+        "bool_operators": 15,
+        "control": 0,
+        "functions": 0,
+        "readwrite": 0,
+        "exceptions": 0,
+        "list": 0,
+        "dictionary": 0
       },
       "granted": {
         "bool_operators": 20
@@ -736,7 +794,13 @@
     "tags": ["dictionary"],
     "skills": {
       "required": {
-        "dictionary": 20
+        "dictionary": 20,
+        "control": 0,
+        "functions": 0,
+        "readwrite": 0,
+        "bool_operators": 0,
+        "exceptions": 0,
+        "list": 0
       },
       "granted": {
         "dictionary": 40
@@ -780,7 +844,11 @@
       "required": {
         "list": 40,
         "control": 40,
-        "bool_operators": 20
+        "bool_operators": 20,
+        "functions": 0,
+        "readwrite": 0,
+        "exceptions": 0,
+        "dictionary": 0
       },
       "granted": {
         "list": 20,
@@ -878,7 +946,11 @@
       "required": {
         "functions": 20,
         "dictionary": 40,
-        "bool_operators": 30
+        "bool_operators": 30,
+        "control": 0,
+        "readwrite": 0,
+        "exceptions": 0,
+        "list": 0
       },
       "granted": {
         "functions": 20,
@@ -950,7 +1022,13 @@
     "tags": ["functions"],
     "skills": {
       "required": {
-        "functions": 50
+        "functions": 50,
+        "control": 0,
+        "readwrite": 0,
+        "bool_operators": 0,
+        "exceptions": 0,
+        "list": 0,
+        "dictionary": 0
       },
       "granted": {
         "functions": 20
@@ -1012,7 +1090,13 @@
     "tags": ["control"],
     "skills": {
       "required": {
-        "control": 40
+        "control": 40,
+        "functions": 0,
+        "readwrite": 0,
+        "bool_operators": 0,
+        "exceptions": 0,
+        "list": 0,
+        "dictionary": 0
       },
       "granted": {
         "control": 20

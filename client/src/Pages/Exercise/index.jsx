@@ -153,17 +153,31 @@ class Exercise extends React.Component {
         this.tutorialStepsUpdate('feedback');
 
         if ((this.props.data.isComplete === false || total > this.props.data.isComplete) && total !== 0 ) {
-            Axios.post('/updateUserQuestions', {
+            // update question progress for user
+            Axios.post('/updateUserQuestionProgress', {
                 question_id: this.props.data._id,
                 score: total,
             })
                 .then((resp) => {
                     if(resp.data.success) {
-                        console.log('Questions for user updated!')
+                        console.log('Question progress for user updated!')
                     }
                 })
                 .catch((err) => {
                     console.log("User questions update error: ", err);
+                });
+
+            // change skill level
+            Axios.post('/updateUserSkill', {
+                updateValues: this.props.data.skills.granted,
+            })
+                .then((resp) => {
+                    if(resp.data.success) {
+                        console.log('User skill level updated!')
+                    }
+                })
+                .catch((err) => {
+                    console.log("User skill level update error: ", err);
                 });
         }
 

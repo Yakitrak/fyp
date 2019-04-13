@@ -8,9 +8,10 @@ module.exports = function () {
         setRouting: function (router) {
             router.get('/initial', this.initialise);
             router.get('/getUserQuestions', this.getUserQuestions);
-            router.post('/updateUserQuestions', this.updateUserQuestions);
-            // router.post('/updateUserSkill', this.updateUserSkill);
+            router.post('/updateUserQuestionProgress', this.updateUserQuestionProgress);
+            router.post('/updateUserSkill', this.updateUserSkill);
             // router.post('/getUserSkill', this.getUserSkill);
+            // router.post('/updateUserQuestionList', this.updateUserQuestionList);
         },
 
         initialise: function (req, res) {
@@ -41,8 +42,21 @@ module.exports = function () {
             })
         },
 
-        updateUserQuestions: function (req, res) {
-            mongooseHelper('update_questions', {identifier: {id: req.user.id, question_id: req.body.question_id, score: req.body.score }}, resp => {
+        updateUserQuestionProgress: function (req, res) {
+            mongooseHelper('update_questions_progress', {identifier: {id: req.user.id, question_id: req.body.question_id, score: req.body.score }}, resp => {
+                if (resp.success) {
+                    res.json({
+                        success: true,
+                        questions: resp.data,
+                    });
+                } else {
+                    res.json({success: false});
+                }
+            })
+        },
+
+        updateUserSkill: function (req, res) {
+            mongooseHelper('update_skill_level', {identifier: {id: req.user.id, updateValues: req.body.updateValues}}, resp => {
                 if (resp.success) {
                     res.json({
                         success: true,

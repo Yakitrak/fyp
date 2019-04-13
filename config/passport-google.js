@@ -27,14 +27,22 @@ module.exports = (passport) => {
                 } else {
 
                     // get beginner questions
-                    mongooseHelper('get_start_questions', {}, resp => {
+                    mongooseHelper('get_suitable_questions_start', {}, resp => {
                         if (resp.success) {
                             let newUser = new User();
                             newUser.id = profile.id;
                             newUser.email = profile.emails[0].value;
                             newUser.name = profile.displayName;
                             newUser.avatar = profile.photos[0].value;
-                            newUser.skills = {};
+                            newUser.skills = {
+                                control: 0,
+                                bool_operators: 0,
+                                readwrite: 0,
+                                functions: 0,
+                                exceptions: 0,
+                                dictionary: 0,
+                                list: 0,
+                            };
                             newUser.questionsActive = resp.data;
                             newUser.google.access_token = accessToken;
                             newUser.google.refresh_token = refreshToken;
