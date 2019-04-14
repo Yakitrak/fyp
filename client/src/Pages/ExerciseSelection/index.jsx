@@ -15,6 +15,9 @@ import classNames from 'classnames';
 import Axios from "axios";
 import LinearProgress from '@material-ui/core/LinearProgress';
 import CardHeader from '@material-ui/core/CardHeader';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
 const prettyTags = {
     "bool_operators": "Boolean Logic & Operators",
@@ -30,8 +33,8 @@ class ExerciseSelection extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            questionsGrid: [],
             loading: true,
+            questions: '',
         }
     }
 
@@ -39,44 +42,14 @@ class ExerciseSelection extends React.Component {
         this.createQuestionsSection();
     };
 
+
     createQuestionsSection = () => {
-
-        const { classes } = this.props;
-
         // database call to get questions
         Axios.get('/getUserQuestions')
             .then((resp) => {
                 if(resp.data.success){
-                    // console.log(resp.data);
-                    let questions = resp.data.questions;
-                    let dynamicGrid = (
-                        <Grid className={classNames(classes.layout, classes.cardGrid)} container spacing={40}>
-                            {Object.keys(questions).map(question => (
-                                <Grid item key={questions[question].data._id} sm={6} md={4} lg={3}>
-                                    <Card className={classes.card}>
-                                        <CardContent className={classes.cardContent}>
-                                            <div className={classes.cardThumb} style={{ background: questions[question].isComplete ? questions[question].score === 100 ? 'rgb(46, 204, 113)' : 'rgb(78, 205, 196)'  : 'rgb(255, 255, 126)'}}>
-                                                <Typography variant="button" style={{ fontSize: '1em' }}>
-                                                    {questions[question].isComplete ? questions[question].score.toFixed(0) + '%' : 'Not Attempted'}
-                                                </Typography>
-                                            </div>
-                                            <Typography style={{padding: 16}} variant="subtitle1"> Includes: {questions[question].data.tags.map(tag => ( prettyTags[tag]) ).join(", ")} </Typography>
-                                        </CardContent>
-                                        <CardActions style={{ justifyContent: 'center' }}>
-                                        <Button
-                                            onClick={() => this.props.handleQuestionClick({...questions[question].data, isComplete: questions[question].isComplete, score: questions[question].score})}
-                                            size="small"
-                                            color="primary">
-                                            {questions[question].isComplete ? 'Restart Puzzle' : 'Start Puzzle' }
-                                        </Button>
-                                        </CardActions>
-                                    </Card>
-                                </Grid>
-                            ))}
-                        </Grid>);
-
                     this.setState({
-                        questionGrid: dynamicGrid,
+                        questions: resp.data.questions,
                         loading: false
                     })
 
@@ -90,14 +63,50 @@ class ExerciseSelection extends React.Component {
     };
 
     render() {
-        const { classes } = this.props;
+        const { classes, showOverlay } = this.props;
+        const { questions } = this.state;
 
         return (
             <div className={classes.root}>
                 {this.state.loading ? (
                     <LinearProgress style={{ marginTop: '-2vh' }} color="primary" />
-                    ) : '' }
-                {this.state.questionGrid}
+                    ) :
+
+                    (<Grid className={classNames(classes.layout, classes.cardGrid)} container spacing={40}>
+                    {Object.keys(questions).map(question => (
+                        <Grid item key={questions[question].data._id} sm={6} md={4} lg={3}>
+                            <Card className={classes.card}>
+                                <CardContent className={classes.cardContent}>
+                                    <div className={classes.cardThumb} style={{ background: questions[question].isComplete ? questions[question].score === 100 ? 'rgb(46, 204, 113)' : 'rgb(78, 205, 196)'  : 'rgb(255, 255, 126)'}}>
+                                        <Typography variant="button" style={{ fontSize: '1em' }}>
+                                            {questions[question].isComplete ? questions[question].score.toFixed(0) + '%' : 'Not Attempted'}
+                                        </Typography>
+                                    </div>
+
+                                    <List>
+                                        {questions[question].data.tags.map(tag => (
+                                            <ListItem key={tag} >
+                                                <ListItemText
+                                                    primary={prettyTags[tag]}
+                                                    secondary={showOverlay ? 'Required: ' + questions[question].data.skills.required[tag] + ', Granted: ' + questions[question].data.skills.granted[tag] : ''}
+                                                />
+                                            </ListItem>
+                                        ))}
+                                    </List>
+                                </CardContent>
+                                <CardActions style={{ justifyContent: 'center' }}>
+                                    <Button
+                                        onClick={() => this.props.handleQuestionClick({...questions[question].data, isComplete: questions[question].isComplete, score: questions[question].score})}
+                                        size="small"
+                                        color="primary">
+                                        {questions[question].isComplete ? 'Restart Puzzle' : 'Start Puzzle' }
+                                    </Button>
+                                </CardActions>
+                            </Card>
+                        </Grid>
+                    ))}
+                </Grid> )}
+
             </div>
         );
     }

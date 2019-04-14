@@ -10,8 +10,7 @@ module.exports = function () {
             router.get('/getUserQuestions', this.getUserQuestions);
             router.post('/updateUserQuestionProgress', this.updateUserQuestionProgress);
             router.post('/updateUserSkill', this.updateUserSkill);
-            // router.post('/getUserSkill', this.getUserSkill);
-            // router.post('/updateUserQuestionList', this.updateUserQuestionList);
+            router.get('/getUserSkill', this.getUserSkill);
         },
 
         initialise: function (req, res) {
@@ -47,7 +46,7 @@ module.exports = function () {
                 if (resp.success) {
                     res.json({
                         success: true,
-                        questions: resp.data,
+                        data: resp.data,
                     });
                 } else {
                     res.json({success: false});
@@ -60,7 +59,20 @@ module.exports = function () {
                 if (resp.success) {
                     res.json({
                         success: true,
-                        questions: resp.data,
+                        data: resp.data,
+                    });
+                } else {
+                    res.json({success: false});
+                }
+            })
+        },
+
+        getUserSkill: function (req, res) {
+            mongooseHelper('get_skill_level', {identifier: {id: req.user.id }}, resp => {
+                if (resp.success) {
+                    res.json({
+                        success: true,
+                        skills: resp.data,
                     });
                 } else {
                     res.json({success: false});

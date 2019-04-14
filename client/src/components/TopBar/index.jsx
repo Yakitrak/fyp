@@ -82,14 +82,14 @@ class Topbar extends React.Component {
     };
 
     handleStatToggle =  () => {
-        let StatPrompt = prompt("Please enter admin password", "");
-        if (StatPrompt === 'admin') {
-            this.setState({
-                statsToggle: !this.state.statsToggle,
-            });
+        this.setState({
+            statsToggle: !this.state.statsToggle,
+        });
+        this.props.showStatistics();
+    };
 
-            this.props.showStatistics();
-        }
+    handleDeleteAccount = () => {
+
     };
 
     render() {
@@ -123,6 +123,14 @@ class Topbar extends React.Component {
                                             </ListItemIcon>
                                             <ListItemText classes={{primary: classes.primary}} inset primary="Logout"/>
                                         </ListItem>
+
+                                        <ListItem button onClick={this.handleDeleteAccount} className={classes.menuItem}>
+                                            <ListItemIcon className={classes.icon}>
+                                                <LogoutIcon/>
+                                            </ListItemIcon>
+                                            <ListItemText classes={{primary: classes.primary}} inset primary="Delete Account"/>
+                                        </ListItem>
+
                                         <ListItem className={classes.menuItem}>
                                             <ListItemIcon className={classes.icon}>
                                                 <ShowStatisticsIcon/>

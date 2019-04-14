@@ -149,5 +149,11 @@ module.exports = (func, data, callback) => {
                     });
 
                 break;
+            case 'get_skill_level':
+                User.findOne({ 'id': data.identifier.id.toString() }, 'skills', function (err, userInformation) {
+                    if (err) return callback({ success: false, errorMsg: err});
+                    callback({success: true, data: userInformation.skills });
+                });
+                break;
         }
 };

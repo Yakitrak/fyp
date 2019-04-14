@@ -50,6 +50,7 @@ class IndexDashboard extends React.Component {
                 ) : (
                     <ExerciseSelection
                         handleQuestionClick={this.handleQuestionClick}
+                        showOverlay={this.state.statOverlay}
                     />
                 )}
                 {this.state.statOverlay ? (
