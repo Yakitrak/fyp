@@ -631,7 +631,6 @@
         "readwrite": 0,
         "bool_operators": 0,
         "exceptions": 0,
-        "list": 0,
         "dictionary": 0
       },
       "granted": {

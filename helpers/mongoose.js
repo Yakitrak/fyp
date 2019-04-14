@@ -84,12 +84,13 @@ module.exports = (func, data, callback) => {
                 break;
             case 'update_skill_level':
                 let newSkills = {};
+                let newQuestions = {};
 
-                User.findOne({ 'id': data.identifier.id.toString() }, 'skills')
+                // gets current skill
+                User.findOne({ 'id': data.identifier.id.toString() }, 'skills questionsActive')
                     .then(function (resp) {
 
-                        // console.log('SKILL_LIST', resp);
-                        // console.log('UPDATE_VALUES', data.identifier.updateValues);
+                        newQuestions = resp.questionsActive;
 
                         // create new skills object
                         Object.keys(resp.skills).forEach(function(key) {
@@ -103,16 +104,45 @@ module.exports = (func, data, callback) => {
                         }
                         });
 
-                        // console.log('NEW_SKILLS', newSkills);
-
-                        // set new skills
-                        User.findOneAndUpdate({'id': data.identifier.id.toString()}, {$set: {'skills': newSkills }})
+                        // gets new questions from new skill level
+                        Question.find({
+                            $and : [
+                                { "skills.required.control": { $lte: newSkills.control }},
+                                { "skills.required.bool_operators": {$lte: newSkills.bool_operators }},
+                                { "skills.required.readwrite": {$lte: newSkills.readwrite }},
+                                { "skills.required.functions": {$lte: newSkills.functions }},
+                                { "skills.required.exceptions": {$lte: newSkills.exceptions }},
+                                { "skills.required.dictionary": {$lte: newSkills.dictionary }},
+                                { "skills.required.list": {$lte: newSkills.list }},
+                            ]}, '_id')
                             .then(function (resp) {
-                                callback({success: true, response: resp});
+                                // console.log('NEW QUESTIONS', resp);
+
+                                resp.forEach(function(element) {
+                                    // add questions to account if not already there
+                                    if (newQuestions[element._id] === undefined) {
+                                        newQuestions[element._id] = {
+                                            id: element._id,
+                                            isComplete: false,
+                                            score: 0,
+                                        };
+                                    }
+                                });
+
+                                // set new skills AND questions
+                                User.findOneAndUpdate({'id': data.identifier.id.toString()}, {$set: {'skills': newSkills, 'questionsActive' : newQuestions }})
+                                    .then(function (resp) {
+                                        callback({success: true, response: resp});
+                                    })
+                                    .catch(function (errs) {
+                                        callback({success: false, error: errs});
+                                    });
+
                             })
                             .catch(function (errs) {
                                 callback({success: false, error: errs});
                             });
+
                     })
                     .catch(function (errs) {
                         callback({success: false, error: errs});
