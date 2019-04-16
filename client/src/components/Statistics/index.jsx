@@ -53,10 +53,10 @@ class Statistics extends React.Component {
         const { skills } = this.state;
 
         return (
-            <Card className={classes.card}>
+            <Card className={classes.root}>
                 <CardContent>
                     <Typography variant="h5" component="h2">
-                       User Skill Statistics
+                       User Statistics
                     </Typography>
 
                     <Table className={classes.table}>

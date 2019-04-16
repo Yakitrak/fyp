@@ -109,6 +109,7 @@ class Topbar extends React.Component {
         this.setState({
             openDialog: false,
             error: false,
+            passwordInput: '',
         })
     };
 
@@ -255,7 +256,7 @@ class Topbar extends React.Component {
                         <TextField
                             error={this.state.error}
                             id="standard-password"
-                            type="password"
+                            type={this.state.dialogType === 'admin' ? 'password' : 'text'}
                             label={this.state.dialogType === 'admin' ? 'Password' : 'Enter your email'}
                             value={this.state.passwordInput}
                             onChange={this.handleChange('passwordInput')}
