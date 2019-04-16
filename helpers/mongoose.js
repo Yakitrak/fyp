@@ -17,6 +17,12 @@ module.exports = (func, data, callback) => {
                     callback({success: true, data: userInformation[0]});
                 });
                 break;
+            case 'delete_account':
+                User.deleteOne({ 'id': data.identifier.id.toString() }, function (err, userInformation) {
+                    if (err) return callback({ success: false, errorMsg: err});
+                    callback({success: true});
+                });
+                break;
             case 'get_suitable_questions_start':
                 Question.find({
                     $and : [

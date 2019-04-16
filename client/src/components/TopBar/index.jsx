@@ -7,6 +7,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import LogoutIcon from 'mdi-react/LogoutVariantIcon';
 import ShowStatisticsIcon from 'mdi-react/GraphqlIcon';
+import Button from '@material-ui/core/Button';
+import DeleteAccountIcon from 'mdi-react/AccountRemoveOutlineIcon';
 import Popper from '@material-ui/core/Popper';
 import Fade from '@material-ui/core/Fade';
 import Card from '@material-ui/core/Card';
@@ -19,19 +21,31 @@ import Axios from 'axios';
 import Avatar from '@material-ui/core/Avatar';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Switch from '@material-ui/core/Switch';
-
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from '@material-ui/core/TextField';
 
 class Topbar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             open: false,
+            openDialog: false,
+            dialogType: '',
+            dialogTitle: '',
+            dialogText: '',
+            dialogButton: '',
             anchorEl: null,
             mobileMoreAnchorEl: null,
             userName: 'Loading..',
             userMail: 'loading...',
             userAvatar: '',
             statsToggle: false,
+            passwordInput: '',
+            error: false,
         }
     }
 
@@ -63,33 +77,83 @@ class Topbar extends React.Component {
 
     };
 
-    handleMenuClose = () => {
-        this.setState({anchorEl: null});
-        this.handleMobileMenuClose();
+    handleOpenDialog = type => {
+        if (type === 'admin') {
+            this.setState({
+                openDialog: true,
+                dialogType: 'admin',
+                dialogTitle: 'Admin Access Required',
+                dialogText: 'To see the user statistics overlay please provide the admin password.',
+                dialogButton: 'Login',
+            })
+        } else if (type === 'delete') {
+            this.setState({
+                openDialog: true,
+                dialogType: 'delete',
+                dialogTitle: 'Are you sure you want to delete this account?',
+                dialogText: 'All your progress will be lost, you cannot reverse this action!',
+                dialogButton: 'Delete',
+            })
+        } else if (type === 'logout') {
+            this.setState({
+                openDialog: true,
+                dialogType: 'logout',
+                dialogTitle: 'Are you sure you want to logout?',
+                dialogText: '',
+                dialogButton: 'Logout',
+            })
+        }
     };
 
-    handleMobileMenuOpen = event => {
-        this.setState({mobileMoreAnchorEl: event.currentTarget, open: !this.state.open });
-    };
-
-    handleMobileMenuClose = () => {
-        this.setState({mobileMoreAnchorEl: null});
-    };
-
-    handleLogOut =() => {
-        let result = window.confirm('Are you sure you want to log out?');
-        if (result === true) window.location.href='/logout';
-    };
-
-    handleStatToggle =  () => {
+    handleCloseDialog = () => {
         this.setState({
-            statsToggle: !this.state.statsToggle,
-        });
-        this.props.showStatistics();
+            openDialog: false,
+            error: false,
+        })
+    };
+
+    handleValidation = () => {
+        if (this.state.dialogType === 'admin') {
+            if (this.state.passwordInput === 'admin1') {
+                this.setState({
+                    statsToggle: !this.state.statsToggle,
+                });
+                this.props.showStatistics();
+                this.handleCloseDialog();
+            } else {
+                this.setState({
+                    error: true,
+                });
+            }
+        } else if (this.state.dialogType === 'delete') {
+            if (this.state.passwordInput === this.state.userMail) {
+                    this.handleDeleteAccount();
+            } else {
+                this.setState({
+                    error: true,
+                });
+            }
+        } else if (this.state.dialogType === 'logout') {
+            window.location.href='/logout';
+        }
     };
 
     handleDeleteAccount = () => {
+        Axios.get('/deleteAccount')
+            .then((resp) => {
+                if(resp.data.success){
+                    window.location.href='/logout'
+                } else {
+                    console.log('Could not delete account');
+                }
+            })
+            .catch((err) => {
+                console.log("Invalid account delete request: ", err);
+            });
+    };
 
+    handleChange = name => event => {
+        this.setState({ [name]: event.target.value, error: false });
     };
 
     render() {
@@ -117,16 +181,16 @@ class Topbar extends React.Component {
                                         component="nav"
                                         style={{ width: '100%' }}
                                     >
-                                        <ListItem button onClick={this.handleLogOut} className={classes.menuItem}>
+                                        <ListItem button onClick={() => this.handleOpenDialog('logout')} className={classes.menuItem}>
                                             <ListItemIcon className={classes.icon}>
                                                 <LogoutIcon/>
                                             </ListItemIcon>
                                             <ListItemText classes={{primary: classes.primary}} inset primary="Logout"/>
                                         </ListItem>
 
-                                        <ListItem button onClick={this.handleDeleteAccount} className={classes.menuItem}>
+                                        <ListItem button onClick={() => this.handleOpenDialog('delete')} className={classes.menuItem}>
                                             <ListItemIcon className={classes.icon}>
-                                                <LogoutIcon/>
+                                                <DeleteAccountIcon/>
                                             </ListItemIcon>
                                             <ListItemText classes={{primary: classes.primary}} inset primary="Delete Account"/>
                                         </ListItem>
@@ -140,7 +204,7 @@ class Topbar extends React.Component {
                                             />
                                             <ListItemSecondaryAction>
                                                 <Switch
-                                                    onChange={this.handleStatToggle}
+                                                    onChange={() => this.handleOpenDialog('admin')}
                                                     checked={this.state.statsToggle}
                                                 />
                                             </ListItemSecondaryAction>
@@ -174,6 +238,40 @@ class Topbar extends React.Component {
                     </Toolbar>
                 </AppBar>
                 {renderMenu}
+
+                <Dialog
+                    open={this.state.openDialog}
+                    onClose={this.handleCloseDialog}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="form-dialog-title"> {this.state.dialogTitle} </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            {this.state.dialogText}
+                        </DialogContentText>
+
+                        { this.state.dialogType !== 'logout' ? (
+                        <TextField
+                            error={this.state.error}
+                            id="standard-password"
+                            type="password"
+                            label={this.state.dialogType === 'admin' ? 'Password' : 'Enter your email'}
+                            value={this.state.passwordInput}
+                            onChange={this.handleChange('passwordInput')}
+                            margin="normal"
+                            fullWidth
+                        /> ) : ''}
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleCloseDialog} color="primary">
+                            Close
+                        </Button>
+                        <Button onClick={this.handleValidation} color="primary">
+                            {this.state.dialogButton}
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </div>
         );
     }

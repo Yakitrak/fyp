@@ -7,10 +7,23 @@ module.exports = function () {
     return {
         setRouting: function (router) {
             router.get('/initial', this.initialise);
+            router.get('/deleteAccount', this.deleteAccount);
             router.get('/getUserQuestions', this.getUserQuestions);
             router.post('/updateUserQuestionProgress', this.updateUserQuestionProgress);
             router.post('/updateUserSkill', this.updateUserSkill);
             router.get('/getUserSkill', this.getUserSkill);
+        },
+
+        deleteAccount: function(req, res) {
+            mongooseHelper('delete_account', {identifier: {id: req.user.id}}, resp => {
+                if (resp.success) {
+                    res.json({
+                        success: true,
+                    });
+                } else {
+                    res.json({success: false});
+                }
+            })
         },
 
         initialise: function (req, res) {
