@@ -9,6 +9,7 @@ const style = theme => ({
         // justifyContent: 'center',
         justifyContent: 'space-between',
         minHeight: 'calc(98vh - 64px)',
+        width: '100vw',
         paddingTop: '2vh',
     },
     topSection: {

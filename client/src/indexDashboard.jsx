@@ -6,6 +6,7 @@ import ExerciseSelection from 'Pages/ExerciseSelection';
 import Topbar from 'components/TopBar';
 import ExericseQuestion from 'Pages/Exercise';
 import Statistics from 'components/Statistics';
+import Axios from "axios/index";
 
 class IndexDashboard extends React.Component {
     constructor() {
@@ -14,6 +15,7 @@ class IndexDashboard extends React.Component {
             questionData: {},
             showQuestion: false,
             statOverlay: false,
+            skills: {},
         };
     }
 
@@ -31,9 +33,21 @@ class IndexDashboard extends React.Component {
     };
 
     showStatistics = () => {
-       this.setState({
-           statOverlay: !this.state.statOverlay
-       });
+
+        Axios.get('/getUserSkill')
+            .then((resp) => {
+                if(resp.data.success){
+                    this.setState({
+                        skills: resp.data.skills,
+                        statOverlay: !this.state.statOverlay
+                    });
+                } else {
+                    console.log('Skill Display Updated');
+                }
+            })
+            .catch((err) => {
+                console.log("Can't display skill!", err);
+            });
    };
 
     render () {
@@ -42,20 +56,24 @@ class IndexDashboard extends React.Component {
                 <Topbar
                     showStatistics={this.showStatistics}
                 />
-                {this.state.showQuestion ? (
-                    <ExericseQuestion
-                        data={this.state.questionData}
-                        handleBack={this.handleBack}
-                    />
-                ) : (
-                    <ExerciseSelection
-                        handleQuestionClick={this.handleQuestionClick}
-                        showOverlay={this.state.statOverlay}
-                    />
-                )}
-                {this.state.statOverlay ? (
-                    <Statistics/>
-                ) : '' }
+                    <div style={{ display: 'flex', flexDirection: ' row' }}>
+                    {this.state.showQuestion ? (
+                        <ExericseQuestion
+                            data={this.state.questionData}
+                            handleBack={this.handleBack}
+                        />
+                    ) : (
+                        <ExerciseSelection
+                            handleQuestionClick={this.handleQuestionClick}
+                            showOverlay={this.state.statOverlay}
+                        />
+                    )}
+                        {this.state.statOverlay ? (
+                            <Statistics
+                                skills={this.state.skills}
+                            />
+                        ) : '' }
+                </div>
             </MuiThemeProvider>
             );
     }

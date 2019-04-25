@@ -118,6 +118,7 @@ class Topbar extends React.Component {
             if (this.state.passwordInput === 'admin1') {
                 this.setState({
                     statsToggle: !this.state.statsToggle,
+                    open: false,
                 });
                 this.props.showStatistics();
                 this.handleCloseDialog();
@@ -254,6 +255,7 @@ class Topbar extends React.Component {
 
                         { this.state.dialogType !== 'logout' ? (
                         <TextField
+                            autofocus={true}
                             error={this.state.error}
                             id="standard-password"
                             type={this.state.dialogType === 'admin' ? 'password' : 'text'}

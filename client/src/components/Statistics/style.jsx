@@ -1,8 +1,7 @@
 const style = theme => ({
     root: {
-        position: 'absolute',
-        bottom: 5,
-        width: '100%',
+        width: '30vw',
+        minHeight: 'calc(98vh - 64px)',
     }
 });
 
