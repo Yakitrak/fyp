@@ -96,7 +96,7 @@ class Exercise extends React.Component {
             if (blockList[i].id === 0) {
                 break;
             }
-            currentList.push(blockList[i]);
+                currentList.push(blockList[i]);
         }
 
         // validate blocks
@@ -193,6 +193,7 @@ class Exercise extends React.Component {
             wrongBlocks: wrongBlocks,
         });
 
+        this.props.updateStats();
 
 
     };

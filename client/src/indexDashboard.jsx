@@ -50,6 +50,22 @@ class IndexDashboard extends React.Component {
             });
    };
 
+    updateStats = () => {
+        Axios.get('/getUserSkill')
+            .then((resp) => {
+                if(resp.data.success){
+                    this.setState({
+                        skills: resp.data.skills,
+                    });
+                } else {
+                    console.log('Skill Display Updated');
+                }
+            })
+            .catch((err) => {
+                console.log("Can't display skill!", err);
+            });
+    };
+
     render () {
         return (
             <MuiThemeProvider theme={theme}>
@@ -61,6 +77,7 @@ class IndexDashboard extends React.Component {
                         <ExericseQuestion
                             data={this.state.questionData}
                             handleBack={this.handleBack}
+                            updateStats={this.updateStats}
                         />
                     ) : (
                         <ExerciseSelection

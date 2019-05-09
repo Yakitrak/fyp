@@ -69,7 +69,7 @@ class Landing extends React.Component {
 
                     <div style={{ paddingTop: '15vh'}}>
                         <Typography variant="h4" style={{ paddingLeft: 20, color: 'white', paddingBottom: 25, fontWeight: 100 }} >
-                            The efficient way to practice programming!
+                            The efficient way to practise programming!
                         </Typography>
 
                         <Button
@@ -111,10 +111,10 @@ class Landing extends React.Component {
                     </Typography>
 
                     <Typography variant="subtitle1" className={classes.infoText} gutterBottom>
-                        Parson's Puzzles are a way to practice programming logic and syntax. Instead of writing a
+                        Parson's Puzzles are a way to practise programming logic and syntax. Instead of writing a
                         program from scratch, you are given a small program but the lines are in a random order. You
                         have to reposition the lines to make the program work correctly. It is an efficient method
-                        to practice and revise programming concepts.
+                        to practise and revise programming concepts.
                     </Typography>
 
                     <Typography variant="h4" gutterBottom>

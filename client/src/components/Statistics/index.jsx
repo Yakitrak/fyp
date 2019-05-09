@@ -60,7 +60,7 @@ class Statistics extends React.Component {
                             datasets: [{
                                 data: Object.keys(skills).map(skill => skills[skill]),
                             }]
-                        }} width="600" height="250"/>
+                        }} />
 
                         <Table className={classes.table}>
                             <TableHead>
