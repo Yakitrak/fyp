@@ -33,7 +33,6 @@ class IndexDashboard extends React.Component {
     };
 
     showStatistics = () => {
-
         Axios.get('/getUserSkill')
             .then((resp) => {
                 if(resp.data.success){

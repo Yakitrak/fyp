@@ -38,6 +38,7 @@ class Exercise extends React.Component {
             activeStep: 0,
             data: this.props.data,
             currentCode: this.props.data.startCode,
+            isComplete: this.props.data.isComplete,
             feedbackOpen: false,
             feedbackTotal: 0,
             feedbackList: false,
@@ -67,7 +68,7 @@ class Exercise extends React.Component {
     componentWillReceiveProps(nextProps) {
         this.setState({
             data: nextProps.data,
-            currentCode: nextProps.data.startCode,
+            // currentCode: nextProps.data.startCode,
         });
     }
 
@@ -81,6 +82,7 @@ class Exercise extends React.Component {
     };
 
     handleCheck = () => {
+        let { isComplete } = this.state;
         let correctList = this.state.data.correctCode;
         let blockList = this.state.currentCode;
         let currentList = [];
@@ -91,6 +93,9 @@ class Exercise extends React.Component {
             indentWrong: [],
         };
 
+
+        console.log("COMPLETE: ", isComplete);
+
         // determine blocks to be marked
         for (let i = 0; i < blockList.length; i++) {
             if (blockList[i].id === 0) {
@@ -98,6 +103,7 @@ class Exercise extends React.Component {
             }
                 currentList.push(blockList[i]);
         }
+
 
         // validate blocks
         for (let i = 0; i < currentList.length; i++) {
@@ -152,7 +158,7 @@ class Exercise extends React.Component {
 
         this.tutorialStepsUpdate('feedback');
 
-        if (this.props.data.isComplete === false || total > this.props.data.score) {
+        if (isComplete === false || total > this.props.data.score) {
             // update question progress for user
             Axios.post('/updateUserQuestionProgress', {
                 question_id: this.props.data._id,
@@ -168,7 +174,7 @@ class Exercise extends React.Component {
                 });
 
             // if 100% and not already complete
-            if (total === 100 && this.props.data.isComplete === false) {
+            if (total === 100 && isComplete === false) {
                 // change skill level
                 Axios.post('/updateUserSkill', {
                     updateValues: this.props.data.skills.granted,
@@ -176,6 +182,10 @@ class Exercise extends React.Component {
                     .then((resp) => {
                         if(resp.data.success) {
                             console.log('User skill level updated and new questions added!')
+                            this.props.updateStats();
+                            this.setState({
+                                isComplete: true,
+                            })
                         }
                     })
                     .catch((err) => {
@@ -192,8 +202,6 @@ class Exercise extends React.Component {
             feedbackList: feedback,
             wrongBlocks: wrongBlocks,
         });
-
-        this.props.updateStats();
 
 
     };

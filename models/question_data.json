@@ -266,7 +266,6 @@
         "readwrite": 0,
         "bool_operators": 0,
         "exceptions": 0,
-        "list": 0,
         "dictionary": 0
       },
       "granted": {
@@ -303,11 +302,11 @@
     ],
     "correctCode": [
       {
-        "id": 1,
+        "id": 2,
         "indent": 0
       },
       {
-        "id": 2,
+        "id": 1,
         "indent": 0
       },
       {
@@ -538,7 +537,7 @@
         "indent": 0
       },
       {
-        "id": 2,
+        "id": 1,
         "indent": 0
       },
       {
@@ -732,7 +731,7 @@
   },
   {
     "id": "11",
-    "question": "Declare the dictionary <code> dictionary </code>, and set the age to 19, then set the address to 'Town'. Lastly delete the email and print out the dictionary.",
+    "question": "Declare the dictionary <code> jake </code>, and set the age to 19, then set the address to 'Town'. Lastly delete the email and print out the dictionary.",
     "starter": false,
     "startCode": [
       {
@@ -858,7 +857,7 @@
   },
   {
     "id": "13",
-    "question": "Define a function which prints 'No presents for you' if the name is equal to 'bad', + else it prints 'You will get a [present]'. The default present is 'bike'. Next declare a dictionary <code> people </code> using the 'dict' function with Jake as good and Dave as bad. Test the function by calling it for Jake and Dave using the dictionary",
+    "question": "Define a function which prints 'No presents for you' if the name is equal to 'bad', else it prints 'You will get a [present]'. The default present is 'bike'. Next declare a dictionary <code> people </code> using the 'dict' function with Jake as good and Dave as bad. Test the function by calling it for Jake and Dave using the dictionary",
     "starter": false,
     "startCode": [
       {

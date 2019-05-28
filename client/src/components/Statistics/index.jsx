@@ -55,12 +55,12 @@ class Statistics extends React.Component {
                     <Typography variant="h5" component="h2">
                        Skill Level
                     </Typography>
-                        <RadarChart data={{
-                            labels: test,
-                            datasets: [{
-                                data: Object.keys(skills).map(skill => skills[skill]),
-                            }]
-                        }} />
+                        {/*<RadarChart data={{*/}
+                        {/*    labels: test,*/}
+                        {/*    datasets: [{*/}
+                        {/*        data: Object.keys(skills).map(skill => skills[skill]),*/}
+                        {/*    }]*/}
+                        {/*}} />*/}
 
                         <Table className={classes.table}>
                             <TableHead>
