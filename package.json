@@ -37,7 +37,7 @@
     "express-session": "^1.15.6",
     "express-validator": "^5.2.0",
     "googleapis": "^37.2.0",
-    "highlight.js": "^9.13.1",
+    "highlight.js": "^10.1.2",
     "lodash": "^4.17.11",
     "mdi-react": "^4.0.0",
     "mongoose": "^5.4.13",
