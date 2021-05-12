@@ -25,7 +25,7 @@
     "async": "latest",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
-    "chart.js": "^1.1.1",
+    "chart.js": "^2.9.4",
     "classnames": "latest",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^2.0.3",
